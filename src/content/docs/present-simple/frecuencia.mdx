@@ -1,0 +1,136 @@
+---
+title: 6. ¿Con qué frecuencia?
+description: Always, usually, often, sometimes, never. Every day, twice a week. How often…?
+---
+import Ejemplos from '../../../components/Ejemplos.astro';
+import Completar from '../../../components/Completar.astro';
+import ArmarFrase from '../../../components/ArmarFrase.astro';
+import OrdenarPasos from '../../../components/OrdenarPasos.astro';
+import OpcionMultiple from '../../../components/OpcionMultiple.astro';
+
+Como el Present Simple habla de **costumbres**, casi siempre viene con una palabra que dice
+**cada cuánto** pasa algo.
+
+## Los adverbios de frecuencia
+
+| | Adverbio | Significa | Ejemplo |
+|---|---|---|---|
+| 100% | **always** | siempre | I **always** have breakfast. |
+| 90% | **usually** | casi siempre / generalmente | She **usually** walks to school. |
+| 70% | **often** | seguido / a menudo | We **often** play videogames. |
+| 50% | **sometimes** | a veces | They **sometimes** eat pizza. |
+| 5% | **hardly ever** | casi nunca | He **hardly ever** watches TV. |
+| 0% | **never** | nunca | I **never** drink coffee. |
+
+### ¿Dónde van? Esto es lo que más se toma
+
+:::danger[Dos reglas]
+1. Van **ANTES del verbo** común:
+   *She **usually gets** up at 7.* (~~She gets usually up~~)
+2. Pero van **DESPUÉS de *to be*** (am/is/are):
+   *I **am always** tired on Monday.* (~~I always am tired~~)
+:::
+
+<Ejemplos items={[
+  ['My dad <b>never drinks</b> coffee.', 'adverbio + verbo'],
+  ["I <b>don't usually</b> go out on Sunday.", 'en negativo: don\'t + adverbio + verbo'],
+  ['My sister <b>is often</b> late for school.', 'is + adverbio'],
+  ['<b>Do</b> you <b>always</b> do your homework?', 'en preguntas: después del sujeto'],
+]} />
+
+:::caution[Never ya es negativo]
+*Never* ya significa "no… nunca". No se usa con *don't*:
+~~I don't never eat fish.~~ → *I **never** eat fish.*
+:::
+
+## Las expresiones de frecuencia
+
+Para decir el número exacto de veces. Estas van **al final** de la frase.
+
+| Expresión | Significa |
+|---|---|
+| **every** day / week / month / summer | todos los días / todas las semanas… |
+| **once** a week | una vez por semana |
+| **twice** a day | dos veces por día |
+| **three times** a month | tres veces por mes |
+| **four times** a year | cuatro veces por año |
+
+<Ejemplos items={[
+  ['I brush my teeth <b>three times a day</b>.', 'Me lavo los dientes tres veces por día.'],
+  ['We visit our grandparents <b>every Sunday</b>.', 'Visitamos a nuestros abuelos todos los domingos.'],
+  ['She goes to the gym <b>twice a week</b>.', 'Va al gimnasio dos veces por semana.'],
+]} />
+
+## How often…?
+
+Para **preguntar** cada cuánto: **How often + do/does + sujeto + verbo?**
+
+<Ejemplos items={[
+  ['<b>How often do</b> you <b>go</b> to the cinema?', '¿Cada cuánto vas al cine?'],
+  ['I go to the cinema <b>once a month</b>.', 'Voy una vez por mes.'],
+  ['<b>How often does</b> your mum <b>cook</b>?', '¿Cada cuánto cocina tu mamá?'],
+  ['She <b>always</b> cooks!', '¡Siempre cocina!'],
+]} />
+
+---
+
+## Ejercicios
+
+<OrdenarPasos
+  titulo="Del 100% al 0%"
+  pasos={['always', 'usually', 'often', 'sometimes', 'hardly ever', 'never']}
+  inicial={[4, 1, 6, 2, 5, 3]}
+>
+  Ordená los adverbios desde el que significa **más veces** hasta el que significa **ninguna**.
+</OrdenarPasos>
+
+<ArmarFrase
+  titulo="¿Dónde va el adverbio?"
+  fundamental
+  items={[
+    { frase: 'I always get up at seven.', es: 'Siempre me levanto a las siete.' },
+    { frase: 'My brother is never late.', es: 'Mi hermano nunca llega tarde.' },
+    { frase: 'We usually have pizza on Friday.', es: 'Generalmente comemos pizza los viernes.' },
+    { frase: 'She sometimes walks to school.', es: 'A veces camina a la escuela.' },
+    { frase: 'They are often tired after school.', es: 'Muchas veces están cansados después de la escuela.' },
+    { frase: 'How often do you play tennis?', es: '¿Cada cuánto jugás al tenis?' },
+  ]}
+>
+  Ojo con las que tienen *is / are*: ahí el adverbio va **después**.
+</ArmarFrase>
+
+<Completar
+  titulo="¿Antes o después?"
+  fundamental
+  items={[
+    { f: "{*I usually go|I go usually} to bed at 11.", e: 'Antes del verbo común: <b>usually go</b>.' },
+    { f: "{She always is|*She is always} happy.", e: 'Con <b>is</b>, el adverbio va después: <b>is always</b>.' },
+    { f: "{*My dad never eats|My dad eats never} fish.", e: 'Antes del verbo: <b>never eats</b>.' },
+    { f: "{We often are|*We are often} at home on Sunday.", e: 'Con <b>are</b>, después: <b>are often</b>.' },
+    { f: "{*I never drink|I don't never drink} coffee.", e: '<i>Never</i> ya es negativo: no va con don\'t.' },
+  ]}
+>
+  Elegí la opción bien ordenada.
+</Completar>
+
+<Completar
+  titulo="Expresiones de frecuencia"
+  items={[
+    { f: "I go to the dentist ___ a year. (2 veces)", r: ['twice'], e: '2 veces = <b>twice</b>.' },
+    { f: "We have English ___ a week. (3 veces)", r: ['three times'], e: '3 veces = <b>three times</b>.' },
+    { f: "My sister calls our grandma ___ a day. (1 vez)", r: ['once'], e: '1 vez = <b>once</b>.' },
+    { f: "I drink water ___ day. (todos los días)", r: ['every'], e: 'todos los días = <b>every</b> day.' },
+    { f: "___ do you go to the park? — Every weekend.", r: [['How often', 'how often']], e: 'Para preguntar cada cuánto: <b>How often</b>…?' },
+  ]}
+/>
+
+<OpcionMultiple
+  titulo="¿Qué significa?"
+  opciones={[
+    { texto: 'Juega al fútbol siempre.', explicacion: 'Siempre sería <i>always</i>.' },
+    { texto: 'Juega al fútbol casi nunca.', correcta: true, explicacion: '<b>hardly ever</b> = casi nunca.' },
+    { texto: 'Juega al fútbol bastante seguido.', explicacion: 'Eso sería <i>often</i>.' },
+  ]}
+>
+  *"Marcos **hardly ever** plays football."*
+</OpcionMultiple>

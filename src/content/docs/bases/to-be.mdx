@@ -1,0 +1,153 @@
+---
+title: 1. Pronombres y verbo to be
+description: I am, you are, she is. La base para todo lo que viene.
+---
+import Ejemplos from '../../../components/Ejemplos.astro';
+import Say from '../../../components/Say.astro';
+import Completar from '../../../components/Completar.astro';
+import Clasificar from '../../../components/Clasificar.astro';
+import OpcionMultiple from '../../../components/OpcionMultiple.astro';
+import ArmarFrase from '../../../components/ArmarFrase.astro';
+
+¿Por qué empezar por acá si el examen es de Present Simple? Porque **el error más común** en el
+examen es mezclar el verbo *to be* con los otros verbos (escribir *"She is go to school"*). Si esto
+está firme, lo demás sale mucho más fácil.
+
+## Los pronombres (quién hace algo)
+
+| Inglés | Castellano | Ojo con… |
+|---|---|---|
+| **I** | yo | Siempre con **mayúscula**, aunque esté en el medio de la frase. |
+| **you** | vos / ustedes | Es igual para una persona o para varias. |
+| **he** | él | Un varón: *my dad, Tom, my brother*. |
+| **she** | ella | Una mujer: *my mum, Sofi, my teacher*. |
+| **it** | (eso) | Una **cosa o un animal**: *the dog, my phone, the school*. |
+| **we** | nosotros/as | |
+| **they** | ellos/as | Varias personas **o cosas**: *my friends, the books*. |
+
+:::caution[En inglés, el sujeto no se puede omitir]
+En castellano decimos *"Es lindo"* o *"Vive en Rosario"* sin decir quién. En inglés **siempre** hay que
+poner el sujeto:
+
+<Ejemplos items={[
+  ["<b>It</b> is nice.", "Es lindo."],
+  ["<b>She</b> lives in Rosario.", "Vive en Rosario."],
+]} />
+:::
+
+## El verbo to be: am / is / are
+
+*To be* significa **ser** o **estar** (en inglés es el mismo verbo). Tiene tres formas y cada
+pronombre tiene la suya:
+
+| Afirmativo | Contracción | Negativo | Pregunta |
+|---|---|---|---|
+| I **am** | I'm | I'm **not** | **Am** I…? |
+| you **are** | you're | you **aren't** | **Are** you…? |
+| he / she / it **is** | he's / she's / it's | he **isn't** | **Is** he…? |
+| we / they **are** | we're / they're | we **aren't** | **Are** they…? |
+
+<Ejemplos items={[
+  ["I<b>'m</b> thirteen years old.", "Tengo trece años. (¡En inglés los años se SON!)"],
+  ["My mum <b>is</b> a teacher.", "Mi mamá es profesora."],
+  ["We <b>aren't</b> at school.", "No estamos en la escuela."],
+  ["<b>Is</b> your brother tired?", "¿Tu hermano está cansado?"],
+  ["Yes, he <b>is</b>. / No, he <b>isn't</b>.", "Sí. / No."],
+]} />
+
+:::note[Dos trucos que sirven para todo el año]
+1. Para hacer la **negativa**, se agrega **not** después de am/is/are.
+2. Para hacer la **pregunta**, se da **vuelta**: el am/is/are pasa **adelante** del sujeto.
+   <Say>She is happy.</Say> → <Say>Is she happy?</Say>
+:::
+
+### ¿Cuándo se usa *to be* y cuándo no?
+
+Se usa *to be* para decir **cómo es o cómo está** algo, **dónde está**, la **edad**, la
+**nacionalidad**, la **profesión**. Para **acciones** (comer, levantarse, jugar, vivir) **no** va
+*to be*: va el verbo solo.
+
+| ❌ Mal | ✅ Bien | Por qué |
+|---|---|---|
+| She **is** go to school. | She **goes** to school. | *Go* es una acción: no lleva *is*. |
+| I **am** like pizza. | I **like** pizza. | *Like* ya es el verbo. |
+| He **is** tired. ✅ | | *Tired* (cansado) no es una acción: acá sí va *is*. |
+
+---
+
+## Ejercicios
+
+<Clasificar
+  titulo="¿Am, is o are?"
+  fundamental
+  cajas={[
+    { id: 'am', nombre: 'am', ayuda: 'solo con I' },
+    { id: 'is', nombre: 'is', ayuda: 'una persona o cosa (he, she, it)' },
+    { id: 'are', nombre: 'are', ayuda: 'you, we, they' },
+  ]}
+  tarjetas={[
+    { texto: 'I', caja: 'am' },
+    { texto: 'my sister', caja: 'is', porque: 'Una mujer = she → is.' },
+    { texto: 'my parents', caja: 'are', porque: 'Son dos personas = they → are.' },
+    { texto: 'the dog', caja: 'is', porque: 'Un animal = it → is.' },
+    { texto: 'you', caja: 'are', porque: 'You va SIEMPRE con are, sea una persona o varias.' },
+    { texto: 'Tom and I', caja: 'are', porque: 'Tom y yo = we → are.' },
+    { texto: 'my phone', caja: 'is', porque: 'Una cosa = it → is.' },
+    { texto: 'the books', caja: 'are', porque: 'Varias cosas = they → are.' },
+  ]}
+>
+  Ubicá cada sujeto con la forma de *to be* que le corresponde.
+</Clasificar>
+
+<Completar
+  titulo="Completá con am, is o are"
+  fundamental
+  items={[
+    { f: "I ___ thirteen years old.", r: ['am'], e: 'Con <b>I</b> siempre <b>am</b>.' },
+    { f: "My best friend ___ from Córdoba.", r: ['is'], e: '<i>My best friend</i> es una persona (he/she) → <b>is</b>.' },
+    { f: "We ___ in the same class.", r: ['are'], e: 'Con <b>we</b> va <b>are</b>.' },
+    { f: "It ___ cold today.", r: ['is'], e: 'Con <b>it</b> va <b>is</b>.' },
+    { f: "My cousins ___ really funny.", r: ['are'], e: '<i>My cousins</i> son varios (they) → <b>are</b>.' },
+    { f: "You ___ late again!", r: ['are'], e: 'Con <b>you</b> siempre <b>are</b>.' },
+  ]}
+>
+  Escribí la forma correcta del verbo *to be*.
+</Completar>
+
+<Completar
+  titulo="Negativas y preguntas con to be"
+  items={[
+    { f: "She's at home. → She ___ at home.", r: [["isn't", 'is not']], e: 'Negativa: <b>is + not</b> = <b>isn\'t</b>.' },
+    { f: "They're hungry. → They ___ hungry.", r: [["aren't", 'are not']], e: 'Negativa: <b>are + not</b> = <b>aren\'t</b>.' },
+    { f: "I'm tired. → I ___ tired.", r: [["'m not", 'am not', "m not"]], e: 'Con I: <b>I\'m not</b> (no existe "I amn\'t").' },
+    { f: "He is your teacher. → ___ he your teacher?", r: [['Is', 'is']], e: 'Pregunta: el <b>is</b> pasa adelante del sujeto.' },
+    { f: "You are ready. → ___ you ready?", r: [['Are', 'are']], e: 'Pregunta: el <b>are</b> pasa adelante.' },
+    { f: "Is your dad at work? — Yes, he ___.", r: ['is'], e: 'Respuesta corta: <i>Yes, he <b>is</b>.</i> (sin contracción en el sí).' },
+    { f: "Are your friends here? — No, they ___.", r: [["aren't", 'are not']], e: 'Respuesta corta negativa: <i>No, they <b>aren\'t</b>.</i>' },
+  ]}
+>
+  Pasá cada frase a la forma que se pide.
+</Completar>
+
+<OpcionMultiple
+  titulo="¿Cuál está bien?"
+  fundamental
+  opciones={[
+    { texto: 'She is go to school by bus.', explicacion: '<i>Go</i> es una acción: no lleva <i>is</i>. Lo correcto es <b>She goes to school by bus.</b>' },
+    { texto: 'She goes to school by bus.', correcta: true, explicacion: 'Acción (ir) → verbo solo, con la -s de <i>she</i>. Lo vas a ver en el tema 4.' },
+    { texto: 'She is goes to school by bus.', explicacion: 'Sobra el <i>is</i>: nunca van dos verbos así pegados.' },
+  ]}
+>
+  Ella va a la escuela en colectivo.
+</OpcionMultiple>
+
+<ArmarFrase
+  titulo="Armá las preguntas"
+  items={[
+    { frase: 'Are you from Argentina?', es: '¿Sos de Argentina?' },
+    { frase: 'Is your sister at school?', es: '¿Tu hermana está en la escuela?' },
+    { frase: 'Where is my phone?', es: '¿Dónde está mi celular?' },
+  ]}
+>
+  En las preguntas, *am/is/are* va **antes** del sujeto.
+</ArmarFrase>

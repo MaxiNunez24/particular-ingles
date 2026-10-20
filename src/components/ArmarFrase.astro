@@ -1,0 +1,100 @@
+---
+/**
+ * Armar la frase: tocar las palabras en orden. Sirve sobre todo para el orden
+ * de las preguntas (Where DOES she live?) y para el lugar de los adverbios
+ * (She ALWAYS gets up early), que es donde más se equivoca en los exámenes.
+ *
+ * Uso (.mdx):
+ *   <ArmarFrase titulo="Preguntas" items={[
+ *     { frase: 'Where does she live?', es: '¿Dónde vive ella?' },
+ *     { frase: 'Tom never eats fish.', mayuscula: true },
+ *   ]} />
+ *
+ * `frase` va bien escrita. Las palabras se muestran mezcladas (siempre igual,
+ * no al azar) y sin la mayúscula del principio, para que la primera palabra no
+ * sea una pista. Si la frase empieza con un nombre propio, `mayuscula: true`.
+ */
+import { idEjercicio } from '../scripts/id-ejercicio';
+
+interface Item {
+  frase: string;
+  /** Traducción o ayuda en castellano. */
+  es?: string;
+  mayuscula?: boolean;
+}
+interface Props {
+  titulo: string;
+  fundamental?: boolean;
+  dificultad?: string;
+  items: Item[];
+}
+const { titulo, dificultad = '🧩', items } = Astro.props;
+const id = idEjercicio(titulo);
+
+const armados = items.map((it, n) => {
+  const final = (it.frase.match(/[.?!]$/) || [''])[0];
+  const palabras = it.frase.replace(/[.?!]$/, '').split(/\s+/);
+  const fichas = palabras.map((p, i) =>
+    i === 0 && !it.mayuscula && p !== 'I' && !p.startsWith("I'") ? p.toLowerCase() : p,
+  );
+  // Mezcla determinista (el mismo contenido da siempre la misma página):
+  // Fisher-Yates con un generador sembrado con la frase.
+  let semilla = [...it.frase].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7 + n);
+  const azar = () => {
+    semilla = (semilla * 1664525 + 1013904223) >>> 0;
+    return semilla / 2 ** 32;
+  };
+  let orden = [...fichas];
+  for (let i = orden.length - 1; i > 0; i--) {
+    const j = Math.floor(azar() * (i + 1));
+    [orden[i], orden[j]] = [orden[j], orden[i]];
+  }
+  // Si quedó igual a la respuesta, la damos vuelta: nunca arranca resuelta.
+  if (orden.join(' ') === fichas.join(' ')) orden = [...orden].reverse();
+  return { orden, solucion: fichas.join(' '), final, frase: it.frase, es: it.es };
+});
+---
+
+<section class="armar ejercicio" id={id} data-titulo={titulo}
+  data-fundamental={Astro.props.fundamental ? '' : undefined}>
+  <header class="ejercicio__header">
+    <span class="ejercicio__dif" aria-hidden="true">{dificultad}</span>
+    <h3 class="ejercicio__titulo">{titulo}</h3>
+    {Astro.props.fundamental && (
+      <span class="ejercicio__fundamental" title="Lo principal del tema: si hacés solo algunos, que sean estos">⭐ Fundamental</span>
+    )}
+    <span class="ej-hecho" hidden>✓ Resuelto</span>
+  </header>
+
+  <div class="ejercicio__consigna">
+    <slot />
+    <p class="armar__ayuda">Tocá las palabras en orden. Si te equivocás, tocá la palabra de arriba y vuelve abajo.</p>
+  </div>
+
+  <ol class="armar__items">
+    {armados.map((a) => (
+      <li class="armar__item" data-solucion={a.solucion} lang="en">
+        {a.es && <p class="armar__es" lang="es">{a.es}</p>}
+        <div class="armar__respuesta" data-respuesta aria-label="Tu frase">
+          <span class="armar__final" aria-hidden="true">{a.final}</span>
+        </div>
+        <div class="armar__fichas" data-fichas>
+          {a.orden.map((f) => <button type="button" class="armar__ficha">{f}</button>)}
+        </div>
+        <button type="button" class="say__btn armar__say" data-say={a.frase} hidden
+          aria-label="Escuchar la frase" title="Escuchar la frase">🔊</button>
+      </li>
+    ))}
+  </ol>
+
+  <div class="ejercicio__acciones">
+    <button type="button" class="ejercicio__btn ejercicio__btn--verify" data-verify>✓ Verificar</button>
+    <button type="button" class="ejercicio__btn ejercicio__btn--reset" data-reset>↺ Volver a empezar</button>
+  </div>
+  <p class="ejercicio__salida" data-salida role="status" aria-live="polite" hidden></p>
+</section>
+
+<script>
+  import '../scripts/armar-frase';
+  import '../scripts/hablar';
+</script>

@@ -1,0 +1,141 @@
+---
+title: 3. Rutinas (vocabulario)
+description: Get up, have a shower, go to bed… las frases para contar tu día.
+---
+import Ejemplos from '../../../components/Ejemplos.astro';
+import Completar from '../../../components/Completar.astro';
+import Clasificar from '../../../components/Clasificar.astro';
+import OrdenarPasos from '../../../components/OrdenarPasos.astro';
+import OpcionMultiple from '../../../components/OpcionMultiple.astro';
+
+Una **rutina** es lo que hacés **siempre**, todos los días o todas las semanas. En inglés, las
+rutinas se cuentan con el **Present Simple** (el próximo tema). Primero, las palabras.
+
+## Daily routine: el día de principio a fin
+
+<Ejemplos titulo="🌅 In the morning" items={[
+  ['get up', 'levantarse'],
+  ['have a shower', 'bañarse / ducharse'],
+  ['get dressed', 'vestirse'],
+  ['have breakfast', 'desayunar'],
+  ['leave home', 'salir de casa'],
+  ['start school', 'empezar la escuela'],
+]} />
+
+<Ejemplos titulo="☀️ In the afternoon" items={[
+  ['study Maths / English / Science', 'estudiar / tener Matemática, Inglés, Ciencias'],
+  ['have lunch', 'almorzar'],
+  ['finish school', 'terminar la escuela'],
+  ['get home', 'llegar a casa'],
+  ['make a snack', 'prepararse algo para picar / la merienda'],
+]} />
+
+<Ejemplos titulo="🌙 In the evening / at night" items={[
+  ['do (my) homework', 'hacer la tarea'],
+  ['have dinner', 'cenar'],
+  ['go to bed', 'irse a dormir / acostarse'],
+]} />
+
+:::caution[Las que más se confunden]
+- Las comidas van con **have**: *have breakfast, have lunch, have dinner*. Nada de "take breakfast"
+  ni "eat breakfast".
+- La tarea va con **do**, no con *make*: *do my homework*.
+- *Go to bed* **sin** "the": ~~go to the bed~~.
+- *Get home* **sin** "to": ~~get to home~~. Lo mismo *leave home*: ~~leave from home~~.
+:::
+
+## Common verbs: otros verbos que vas a usar mucho
+
+<Ejemplos items={[
+  ['live in a flat', 'vivir en un departamento'],
+  ['work in an office', 'trabajar en una oficina'],
+  ['call your friends', 'llamar a tus amigos'],
+  ['meet your friends', 'encontrarse con tus amigos'],
+  ['drink water', 'tomar agua'],
+  ['eat pizza', 'comer pizza'],
+  ['wear a uniform', 'usar (ropa) un uniforme'],
+  ['use a laptop', 'usar una compu'],
+  ['want a new phone', 'querer un celular nuevo'],
+  ['know the answer', 'saber la respuesta'],
+  ['teach English', 'enseñar inglés'],
+  ['travel by bus', 'viajar en colectivo'],
+]} />
+
+:::tip[Wear vs. use]
+Para la **ropa** se usa **wear**: *I wear a uniform*. Para **cosas** (celu, compu, diccionario),
+**use**: *I use a dictionary*.
+:::
+
+---
+
+## Ejercicios
+
+<OrdenarPasos
+  titulo="Ordená el día de Lucía"
+  fundamental
+  pasos={[
+    'get up',
+    'have a shower',
+    'get dressed',
+    'have breakfast',
+    'leave home',
+    'start school',
+    'finish school',
+    'do her homework',
+    'have dinner',
+    'go to bed',
+  ]}
+  inicial={[4, 9, 1, 6, 3, 10, 5, 8, 2, 7]}
+  pistas={['Primero te levantás, después te bañás y te vestís.', 'No podés empezar la escuela antes de salir de casa.']}
+>
+  Lucía tiene un día bien normal. Poné sus actividades en el orden en que las hace.
+</OrdenarPasos>
+
+<Clasificar
+  titulo="¿Have, do, go o get?"
+  fundamental
+  cajas={[
+    { id: 'have', nombre: 'have…' },
+    { id: 'do', nombre: 'do…' },
+    { id: 'go', nombre: 'go…' },
+    { id: 'get', nombre: 'get…' },
+  ]}
+  tarjetas={[
+    { texto: '… breakfast', caja: 'have', porque: 'Las comidas: <b>have</b> breakfast.' },
+    { texto: '… a shower', caja: 'have', porque: '<b>have</b> a shower.' },
+    { texto: '… my homework', caja: 'do', porque: 'La tarea: <b>do</b> my homework (no "make").' },
+    { texto: '… to bed', caja: 'go', porque: '<b>go</b> to bed.' },
+    { texto: '… up', caja: 'get', porque: '<b>get</b> up = levantarse.' },
+    { texto: '… dressed', caja: 'get', porque: '<b>get</b> dressed = vestirse.' },
+    { texto: '… home (llegar)', caja: 'get', porque: '<b>get</b> home = llegar a casa.' },
+    { texto: '… dinner', caja: 'have', porque: 'Las comidas: <b>have</b> dinner.' },
+    { texto: '… to school', caja: 'go', porque: '<b>go</b> to school = ir a la escuela.' },
+  ]}
+>
+  ¿Con qué verbo va cada expresión?
+</Clasificar>
+
+<Completar
+  titulo="El día de Tomi"
+  items={[
+    { f: "Hi! I'm Tomi. I ___ up at 7.00.", r: ['get'], e: '<b>get up</b> = levantarse.' },
+    { f: "Then I ___ a shower and I ___ dressed.", r: ['have', 'get'], e: '<b>have</b> a shower / <b>get</b> dressed.' },
+    { f: "I ___ breakfast at 7.30: toast and milk.", r: ['have'], e: 'Las comidas van con <b>have</b>.' },
+    { f: "I ___ home at 7.45 and I ___ school at 8.00.", r: ['leave', 'start'], e: '<b>leave</b> home = salir de casa; <b>start</b> school = empezar la escuela.' },
+    { f: "I ___ school at 12.30 and I ___ home at 1.00.", r: ['finish', 'get'], e: '<b>finish</b> school; <b>get</b> home = llegar a casa.' },
+    { f: "In the afternoon, I ___ my homework.", r: ['do'], e: 'La tarea: <b>do</b> my homework.' },
+    { f: "I ___ dinner with my family at 9.00 and I ___ to bed at 10.30.", r: ['have', 'go'], e: '<b>have</b> dinner / <b>go</b> to bed.' },
+  ]}
+>
+  Completá con el verbo que falta. Pista: todos están en la lista de arriba.
+</Completar>
+
+<OpcionMultiple
+  titulo="¿Wear o use?"
+  opciones={[
+    { texto: 'I use a uniform at school.', explicacion: 'Un uniforme es ropa: va <b>wear</b>.' },
+    { texto: 'I wear a uniform at school.', correcta: true, explicacion: 'Para la ropa, <b>wear</b>.' },
+  ]}
+>
+  En mi escuela usamos uniforme. ¿Cuál está bien?
+</OpcionMultiple>

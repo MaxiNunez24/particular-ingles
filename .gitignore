@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.env
+
+# Los libros (Student's Book y Workbook) tienen copyright y pesan ~90 MB:
+# quedan solo en esta máquina, como referencia para armar el material.
+_material/
+
+.claude/settings.local.json
+.vscode/
+.idea/

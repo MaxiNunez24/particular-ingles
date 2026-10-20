@@ -1,0 +1,7 @@
+# Config de pnpm. Seguridad: por defecto pnpm NO corre scripts de instalación
+# de las dependencias. Habilitamos SOLO los que Astro necesita de verdad
+# (esbuild trae su binario; sharp compila el optimizador de imágenes). El resto
+# queda bloqueado.
+allowBuilds:
+  esbuild: true
+  sharp: true

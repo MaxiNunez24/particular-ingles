@@ -1,0 +1,95 @@
+---
+title: 9. Errores típicos
+description: Los errores que más se repiten en los exámenes de este tema, y cómo no caer.
+---
+import Completar from '../../../components/Completar.astro';
+import OpcionMultiple from '../../../components/OpcionMultiple.astro';
+
+Estos son los errores que **más puntos hacen perder**. Si los evitás, ya tenés buena parte del
+examen.
+
+| # | ❌ Así no | ✅ Así sí | Por qué |
+|---|---|---|---|
+| 1 | She **play** tennis. | She **plays** tennis. | he/she/it → **-s** |
+| 2 | My parents **works** here. | My parents **work** here. | *my parents* = they → sin -s |
+| 3 | He **studys** a lot. | He **studies** a lot. | consonante + y → **-ies** |
+| 4 | She doesn't **likes** it. | She doesn't **like** it. | con does/doesn't el verbo va **sin -s** |
+| 5 | **Do** she live here? | **Does** she live here? | he/she/it → **does** |
+| 6 | She **is go** to school. | She **goes** to school. | no mezclar *to be* con otro verbo en Simple |
+| 7 | She **cooking** now. | She **is cooking** now. | Continuous = **is + -ing** (las dos piezas) |
+| 8 | I **always am** tired. | I **am always** tired. | con *to be*, el adverbio va **después** |
+| 9 | I **get usually** up at 7. | I **usually get** up at 7. | con los demás verbos, va **antes** |
+| 10 | I **am wanting** a pizza. | I **want** a pizza. | *want, like, know…* no van con -ing |
+| 11 | I don't **never** eat fish. | I **never** eat fish. | *never* ya es negativo |
+| 12 | **Where she lives?** | **Where does she live?** | en las preguntas hace falta **does** |
+| 13 | **Do you like pizza? — Yes, I like.** | **Yes, I do.** | respuesta corta con el ayudante |
+| 14 | Quarter **to** eight = 8:15 | Quarter **to** eight = **7:45** | *to* = "para" |
+
+---
+
+## Ejercicios: encontrá el error
+
+<OpcionMultiple
+  titulo="Error 1"
+  fundamental
+  opciones={[
+    { texto: 'My brother watch TV every night.', explicacion: '<i>My brother</i> = he → <b>watches</b>.' },
+    { texto: 'My brother watches TV every night.', correcta: true },
+    { texto: 'My brother is watch TV every night.', explicacion: 'No se mezcla <i>is</i> con el verbo en Present Simple.' },
+  ]}
+>
+  ¿Cuál está bien?
+</OpcionMultiple>
+
+<OpcionMultiple
+  titulo="Error 2"
+  fundamental
+  opciones={[
+    { texto: "Sofi doesn't goes to the gym.", explicacion: 'Con <i>doesn\'t</i>, el verbo va sin -es: <b>go</b>.' },
+    { texto: "Sofi don't go to the gym.", explicacion: '<i>Sofi</i> = she → <b>doesn\'t</b>.' },
+    { texto: "Sofi doesn't go to the gym.", correcta: true },
+  ]}
+>
+  ¿Cuál está bien?
+</OpcionMultiple>
+
+<OpcionMultiple
+  titulo="Error 3"
+  fundamental
+  opciones={[
+    { texto: 'What time she gets up?', explicacion: 'Falta el ayudante: <b>What time does she get up?</b>' },
+    { texto: 'What time does she gets up?', explicacion: 'Con <i>does</i>, el verbo va sin -s: <b>get</b>.' },
+    { texto: 'What time does she get up?', correcta: true },
+    { texto: 'What time is she get up?', explicacion: 'Es una rutina (Present Simple): va <i>does</i>, no <i>is</i>.' },
+  ]}
+>
+  ¿A qué hora se levanta ella? ¿Cuál está bien?
+</OpcionMultiple>
+
+<OpcionMultiple
+  titulo="Error 4"
+  fundamental
+  opciones={[
+    { texto: 'Listen! The baby cries.', explicacion: '<i>Listen!</i> = ahora → Continuous.' },
+    { texto: 'Listen! The baby is crying.', correcta: true },
+    { texto: 'Listen! The baby crying.', explicacion: 'Falta el <b>is</b>.' },
+  ]}
+>
+  ¿Cuál está bien?
+</OpcionMultiple>
+
+<Completar
+  titulo="Corregí la frase"
+  fundamental
+  items={[
+    { f: "She study English. → She ___ English.", r: ['studies'], e: 'he/she/it + consonante + y → <b>studies</b>.' },
+    { f: "My parents doesn't work on Sunday. → My parents ___ work on Sunday.", r: [["don't", 'do not']], e: '<i>My parents</i> = they → <b>don\'t</b>.' },
+    { f: "Do your sister like pizza? → ___ your sister like pizza?", r: [['Does', 'does']], e: '<i>Your sister</i> = she → <b>Does</b>.' },
+    { f: "I usually am late. → I ___ late.", r: ['am usually'], e: 'Con <i>to be</i>, el adverbio va después: <b>am usually</b>.' },
+    { f: "We are play football now. → We ___ football now.", r: [['are playing', "'re playing"]], e: 'Continuous = are + <b>playing</b>.' },
+    { f: "He is knowing the answer. → He ___ the answer.", r: ['knows'], e: '<i>Know</i> no va con -ing → <b>knows</b>.' },
+    { f: "Is she like dogs? → ___ she like dogs?", r: [['Does', 'does']], e: '<i>Like</i> es un verbo común: la pregunta va con <b>Does</b>.' },
+  ]}
+>
+  Cada frase tiene **un** error. Escribí la parte corregida.
+</Completar>

@@ -1,0 +1,39 @@
+---
+/**
+ * Lista de ejemplos en inglés, cada uno con 🔊 y (opcional) su traducción.
+ *
+ * Uso (.mdx):
+ *   <Ejemplos items={[
+ *     ['I <b>get up</b> at seven.', 'Me levanto a las siete.'],
+ *     ['She <b>gets up</b> at eight.'],
+ *   ]} />
+ *
+ * El inglés admite <b> para resaltar la parte que importa; al leerlo en voz
+ * alta las etiquetas no se pronuncian (se lee el texto, no el HTML).
+ */
+interface Props {
+  items: [string, string?][];
+  titulo?: string;
+}
+const { items, titulo } = Astro.props;
+---
+
+<div class="ejemplos">
+  {titulo && <p class="ejemplos__titulo">{titulo}</p>}
+  <ul class="ejemplos__lista">
+    {items.map(([en, es]) => (
+      <li class="ejemplos__item">
+        <span class="ejemplos__en" lang="en" data-say-scope>
+          <span set:html={en} />
+          <button type="button" class="say__btn" data-say="" aria-label="Escuchar en inglés"
+            title="Escuchar (tocá de nuevo para oírlo más lento)">🔊</button>
+        </span>
+        {es && <span class="ejemplos__es">{es}</span>}
+      </li>
+    ))}
+  </ul>
+</div>
+
+<script>
+  import '../scripts/hablar';
+</script>

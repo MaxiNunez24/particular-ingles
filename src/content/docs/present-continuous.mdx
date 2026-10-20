@@ -1,0 +1,160 @@
+---
+title: 7. Present Continuous
+description: I'm studying right now. Lo que está pasando en este momento.
+---
+import Ejemplos from '../../components/Ejemplos.astro';
+import Completar from '../../components/Completar.astro';
+import Clasificar from '../../components/Clasificar.astro';
+import ArmarFrase from '../../components/ArmarFrase.astro';
+import OpcionMultiple from '../../components/OpcionMultiple.astro';
+
+## ¿Para qué se usa?
+
+El **Present Continuous** es para lo que está pasando **AHORA**, en este momento. Es el
+**"estoy …ando / …endo"** del castellano.
+
+<Ejemplos items={[
+  ["I<b>'m studying</b> English right now.", 'Estoy estudiando inglés ahora.'],
+  ["My mum<b>'s cooking</b> pasta.", 'Mi mamá está cocinando fideos.'],
+  ["Look! It<b>'s raining</b>.", '¡Mirá! Está lloviendo.'],
+]} />
+
+Palabras que suelen acompañarlo: **now**, **right now**, **at the moment**, **today**, **Look!**,
+**Listen!**
+
+## Cómo se forma: to be + verbo-ing
+
+Se arma con **dos piezas**: el verbo **to be** (am / is / are, ¡el del tema 1!) + el verbo con
+**-ing**.
+
+| Afirmativo | Negativo | Pregunta | Respuesta corta |
+|---|---|---|---|
+| **I'm** playing | **I'm not** playing | **Am** I playing? | Yes, I am. / No, I'm not. |
+| you **are** playing | you **aren't** playing | **Are** you playing? | Yes, I am. / No, I'm not. |
+| he/she/it **is** playing | she **isn't** playing | **Is** she playing? | Yes, she is. / No, she isn't. |
+| we/they **are** playing | they **aren't** playing | **Are** they playing? | Yes, they are. / No, they aren't. |
+
+:::danger[Las dos piezas son obligatorias]
+- ~~She playing tennis.~~ → falta el **is**: *She **is** playing tennis.*
+- ~~She is play tennis.~~ → falta el **-ing**: *She is play**ing** tennis.*
+
+Y acá **no** se usa *do / does*: negativas y preguntas se hacen con **am / is / are**, igual que en el
+tema 1. ~~Do you playing?~~ → *Are you playing?*
+:::
+
+### Cómo se escribe el -ing
+
+| Regla | Ejemplos |
+|---|---|
+| Casi todos: **+ ing** | play → play**ing**, eat → eat**ing**, study → study**ing**, go → go**ing** |
+| Terminan en **-e**: se va la e | make → mak**ing**, dance → danc**ing**, write → writ**ing**, have → hav**ing** |
+| Terminan en **consonante + vocal + consonante** (y son cortos): se **duplica** la última | run → ru**nn**ing, swim → swi**mm**ing, sit → si**tt**ing, get → ge**tt**ing, shop → sho**pp**ing |
+
+:::tip[Truco para la regla de duplicar]
+Mirá las tres últimas letras: **s-i-t** (consonante, vocal, consonante) → *sitting*.
+**r-e-a-d** no: termina en dos vocales + consonante → *reading*. **p-l-a-y** tampoco: la *y* no
+se duplica → *playing*.
+:::
+
+## Preguntas con What, Where, Who…
+
+**Palabra + am/is/are + sujeto + verbo-ing?**
+
+<Ejemplos items={[
+  ['<b>What are</b> you <b>doing</b>?', '¿Qué estás haciendo?'],
+  ["I<b>'m watching</b> a film.", 'Estoy viendo una peli.'],
+  ['<b>Where is</b> Tomi <b>going</b>?', '¿A dónde va Tomi?'],
+  ['<b>Who are</b> you <b>talking</b> to?', '¿Con quién estás hablando?'],
+]} />
+
+---
+
+## Ejercicios
+
+<Clasificar
+  titulo="¿Cómo se escribe con -ing?"
+  fundamental
+  cajas={[
+    { id: 'ing', nombre: '+ ing', ayuda: 'normal' },
+    { id: 'e', nombre: 'sin la e + ing', ayuda: 'make → making' },
+    { id: 'doble', nombre: 'doble + ing', ayuda: 'run → running' },
+  ]}
+  tarjetas={[
+    { texto: 'swim', caja: 'doble', porque: 's-w-<b>i-m</b>: vocal + consonante al final → swi<b>mm</b>ing.' },
+    { texto: 'dance', caja: 'e', porque: 'Termina en -e → danc<b>ing</b>.' },
+    { texto: 'read', caja: 'ing', porque: 'Dos vocales (ea) antes de la d: no se duplica → read<b>ing</b>.' },
+    { texto: 'sit', caja: 'doble', porque: 'consonante-vocal-consonante → si<b>tt</b>ing.' },
+    { texto: 'write', caja: 'e', porque: 'Termina en -e → writ<b>ing</b>.' },
+    { texto: 'play', caja: 'ing', porque: 'La y no se duplica → play<b>ing</b>.' },
+    { texto: 'get', caja: 'doble', porque: 'consonante-vocal-consonante → ge<b>tt</b>ing.' },
+    { texto: 'have', caja: 'e', porque: 'Termina en -e → hav<b>ing</b>.' },
+    { texto: 'study', caja: 'ing', porque: 'Normal → study<b>ing</b> (acá la y se queda).' },
+    { texto: 'run', caja: 'doble', porque: 'consonante-vocal-consonante → ru<b>nn</b>ing.' },
+  ]}
+>
+  ¿Qué le pasa a cada verbo cuando se le agrega -ing?
+</Clasificar>
+
+<Completar
+  titulo="Completá en Present Continuous"
+  fundamental
+  items={[
+    { f: "Shh! The baby ___ (sleep).", r: [["is sleeping", "'s sleeping"]], e: '<i>The baby</i> = it → <b>is sleeping</b>.' },
+    { f: "I ___ (do) my homework right now.", r: [["am doing", "'m doing"]], e: 'I → <b>am doing</b>.' },
+    { f: "My friends ___ (play) football in the park.", r: [['are playing', "'re playing"]], e: 'They → <b>are playing</b>.' },
+    { f: "Look! Dad ___ (dance)!", r: [['is dancing', "'s dancing"]], e: 'dance pierde la e → <b>is dancing</b>.' },
+    { f: "We ___ (swim) in the sea.", r: [['are swimming', "'re swimming"]], e: 'swim duplica la m → <b>are swimming</b>.' },
+    { f: "She ___ (sit) next to me.", r: [['is sitting', "'s sitting"]], e: 'sit duplica la t → <b>is sitting</b>.' },
+  ]}
+>
+  Usá **am / is / are + verbo-ing**.
+</Completar>
+
+<Completar
+  titulo="Negativo y respuestas cortas"
+  items={[
+    { f: "I'm not watching TV. I ___ (read) a book.", r: [["'m reading", 'am reading']], e: '<b>I\'m reading</b>.' },
+    { f: "My dad ___ (not work) today. He's at home.", r: [["isn't working", 'is not working', "'s not working"]], e: 'Negativo: <b>isn\'t working</b>.' },
+    { f: "They ___ (not listen) to the teacher!", r: [["aren't listening", 'are not listening', "'re not listening"]], e: 'Negativo: <b>aren\'t listening</b>.' },
+    { f: "Are you having lunch? — Yes, I ___.", r: ['am'], e: 'A <i>Are you…?</i> se responde <b>Yes, I am</b>.' },
+    { f: "Is your sister studying? — No, she ___.", r: [["isn't", 'is not']], e: '<b>No, she isn\'t.</b>' },
+    { f: "Are they coming? — Yes, they ___.", r: ['are'], e: '<b>Yes, they are.</b>' },
+  ]}
+/>
+
+<OpcionMultiple
+  titulo="¿Cuál está bien?"
+  fundamental
+  opciones={[
+    { texto: 'She cooking dinner now.', explicacion: 'Falta el <b>is</b>.' },
+    { texto: 'She is cook dinner now.', explicacion: 'Falta el <b>-ing</b>.' },
+    { texto: 'She is cooking dinner now.', correcta: true, explicacion: '<b>is + cooking</b>: las dos piezas. ✔️' },
+    { texto: 'She does cooking dinner now.', explicacion: 'En el Present Continuous no se usa <i>does</i>.' },
+  ]}
+>
+  Ella está cocinando la cena ahora.
+</OpcionMultiple>
+
+<ArmarFrase
+  titulo="Armá las preguntas"
+  fundamental
+  items={[
+    { frase: 'What are you doing?', es: '¿Qué estás haciendo?' },
+    { frase: 'Is your brother playing videogames?', es: '¿Tu hermano está jugando a los jueguitos?' },
+    { frase: 'Where are they going?', es: '¿A dónde van (ahora)?' },
+    { frase: 'Why is the baby crying?', es: '¿Por qué está llorando el bebé?' },
+  ]}
+/>
+
+<Completar
+  titulo="¿Qué está pasando en la plaza?"
+  items={[
+    { f: "It's Saturday afternoon and the park is crowded. Some boys ___ (play) football.", r: [['are playing', "'re playing"]] },
+    { f: "A girl ___ (ride) her bike.", r: [['is riding', "'s riding"]], e: 'ride pierde la e → <b>riding</b>.' },
+    { f: "Two old men ___ (sit) on a bench and they ___ (drink) mate.", r: [['are sitting', "'re sitting"], ['are drinking', "'re drinking"]], e: 'sit → <b>sitting</b> (doble t).' },
+    { f: "A dog ___ (run) after a ball.", r: [['is running', "'s running"]], e: 'run → <b>running</b> (doble n).' },
+    { f: "And me? I ___ (take) photos!", r: [["'m taking", 'am taking']], e: 'take pierde la e → <b>taking</b>.' },
+  ]}
+>
+  Describí lo que está pasando **ahora** en la plaza.
+</Completar>

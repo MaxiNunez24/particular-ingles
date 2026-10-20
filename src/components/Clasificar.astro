@@ -1,0 +1,121 @@
+---
+/**
+ * Ejercicio de CLASIFICAR: arrastrar cada tarjeta a la caja que le corresponde.
+ *
+ * Nació para los conceptos de Testing —qué es una prueba unitaria, cuál es de
+ * integración, cuál es E2E— pero sirve para cualquier cosa que se aprenda
+ * separando en grupos: tipos de dato, mutable vs. inmutable, error de sintaxis
+ * vs. de ejecución.
+ *
+ * Se puede arrastrar, pero NO hace falta: tocar la tarjeta y después la caja
+ * hace lo mismo. Arrastrar en un celular es incómodo y con el dedo grueso se
+ * falla, así que el camino de los dos toques es el principal y el arrastre es
+ * el atajo para quien está con mouse.
+ */
+import { idEjercicio } from '../scripts/id-ejercicio';
+
+interface Caja {
+  id: string;
+  nombre: string;
+  /** Se muestra bajo el nombre: para qué sirve o cuándo se usa. */
+  ayuda?: string;
+}
+interface Tarjeta {
+  texto: string;
+  /** id de la caja donde va */
+  caja: string;
+  /** Se muestra al verificar, esté bien o mal. Es donde está la enseñanza. */
+  porque?: string;
+}
+
+const {
+  titulo,
+  dificultad = '🗂️',
+  cajas,
+  tarjetas,
+  pistas = [],
+} = Astro.props as {
+  titulo: string;
+  /** ⭐ Lo principal de la clase: se hace en clase, y si alguien hace solo algunos, que sean estos. */
+  fundamental?: boolean;
+  dificultad?: string;
+  cajas: Caja[];
+  tarjetas: Tarjeta[];
+  pistas?: string[];
+};
+
+const id = idEjercicio(titulo);
+
+// Se barajan en el servidor para que no aparezcan en el orden de la respuesta.
+// Es determinista a propósito (no Math.random): el mismo contenido genera
+// siempre la misma página, así el HTML no cambia entre builds sin motivo.
+const mezcladas = tarjetas
+  .map((t, i) => ({ t, k: ((i + 1) * 7919) % (tarjetas.length + 3) }))
+  .sort((a, b) => a.k - b.k)
+  .map((x) => x.t);
+---
+
+<section class="clasificar ejercicio" id={id} data-titulo={titulo}
+  data-fundamental={Astro.props.fundamental ? '' : undefined}>
+  <header class="ejercicio__header">
+    <span class="ejercicio__dif" aria-hidden="true">{dificultad}</span>
+    <h3 class="ejercicio__titulo">{titulo}</h3>
+    {Astro.props.fundamental && (
+      <span class="ejercicio__fundamental" title="Lo principal de la clase: si hacés solo algunos, que sean estos">⭐ Fundamental</span>
+    )}
+    <span class="ej-hecho" hidden>✓ Resuelto</span>
+  </header>
+
+  <div class="ejercicio__consigna">
+    <slot />
+  </div>
+
+  <p class="clasificar__ayuda">
+    Tocá una tarjeta y después la caja donde va. <span class="clasificar__ayuda-mouse">Con mouse también podés arrastrarla.</span>
+  </p>
+
+  <div class="clasificar__pozo" data-pozo aria-label="Tarjetas sin clasificar">
+    {mezcladas.map((t) => (
+      <button
+        type="button"
+        class="clasificar__tarjeta"
+        draggable="true"
+        data-tarjeta
+        data-caja={t.caja}
+        data-porque={t.porque || ''}
+      >{t.texto}</button>
+    ))}
+  </div>
+
+  <div class="clasificar__cajas">
+    {cajas.map((c) => (
+      <div class="clasificar__caja" data-caja={c.id}>
+        <div class="clasificar__caja-tit">
+          {c.nombre}
+          {c.ayuda && <small>{c.ayuda}</small>}
+        </div>
+        <div class="clasificar__caja-contenido" data-destino={c.id}></div>
+      </div>
+    ))}
+  </div>
+
+  <div class="ejercicio__acciones">
+    <button type="button" class="ejercicio__btn ejercicio__btn--verify" data-verify>✓ Verificar</button>
+    <button type="button" class="ejercicio__btn ejercicio__btn--reset" data-reset>↺ Volver a empezar</button>
+  </div>
+
+  {pistas.length > 0 && (
+    <details class="ejercicio__pistas">
+      <summary>💡 Pista</summary>
+      <ul>{pistas.map((p) => <li set:html={p} />)}</ul>
+    </details>
+  )}
+
+  <p class="ejercicio__salida" data-salida role="status" aria-live="polite" hidden></p>
+  <ul class="clasificar__porques" data-porques hidden></ul>
+</section>
+
+<script>
+  import { conectarClasificar } from '../scripts/clasificar';
+  document.querySelectorAll<HTMLElement>('.clasificar').forEach(conectarClasificar);
+</script>

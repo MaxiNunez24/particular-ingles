@@ -1,0 +1,158 @@
+---
+title: 10. Simulacro de examen
+description: Un examen de práctica con todo lo de las unidades 5, 6 y 8. Con nota y correcciones explicadas.
+---
+import Simulacro from '../../../components/Simulacro.astro';
+
+Hacelo **sin mirar los apuntes**, como si fuera el examen de verdad. Tomate unos **40 minutos**.
+Cuando entregues vas a ver la nota y, en cada error, la respuesta correcta y el porqué.
+
+Se aprueba con **6**. Si no llegás, no pasa nada: para eso está. Repasá los temas de lo que te salió
+mal y volvé a hacerlo otro día. Hay **dos simulacros** distintos.
+
+<Simulacro
+  titulo="Simulacro 1"
+  partes={[
+    {
+      titulo: 'A. Vocabulario: rutinas',
+      consigna: 'Elegí el verbo correcto.',
+      items: [
+        { f: "I {*have|take|do} breakfast at 7.30.", e: 'Las comidas van con <b>have</b>.' },
+        { f: "She {makes|*does|has} her homework in the evening.", e: 'La tarea: <b>do</b> → does.' },
+        { f: "We {*get|go|have} dressed after the shower.", e: '<b>get dressed</b> = vestirse.' },
+        { f: "My dad {*leaves|goes|gets} home at 8.00.", e: '<b>leave home</b> = salir de casa.' },
+        { f: "They go to {the bed|*bed} at 11.00.", e: '<b>go to bed</b>, sin "the".' },
+      ],
+    },
+    {
+      titulo: 'B. Present Simple: afirmativo',
+      consigna: 'Completá con el verbo entre paréntesis.',
+      items: [
+        { f: "My sister ___ (watch) videos every night.", r: ['watches'], e: '-ch → <b>watches</b>.' },
+        { f: "Nico ___ (study) French on Wednesday.", r: ['studies'], e: 'consonante + y → <b>studies</b>.' },
+        { f: "My grandparents ___ (live) in Salta.", r: ['live'], e: 'they → <b>live</b>, sin -s.' },
+        { f: "The class ___ (finish) at 12.30.", r: ['finishes'], e: '-sh → <b>finishes</b>.' },
+        { f: "My mum ___ (have) a shower in the morning.", r: ['has'], e: 'have → <b>has</b>.' },
+        { f: "Juan ___ (play) the drums.", r: ['plays'], e: 'vocal + y → <b>plays</b>.' },
+      ],
+    },
+    {
+      titulo: 'C. Present Simple: negativo y preguntas',
+      consigna: 'Completá con lo que falta.',
+      items: [
+        { f: "I ___ (not like) Science.", r: [["don't like", 'do not like']], e: '<b>don\'t like</b>.' },
+        { f: "My brother ___ (not eat) vegetables.", r: [["doesn't eat", 'does not eat']], e: '<b>doesn\'t eat</b> (sin -s en eat).' },
+        { f: "___ your friends wear a uniform? — No, they ___.", r: [['Do', 'do'], ["don't", 'do not']], e: '<b>Do</b>…? — No, they <b>don\'t</b>.' },
+        { f: "___ your cousin play tennis? — Yes, she ___.", r: [['Does', 'does'], 'does'], e: '<b>Does</b>…? — Yes, she <b>does</b>.' },
+        { f: "Where ___ your dad work?", r: ['does'], e: 'Where <b>does</b> your dad work?' },
+        { f: "What time ___ you go to bed?", r: ['do'], e: 'What time <b>do</b> you go to bed?' },
+      ],
+    },
+    {
+      titulo: 'D. Frecuencia',
+      consigna: 'Elegí la opción correcta.',
+      items: [
+        { f: "{She always is|*She is always} hungry after school.", e: 'Con <i>is</i>, el adverbio va después.' },
+        { f: "{*We sometimes go|We go sometimes} to the cinema.", e: 'Antes del verbo común.' },
+        { f: "I play tennis {two times|*twice} a week.", e: '2 veces = <b>twice</b>.' },
+        { f: "{*How often|How much|How} do you visit your grandma? — Every Sunday.", e: 'Cada cuánto = <b>How often</b>.' },
+        { f: "He {doesn't never|*never} drinks coffee.", e: '<i>Never</i> ya es negativo.' },
+      ],
+    },
+    {
+      titulo: 'E. Present Continuous',
+      consigna: 'Completá con am / is / are + verbo-ing.',
+      items: [
+        { f: "Look! It ___ (snow)!", r: [['is snowing', "'s snowing"]], e: '<b>is snowing</b>.' },
+        { f: "We ___ (have) lunch right now.", r: [['are having', "'re having"]], e: 'have pierde la e → <b>are having</b>.' },
+        { f: "My friends ___ (swim) in the pool.", r: [['are swimming', "'re swimming"]], e: 'swim → <b>swimming</b> (doble m).' },
+        { f: "I ___ (not listen) to music.", r: [["'m not listening", 'am not listening']], e: '<b>I\'m not listening</b>.' },
+        { f: "___ she ___ (sleep)? — No, she ___.", r: [['Is', 'is'], 'sleeping', "isn't"], e: '<b>Is</b> she <b>sleeping</b>? — No, she <b>isn\'t</b>.' },
+        { f: "What ___ you ___ (do)?", r: ['are', 'doing'], e: 'What <b>are</b> you <b>doing</b>?' },
+      ],
+    },
+    {
+      titulo: 'F. ¿Simple o Continuous?',
+      consigna: 'Elegí el tiempo correcto.',
+      items: [
+        { f: "My dad {*cooks|is cooking} dinner every day.", e: 'every day → Simple.' },
+        { f: "Be quiet! The baby {sleeps|*is sleeping}.", e: 'Ahora → Continuous.' },
+        { f: "I {am needing|*need} a pen. Can you help me?", e: '<i>Need</i> no va con -ing.' },
+        { f: "Mateo usually {*walks|is walking} to school, but today he {goes|*is going} by car.", e: 'usually → Simple; today → Continuous.' },
+        { f: "{Do you study|*Are you studying} at the moment?", e: 'at the moment → Continuous.' },
+      ],
+    },
+    {
+      titulo: 'G. Comprensión lectora',
+      consigna: 'Leé lo que cuenta Agus y elegí <b>True</b> (verdadero) o <b>False</b> (falso).<br><br><i lang="en">"Hi! I\'m Agus and I\'m 13. I live in Bahía Blanca with my mum and my little brother. On weekdays I get up at 6.45 and I go to school by bus. School starts at 7.30 and finishes at 12.30. In the afternoon I usually do my homework, and twice a week I go to swimming lessons. My brother never does his homework, he always plays videogames! Today is Sunday, so there\'s no school. Right now I\'m sitting in the park with my friends and we\'re eating ice cream."</i>',
+      items: [
+        { f: "Agus lives with her dad. {True|*False}", e: 'Vive con su <b>mamá</b> y su hermano.' },
+        { f: "She goes to school by bus. {*True|False}", e: '"I go to school <b>by bus</b>".' },
+        { f: "School finishes at half past twelve. {*True|False}", e: '12.30 = <b>half past twelve</b>.' },
+        { f: "She goes swimming every day. {True|*False}", e: 'Va <b>twice a week</b> (dos veces por semana).' },
+        { f: "Her brother always does his homework. {True|*False}", e: 'Él <b>never</b> hace la tarea.' },
+        { f: "At the moment, Agus is at school. {True|*False}", e: 'Es domingo: <b>está en la plaza</b> con amigos.' },
+      ],
+    },
+  ]}
+/>
+
+<Simulacro
+  titulo="Simulacro 2"
+  partes={[
+    {
+      titulo: 'A. Present Simple',
+      consigna: 'Completá con el verbo entre paréntesis (afirmativo o negativo, según se indica).',
+      items: [
+        { f: "My best friend ___ (go) to a different school.", r: ['goes'], e: '-o → <b>goes</b>.' },
+        { f: "We ___ (not have) classes on Saturday.", r: [["don't have", 'do not have']], e: '<b>don\'t have</b>.' },
+        { f: "My uncle ___ (teach) Maths.", r: ['teaches'], e: '-ch → <b>teaches</b>.' },
+        { f: "Valen ___ (not use) social media.", r: [["doesn't use", 'does not use']], e: '<b>doesn\'t use</b>.' },
+        { f: "The bus ___ (stop) in front of my house.", r: ['stops'], e: 'it → <b>stops</b>.' },
+        { f: "Babies ___ (cry) a lot.", r: ['cry'], e: '<i>Babies</i> = they → <b>cry</b>, sin -ies.' },
+      ],
+    },
+    {
+      titulo: 'B. Preguntas',
+      consigna: 'Escribí la pregunta completa con las palabras dadas.',
+      items: [
+        { f: "(you / walk / to school) → ___", r: ['Do you walk to school?'], e: '<b>Do</b> you walk to school?' },
+        { f: "(where / your sister / live) → ___", r: ['Where does your sister live?'], e: 'Where <b>does</b> your sister <b>live</b>?' },
+        { f: "(how often / they / play football) → ___", r: ['How often do they play football?'], e: 'How often <b>do</b> they play football?' },
+        { f: "(what / you / do / now) → ___", r: ['What are you doing now?'], e: '<i>now</i> → What <b>are</b> you <b>doing</b> now?' },
+      ],
+    },
+    {
+      titulo: 'C. Respuestas cortas',
+      consigna: 'Completá la respuesta corta.',
+      items: [
+        { f: "Does your mum drive? — Yes, she ___.", r: ['does'], e: 'Yes, she <b>does</b>.' },
+        { f: "Are you watching TV? — No, I ___.", r: [["'m not", 'am not']], e: 'No, I<b>\'m not</b>.' },
+        { f: "Do they like rock? — No, they ___.", r: [["don't", 'do not']], e: 'No, they <b>don\'t</b>.' },
+        { f: "Is it raining? — Yes, it ___.", r: ['is'], e: 'Yes, it <b>is</b>.' },
+      ],
+    },
+    {
+      titulo: 'D. Simple o Continuous',
+      consigna: 'Completá con el tiempo correcto.',
+      items: [
+        { f: "Listen! My neighbour ___ (play) the piano.", r: [['is playing', "'s playing"]], e: 'Listen! → <b>is playing</b>.' },
+        { f: "I ___ (always / get up) early on Monday.", r: ['always get up'], e: 'Costumbre + adverbio antes del verbo: <b>always get up</b>.' },
+        { f: "Shh! We ___ (do) an exam.", r: [['are doing', "'re doing"]], e: 'Ahora → <b>are doing</b>.' },
+        { f: "My sister ___ (love) horses.", r: ['loves'], e: '<i>Love</i> no va con -ing → <b>loves</b>.' },
+        { f: "Today Martín ___ (not wear) his uniform.", r: [["isn't wearing", 'is not wearing', "'s not wearing"]], e: 'Today → <b>isn\'t wearing</b>.' },
+        { f: "Martín ___ (wear) a uniform every day.", r: ['wears'], e: 'every day → <b>wears</b>.' },
+      ],
+    },
+    {
+      titulo: 'E. Encontrá el error',
+      consigna: 'Cada frase tiene un error. Elegí la versión correcta.',
+      items: [
+        { f: "{She don't like Maths.|*She doesn't like Maths.|She doesn't likes Maths.}", e: '<b>doesn\'t like</b>: does + verbo sin -s.' },
+        { f: "{*He is usually tired.|He usually is tired.}", e: 'Con <i>is</i>, el adverbio va después.' },
+        { f: "{They playing now.|*They're playing now.|They play now.}", e: 'Continuous = <b>are + playing</b>.' },
+        { f: "{Where she works?|Where does she works?|*Where does she work?}", e: 'Where <b>does</b> she <b>work</b>?' },
+      ],
+    },
+  ]}
+/>

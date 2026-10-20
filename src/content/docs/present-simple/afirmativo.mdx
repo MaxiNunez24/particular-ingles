@@ -1,0 +1,155 @@
+---
+title: '4. Present Simple: la -s'
+description: I play / She plays. Cuándo se usa y cuándo el verbo lleva -s, -es o -ies.
+---
+import Ejemplos from '../../../components/Ejemplos.astro';
+import Say from '../../../components/Say.astro';
+import Completar from '../../../components/Completar.astro';
+import Clasificar from '../../../components/Clasificar.astro';
+import OpcionMultiple from '../../../components/OpcionMultiple.astro';
+
+## ¿Para qué se usa?
+
+El **Present Simple** se usa para lo que pasa **siempre**, **todos los días**, **en general**:
+
+- 🔁 **Rutinas y costumbres**: *I get up at 7.00.* (todos los días)
+- 🌍 **Cosas que son así**: *My dad works in an office.* *Cats eat fish.*
+- ❤️ **Gustos**: *I like pizza.*
+
+Si te preguntás **"¿esto lo hago siempre / normalmente?"** y la respuesta es sí → Present Simple.
+
+## Cómo se forma: la regla más importante
+
+Es **el verbo solo**, como en el diccionario… **salvo con he, she, it**, que le agregan una **-s**.
+
+| Sujeto | Verbo | Ejemplo |
+|---|---|---|
+| I / you / we / they | **play** | They **play** football on Saturday. |
+| he / she / it | **play<b>s</b>** | She **plays** football on Saturday. |
+
+<Ejemplos items={[
+  ['I <b>live</b> in Rosario.', 'Yo vivo en Rosario.'],
+  ['My cousin <b>lives</b> in Córdoba.', 'Mi primo vive en Córdoba (my cousin = he).'],
+  ['We <b>have</b> English on Monday.', 'Tenemos inglés los lunes.'],
+  ['The class <b>starts</b> at 8.00.', 'La clase empieza a las 8 (the class = it).'],
+]} />
+
+:::caution[He / she / it no son solo esas tres palabras]
+Cualquier sujeto que sea **una sola persona, animal o cosa** cuenta como he/she/it:
+*my mum*, *Tomás*, *my best friend*, *the dog*, *the school*, *my phone*…
+
+En cambio, *my parents*, *Tom and Ana*, *my friends* son **they** → **sin -s**.
+:::
+
+### Cuándo es -s, -es o -ies
+
+| El verbo termina en… | Se agrega | Ejemplos |
+|---|---|---|
+| casi todo | **-s** | play → play**s**, eat → eat**s**, get → get**s** |
+| **-ch, -sh, -ss, -x, -o** | **-es** | watch → watch**es**, wash → wash**es**, kiss → kiss**es**, go → go**es**, do → do**es** |
+| **consonante + y** | ~~y~~ → **-ies** | study → stud**ies**, fly → fl**ies** |
+| **vocal + y** | **-s** (normal) | play → play**s**, buy → buy**s** |
+| **have** | ¡irregular! | have → **has** |
+
+:::tip[¿Por qué -es?]
+Probá decir *"watchs"*: no se puede pronunciar. La **e** está para que suene: <Say>watches</Say>.
+Lo mismo con *go* → <Say>goes</Say> y *do* → <Say>does</Say>.
+:::
+
+### Cómo suena la -s
+
+La -s se pronuncia de tres maneras. No te la van a tomar escrita, pero ayuda a escucharla:
+
+| Suena /s/ | Suena /z/ | Suena /ɪz/ (una sílaba más) |
+|---|---|---|
+| <Say>gets</Say> | <Say>leaves</Say> | <Say>finishes</Say> |
+| <Say>likes</Say> | <Say>goes</Say> | <Say>watches</Say> |
+| <Say>starts</Say> | <Say>drives</Say> | <Say>teaches</Say> |
+
+---
+
+## Ejercicios
+
+<Clasificar
+  titulo="¿-s, -es o -ies?"
+  fundamental
+  cajas={[
+    { id: 's', nombre: '+ s', ayuda: 'casi todos' },
+    { id: 'es', nombre: '+ es', ayuda: '-ch, -sh, -ss, -x, -o' },
+    { id: 'ies', nombre: 'y → ies', ayuda: 'consonante + y' },
+  ]}
+  tarjetas={[
+    { texto: 'watch', caja: 'es', porque: 'Termina en -ch → watch<b>es</b>.' },
+    { texto: 'play', caja: 's', porque: 'Termina en vocal + y (a+y) → play<b>s</b>, sin cambiar la y.' },
+    { texto: 'study', caja: 'ies', porque: 'Consonante + y (d+y) → stud<b>ies</b>.' },
+    { texto: 'go', caja: 'es', porque: 'Termina en -o → go<b>es</b>.' },
+    { texto: 'get', caja: 's', porque: 'Normal → get<b>s</b>.' },
+    { texto: 'finish', caja: 'es', porque: 'Termina en -sh → finish<b>es</b>.' },
+    { texto: 'do', caja: 'es', porque: 'Termina en -o → do<b>es</b>.' },
+    { texto: 'fly', caja: 'ies', porque: 'Consonante + y → fl<b>ies</b>.' },
+    { texto: 'leave', caja: 's', porque: 'Normal → leave<b>s</b> (ya termina en e, solo va la s).' },
+    { texto: 'buy', caja: 's', porque: 'Vocal + y (u+y) → buy<b>s</b>.' },
+  ]}
+>
+  ¿Cómo queda cada verbo con *he / she / it*?
+</Clasificar>
+
+<Completar
+  titulo="Escribí el verbo con he / she / it"
+  fundamental
+  items={[
+    { f: "My mum ___ (work) in a hospital.", r: ['works'], e: '<i>My mum</i> = she → <b>works</b>.' },
+    { f: "Sofi ___ (watch) series every night.", r: ['watches'], e: 'Termina en -ch → <b>watches</b>.' },
+    { f: "My brother ___ (study) a lot for his exams.", r: ['studies'], e: 'Consonante + y → <b>studies</b>.' },
+    { f: "Martín ___ (go) to school by bike.", r: ['goes'], e: 'Termina en -o → <b>goes</b>.' },
+    { f: "My dad ___ (have) a coffee for breakfast.", r: ['has'], e: '<i>Have</i> es irregular: <b>has</b>.' },
+    { f: "Our teacher ___ (finish) the class at 12.00.", r: ['finishes'], e: 'Termina en -sh → <b>finishes</b>.' },
+    { f: "My cat ___ (sleep) all day.", r: ['sleeps'], e: '<i>My cat</i> = it → <b>sleeps</b>.' },
+    { f: "Juli ___ (play) the guitar.", r: ['plays'], e: 'Vocal + y → <b>plays</b> (no "plaies").' },
+    { f: "My grandma ___ (do) yoga on Tuesday.", r: ['does'], e: 'Termina en -o → <b>does</b>.' },
+  ]}
+>
+  Completá con el verbo entre paréntesis en Present Simple.
+</Completar>
+
+<Completar
+  titulo="¿Con -s o sin -s?"
+  fundamental
+  items={[
+    { f: "I {*play|plays} videogames with my friends.", e: 'Con <b>I</b> el verbo va sin -s.' },
+    { f: "My best friend {*lives|live} near my house.", e: '<i>My best friend</i> es una persona (he/she) → <b>lives</b>.' },
+    { f: "My parents {works|*work} in the city centre.", e: '<i>My parents</i> son dos (they) → <b>work</b>, sin -s.' },
+    { f: "We {*have|has} lunch at school.", e: 'Con <b>we</b> va <b>have</b>.' },
+    { f: "The film {start|*starts} at 9.00.", e: '<i>The film</i> = it → <b>starts</b>.' },
+    { f: "You {*speak|speaks} English very well!", e: 'Con <b>you</b> nunca va -s.' },
+    { f: "Tom and Ana {gets|*get} up early.", e: 'Tom y Ana son dos = they → <b>get</b>.' },
+  ]}
+>
+  Elegí la forma correcta.
+</Completar>
+
+<Completar
+  titulo="Un día de Mía"
+  items={[
+    { f: "Mía is 14 and she ___ (live) in Mar del Plata.", r: ['lives'] },
+    { f: "Every day she ___ (get) up at 6.30.", r: ['gets'] },
+    { f: "She ___ (have) breakfast with her dad.", r: ['has'], e: '<i>have</i> → <b>has</b> con she.' },
+    { f: "Then she ___ (go) to school by bus.", r: ['goes'], e: '-o → <b>goes</b>.' },
+    { f: "After school, she ___ (watch) videos and ___ (study) English.", r: ['watches', 'studies'], e: 'watch → <b>watches</b> (-ch); study → <b>studies</b> (consonante + y).' },
+    { f: "Her parents ___ (finish) work at 6.00.", r: ['finish'], e: '<i>Her parents</i> = they → <b>finish</b>, sin -es.' },
+    { f: "They ___ (have) dinner together at 9.00.", r: ['have'], e: 'Con <b>they</b>: <b>have</b>.' },
+  ]}
+>
+  Completá el texto. Ojo: no todos los sujetos son *she*.
+</Completar>
+
+<OpcionMultiple
+  titulo="¿Cuál NO lleva -s?"
+  opciones={[
+    { texto: 'My sister ___ (like) pizza.', explicacion: '<i>My sister</i> = she → lleva -s: likes.' },
+    { texto: 'My friends ___ (like) pizza.', correcta: true, explicacion: '<i>My friends</i> = they → <b>like</b>, sin -s.' },
+    { texto: 'The teacher ___ (like) pizza.', explicacion: '<i>The teacher</i> = he/she → lleva -s: likes.' },
+  ]}
+>
+  En una sola de estas frases el verbo va **sin** -s. ¿Cuál?
+</OpcionMultiple>

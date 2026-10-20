@@ -1,0 +1,128 @@
+---
+title: 2. La hora y cuándo pasa algo
+description: What time is it? At seven o'clock, in the morning, on Monday.
+---
+import Ejemplos from '../../../components/Ejemplos.astro';
+import Completar from '../../../components/Completar.astro';
+import Clasificar from '../../../components/Clasificar.astro';
+import OpcionMultiple from '../../../components/OpcionMultiple.astro';
+
+Para contar una rutina hace falta decir **a qué hora** y **cuándo** hacés las cosas. Esto aparece en
+todos los ejercicios de la unidad 5.
+
+## Decir la hora
+
+La forma más fácil (y que siempre está bien) es decir los números **como en un reloj digital**:
+
+<Ejemplos items={[
+  ["It's seven o'clock.", '7:00 (o\'clock = en punto)'],
+  ["It's seven fifteen.", '7:15'],
+  ["It's seven thirty.", '7:30'],
+  ["It's seven forty-five.", '7:45'],
+]} />
+
+En el libro también vas a ver la forma "clásica", que hay que **reconocer**:
+
+| Hora | Forma clásica | Cómo pensarlo |
+|---|---|---|
+| 7:15 | **quarter past** seven | un cuarto **pasadas** las 7 |
+| 7:30 | **half past** seven | media **pasadas** las 7 |
+| 7:45 | **quarter to** eight | un cuarto **para** las 8 |
+| 7:10 | ten **past** seven | 10 pasadas las 7 |
+| 7:50 | ten **to** eight | 10 para las 8 |
+
+:::caution[Ojo con "quarter to"]
+*Quarter **to** eight* son las **7:45**, no las 8:15. *To* = "para". Es el error más común.
+:::
+
+Para preguntar:
+
+<Ejemplos items={[
+  ['What time is it?', '¿Qué hora es?'],
+  ['What time do you get up?', '¿A qué hora te levantás?'],
+]} />
+
+## At, in, on: ¿cuándo?
+
+| | Se usa con… | Ejemplos |
+|---|---|---|
+| **at** | una **hora exacta**, y *night* / *the weekend* | at 7.00, at half past six, **at night**, **at the weekend** |
+| **in** | **partes del día**, meses, estaciones | **in the morning**, in the afternoon, in the evening, in July, in winter |
+| **on** | **días** | on Monday, on Saturday, on Sunday morning |
+
+<Ejemplos items={[
+  ['I get up <b>at</b> seven <b>in</b> the morning.', 'Me levanto a las 7 de la mañana.'],
+  ['We have English <b>on</b> Tuesday.', 'Tenemos inglés los martes.'],
+  ['I go to bed late <b>at</b> the weekend.', 'Me acuesto tarde el fin de semana.'],
+]} />
+
+:::note[Las partes del día, según el libro]
+- *in the morning* → de 5 a 12
+- *in the afternoon* → de 12 a 17
+- *in the evening* → de 17 a 21
+- *at night* → de 21 a 5 (¡con **at**!)
+:::
+
+Los días de la semana van **siempre con mayúscula**: Monday, Tuesday, Wednesday, Thursday, Friday,
+Saturday, Sunday.
+
+---
+
+## Ejercicios
+
+<Clasificar
+  titulo="¿At, in u on?"
+  fundamental
+  cajas={[
+    { id: 'at', nombre: 'at', ayuda: 'hora exacta, night, the weekend' },
+    { id: 'in', nombre: 'in', ayuda: 'partes del día, meses' },
+    { id: 'on', nombre: 'on', ayuda: 'días' },
+  ]}
+  tarjetas={[
+    { texto: '8 o\'clock', caja: 'at', porque: 'Hora exacta → at.' },
+    { texto: 'the morning', caja: 'in', porque: 'Parte del día → in.' },
+    { texto: 'Friday', caja: 'on', porque: 'Día → on.' },
+    { texto: 'night', caja: 'at', porque: 'Es la excepción: at night.' },
+    { texto: 'the evening', caja: 'in', porque: 'Parte del día → in.' },
+    { texto: 'the weekend', caja: 'at', porque: 'En inglés británico (el del libro): at the weekend.' },
+    { texto: 'half past six', caja: 'at', porque: 'Hora exacta → at.' },
+    { texto: 'Sunday', caja: 'on', porque: 'Día → on.' },
+    { texto: 'July', caja: 'in', porque: 'Mes → in.' },
+  ]}
+>
+  ¿Qué preposición va con cada uno?
+</Clasificar>
+
+<Completar
+  titulo="Completá con at, in u on"
+  items={[
+    { f: "I have breakfast ___ 7.30.", r: ['at'], e: 'Hora exacta → <b>at</b>.' },
+    { f: "My brother plays football ___ Saturday.", r: ['on'], e: 'Día → <b>on</b>.' },
+    { f: "We study Maths ___ the morning.", r: ['in'], e: 'Parte del día → <b>in</b> the morning.' },
+    { f: "I read a book in bed ___ night.", r: ['at'], e: 'Excepción: <b>at</b> night.' },
+    { f: "She does her homework ___ the afternoon.", r: ['in'], e: 'Parte del día → <b>in</b>.' },
+    { f: "They visit their grandparents ___ the weekend.", r: ['at'], e: '<b>at</b> the weekend.' },
+  ]}
+/>
+
+<OpcionMultiple
+  titulo="Quarter to…"
+  opciones={[
+    { texto: '8:15', explicacion: '8:15 es <i>quarter past eight</i>.' },
+    { texto: '7:45', correcta: true, explicacion: '<i>To</i> = "para". Un cuarto para las 8 = 7:45.' },
+    { texto: '8:45', explicacion: '8:45 sería <i>quarter to nine</i>.' },
+  ]}
+>
+  *"School starts at **quarter to eight**."* ¿A qué hora empieza la escuela?
+</OpcionMultiple>
+
+<OpcionMultiple
+  titulo="Half past"
+  opciones={[
+    { texto: '6:30', correcta: true, explicacion: '<i>Half past six</i> = media pasadas las seis.' },
+    { texto: '5:30', explicacion: 'Es <b>past</b> six: después de las 6, no antes.' },
+    { texto: '6:15', explicacion: '6:15 es <i>quarter past six</i>.' },
+  ]}
+>
+  *"I get home at **half past six**."* ¿A qué hora llega?
+</OpcionMultiple>

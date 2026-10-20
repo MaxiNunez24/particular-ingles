@@ -1,0 +1,78 @@
+---
+import { idEjercicio } from '../scripts/id-ejercicio';
+/**
+ * Ejercicio de opción múltiple (chequeo de concepto). Una o varias respuestas
+ * correctas. La pregunta va en el slot (Markdown/MDX).
+ *
+ * Uso (.mdx):
+ *   import OpcionMultiple from '../../../components/OpcionMultiple.astro';
+ *   <OpcionMultiple opciones={[
+ *     { texto: "Es el objeto actual", correcta: true, explicacion: "self = el objeto que está usando el método." },
+ *     { texto: "Es una variable global", explicacion: "No: self no es global, es el objeto en uso." },
+ *   ]}>
+ *     ¿Qué representa `self` dentro de un método?
+ *   </OpcionMultiple>
+ */
+interface Opcion {
+  texto: string;
+  correcta?: boolean;
+  explicacion?: string;
+}
+interface Props {
+  titulo?: string;
+  /** ⭐ Lo principal de la clase: se hace en clase, y si alguien hace solo algunos, que sean estos. */
+  fundamental?: boolean;
+  opciones: Opcion[];
+}
+
+const { titulo = 'Pregunta', opciones } = Astro.props;
+
+const correctas = opciones.map((o, i) => (o.correcta ? i : -1)).filter((i) => i >= 0);
+const expl: Record<number, string> = {};
+opciones.forEach((o, i) => {
+  if (o.explicacion) expl[i] = o.explicacion;
+});
+const multiple = correctas.length > 1;
+
+const id = idEjercicio(titulo);
+const enc = (o: unknown) => Buffer.from(JSON.stringify(o), 'utf-8').toString('base64');
+---
+
+<section class="quiz" id={id} data-titulo={titulo}
+  data-fundamental={Astro.props.fundamental ? '' : undefined} data-solucion={enc({ correctas, expl, multiple })}>
+  <header class="ejercicio__header">
+    <span class="ejercicio__dif" aria-hidden="true">❓</span>
+    <h3 class="ejercicio__titulo">{titulo}</h3>
+    {Astro.props.fundamental && (
+      <span class="ejercicio__fundamental" title="Lo principal de la clase: si hacés solo algunos, que sean estos">⭐ Fundamental</span>
+    )}
+    <span class="ej-hecho" hidden>✓ Resuelto</span>
+  </header>
+
+  <div class="quiz__pregunta"><slot /></div>
+  {multiple && <p class="quiz__nota">Puede haber más de una respuesta correcta.</p>}
+
+  <ul class="quiz__opciones" role="list">
+    {opciones.map((o, i) => (
+      <li>
+        <button type="button" class="quiz__opcion" data-idx={i} aria-pressed="false">
+          <span class="quiz__marca" aria-hidden="true"></span>
+          {/* set:html para poder marcar código con <code> en la opción. Ojo:
+              acá va HTML, no Markdown — los backticks saldrían literales. */}
+          <span class="quiz__texto" set:html={o.texto} />
+        </button>
+      </li>
+    ))}
+  </ul>
+
+  <div class="ejercicio__acciones">
+    <button type="button" class="ejercicio__btn ejercicio__btn--verify" data-q-verificar>✓ Verificar</button>
+    <button type="button" class="ejercicio__btn ejercicio__btn--reset" data-q-reset>↺ Reiniciar</button>
+  </div>
+
+  <div class="ejercicio__salida" data-q-salida role="status" aria-live="polite" hidden></div>
+</section>
+
+<script>
+  import '../scripts/opcion-multiple.ts';
+</script>

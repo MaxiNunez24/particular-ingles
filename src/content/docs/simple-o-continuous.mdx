@@ -1,0 +1,124 @@
+---
+title: 8. ¿Simple o Continuous?
+description: Cómo darte cuenta cuál de los dos presentes va. Lo que más se toma en los exámenes.
+---
+import Ejemplos from '../../components/Ejemplos.astro';
+import Completar from '../../components/Completar.astro';
+import Clasificar from '../../components/Clasificar.astro';
+import OpcionMultiple from '../../components/OpcionMultiple.astro';
+
+Ya sabés armar los dos. La parte difícil del examen es **elegir cuál**. La pregunta clave es una sola:
+
+:::tip[La pregunta clave]
+**¿Esto pasa SIEMPRE / normalmente, o está pasando AHORA?**
+- Siempre, todos los días, en general → **Present Simple**
+- Ahora, en este momento → **Present Continuous**
+:::
+
+|  | **Present Simple** 🔁 | **Present Continuous** 🎬 |
+|---|---|---|
+| ¿Cuándo? | rutinas, costumbres, cosas que son así | lo que pasa **ahora** |
+| Se forma | verbo (+ s con he/she/it) | am/is/are + verbo-**ing** |
+| Negativo | **don't / doesn't** + verbo | **am not / isn't / aren't** + verbo-ing |
+| Pregunta | **Do / Does** + sujeto + verbo? | **Am / Is / Are** + sujeto + verbo-ing? |
+| Palabras pista | always, usually, often, sometimes, never, every day, on Mondays, at the weekend, once a week | now, right now, at the moment, today, Look!, Listen! |
+
+<Ejemplos items={[
+  ['My dad usually <b>drives</b> to work, but today he<b>\'s taking</b> the bus.', 'Generalmente maneja, pero hoy toma el colectivo.'],
+  ['I <b>play</b> volleyball on Tuesdays. Right now I<b>\'m playing</b> a match!', 'Juego los martes. ¡Ahora estoy jugando un partido!'],
+  ['<b>Do</b> you <b>watch</b> TV every day? / <b>Are</b> you <b>watching</b> TV now?', '¿Mirás tele todos los días? / ¿Estás mirando tele ahora?'],
+]} />
+
+## Los verbos que no van con -ing
+
+Algunos verbos hablan de **gustos, deseos o lo que sabés**, no de acciones. Esos van en **Present
+Simple** aunque sea "ahora":
+
+**like, love, hate, want, need, know, understand**
+
+| ❌ Mal | ✅ Bien |
+|---|---|
+| I'm wanting a pizza. | I **want** a pizza. |
+| She's knowing the answer. | She **knows** the answer. |
+| Are you understanding? | **Do** you **understand**? |
+
+---
+
+## Ejercicios
+
+<Clasificar
+  titulo="Palabras pista"
+  fundamental
+  cajas={[
+    { id: 's', nombre: '🔁 Present Simple', ayuda: 'siempre / normalmente' },
+    { id: 'c', nombre: '🎬 Present Continuous', ayuda: 'ahora' },
+  ]}
+  tarjetas={[
+    { texto: 'every day', caja: 's', porque: 'Todos los días = costumbre.' },
+    { texto: 'right now', caja: 'c', porque: 'Justo ahora.' },
+    { texto: 'usually', caja: 's', porque: 'Generalmente = costumbre.' },
+    { texto: 'at the moment', caja: 'c', porque: 'En este momento.' },
+    { texto: 'on Saturdays', caja: 's', porque: 'Todos los sábados = costumbre.' },
+    { texto: 'Look!', caja: 'c', porque: '¡Mirá! = está pasando delante tuyo.' },
+    { texto: 'never', caja: 's', porque: 'Adverbio de frecuencia → costumbre.' },
+    { texto: 'now', caja: 'c', porque: 'Ahora.' },
+    { texto: 'twice a week', caja: 's', porque: 'Dos veces por semana = costumbre.' },
+    { texto: 'Listen!', caja: 'c', porque: '¡Escuchá! = está sonando ahora.' },
+  ]}
+>
+  ¿Con qué tiempo suele ir cada expresión?
+</Clasificar>
+
+<Completar
+  titulo="Elegí el tiempo correcto"
+  fundamental
+  items={[
+    { f: "I {*get up|am getting up} at 7.00 every day.", e: '<i>Every day</i> = costumbre → Present Simple.' },
+    { f: "Look! The cat {sleeps|*is sleeping} on your bed.", e: '<i>Look!</i> = está pasando ahora → Continuous.' },
+    { f: "My mum {*works|is working} in a bank.", e: 'Es su trabajo, siempre → Present Simple.' },
+    { f: "Shh! I {study|*am studying}.", e: '<i>Shh!</i> = ahora mismo → Continuous.' },
+    { f: "We {*don't usually go|aren't usually going} out on Monday.", e: '<i>Usually</i> = costumbre → Present Simple.' },
+    { f: "I {am wanting|*want} a new phone.", e: '<i>Want</i> no va con -ing.' },
+    { f: "{Are you liking|*Do you like} this song?", e: '<i>Like</i> no va con -ing.' },
+    { f: "Where's Pedro? — He {has|*is having} a shower.", e: 'Está pasando ahora → Continuous.' },
+  ]}
+/>
+
+<Completar
+  titulo="Completá con el tiempo correcto"
+  fundamental
+  items={[
+    { f: "My brother usually ___ (play) football on Saturdays, but today he ___ (study).", r: ['plays', ['is studying', "'s studying"]], e: 'usually → <b>plays</b>; today (hoy, ahora) → <b>is studying</b>.' },
+    { f: "Listen! Someone ___ (sing) in the street.", r: [['is singing', "'s singing"]], e: 'Listen! → <b>is singing</b>.' },
+    { f: "Martina ___ (not eat) meat. She's vegetarian.", r: [["doesn't eat", 'does not eat']], e: 'Es algo que pasa siempre → <b>doesn\'t eat</b>.' },
+    { f: "I can't talk now. I ___ (have) dinner.", r: [["'m having", 'am having']], e: 'Ahora → <b>am having</b> (have pierde la e).' },
+    { f: "___ you ___ (know) the answer?", r: [['Do', 'do'], 'know'], e: '<i>Know</i> no va con -ing → <b>Do you know</b>…?' },
+    { f: "What ___ you ___ (do) right now?", r: ['are', 'doing'], e: 'right now → <b>are</b> you <b>doing</b>?' },
+    { f: "What ___ your dad ___ (do)? — He's a doctor.", r: ['does', 'do'], e: 'Pregunta por el trabajo (siempre) → <b>does</b> your dad <b>do</b>?' },
+  ]}
+>
+  Primero pensá: ¿siempre o ahora? Después armalo.
+</Completar>
+
+<OpcionMultiple
+  titulo="La pregunta trampa"
+  opciones={[
+    { texto: '¿Qué está haciendo tu mamá ahora?', explicacion: 'Eso sería <i>What is your mum doing?</i>' },
+    { texto: '¿De qué trabaja tu mamá?', correcta: true, explicacion: '<b>What does she do?</b> en Present Simple pregunta por el trabajo, lo que hace siempre.' },
+  ]}
+>
+  *"What **does** your mum **do**?"* ¿Qué significa?
+</OpcionMultiple>
+
+<Completar
+  titulo="Un mensaje de Valen"
+  items={[
+    { f: "Hi Juli! How are you? I ___ (write) to you from my grandma's house.", r: [["'m writing", 'am writing']] },
+    { f: "We usually ___ (visit) her once a month.", r: ['visit'], e: 'usually + once a month → Present Simple.' },
+    { f: "Right now my grandma ___ (make) a cake and my cousins ___ (watch) a film.", r: [['is making', "'s making"], ['are watching', "'re watching"]], e: 'Right now → Continuous. make pierde la e.' },
+    { f: "My grandma ___ (have) a big garden and she ___ (love) flowers.", r: ['has', 'loves'], e: 'Cosas que son así + <i>love</i> → Present Simple.' },
+    { f: "What ___ you ___ (do) at the moment?", r: ['are', 'doing'], e: 'At the moment → <b>are</b> you <b>doing</b>?' },
+  ]}
+>
+  Completá el mensaje. Ojo: hay de los dos tiempos.
+</Completar>

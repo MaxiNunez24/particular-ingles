@@ -1,0 +1,27 @@
+---
+/**
+ * Una frase en inglés con su botón 🔊 para escucharla.
+ *
+ * Uso (.mdx):
+ *   import Say from '../../components/Say.astro';
+ *   <Say>She gets up at seven.</Say>
+ *
+ * Tocar 🔊 dos veces seguidas la repite más lento.
+ */
+interface Props {
+  /** Qué leer, si no es exactamente el texto que se ve. */
+  t?: string;
+}
+const { t = '' } = Astro.props;
+---
+
+<span class="say" lang="en" data-say-scope><slot /><button
+    type="button"
+    class="say__btn"
+    data-say={t}
+    aria-label="Escuchar en inglés"
+    title="Escuchar (tocá de nuevo para oírlo más lento)">🔊</button></span>
+
+<script>
+  import '../scripts/hablar';
+</script>

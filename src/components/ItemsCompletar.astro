@@ -1,0 +1,48 @@
+---
+/**
+ * La lista de frases con huecos. La usan Completar (práctica, corrige cada
+ * ejercicio) y Simulacro (examen, corrige todo junto al final).
+ */
+import type { ItemArmado } from '../scripts/completar-armar';
+
+interface Props {
+  items: ItemArmado[];
+  /** Número del primer ítem (en el simulacro la numeración sigue entre partes). */
+  desde?: number;
+}
+const { items, desde = 1 } = Astro.props;
+---
+
+<ol class="completar__items" start={desde}>
+  {items.map((it, i) => (
+    <li class="completar__item" data-item={i} lang="en">
+      <span class="completar__frase">
+        {it.pedazos.map((p) =>
+          p.tipo === 'texto' ? (
+            <span set:html={p.html} />
+          ) : p.tipo === 'hueco' ? (
+            <input
+              type="text"
+              class="completar__hueco"
+              size={p.ancho}
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+              aria-label="Completar"
+            />
+          ) : (
+            <select class="completar__elegir" aria-label="Elegir">
+              <option value="">…</option>
+              {p.opciones.map((o, j) => <option value={j}>{o}</option>)}
+            </select>
+          ),
+        )}
+      </span>
+      {/* El 🔊 aparece recién cuando la frase está bien: escucharla antes
+          sería escuchar la respuesta. */}
+      <button type="button" class="say__btn completar__say" data-say={it.correcta} hidden
+        aria-label="Escuchar la frase correcta" title="Escuchar la frase correcta">🔊</button>
+      <div class="completar__expl" hidden></div>
+    </li>
+  ))}
+</ol>
