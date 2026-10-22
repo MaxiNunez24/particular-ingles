@@ -1,23 +1,36 @@
 // Simulacro de examen (components/Simulacro.astro): corrige todo junto al
-// entregar, con la respuesta correcta y la explicación de cada error.
+// entregar. Como en la práctica, no muestra las respuestas: dice qué tipo de
+// error hay y qué repasar. Se puede corregir y volver a entregar; después de
+// varias entregas aparece el botón para ver las respuestas correctas.
 
 import { estaHecho, marcarHecho, pintarSello, actualizarResumen } from './progreso';
-import { prepararItems, corregirItem, limpiarItem } from './completar';
+import { prepararItems, corregirItem, limpiarItem, leerIntentos, guardarIntentos } from './completar';
+
+const ENTREGAS_PARA_VER = 3;
 
 function initSimulacro(el: HTMLElement): void {
   const titulo = el.dataset.titulo || '';
   const salida = el.querySelector<HTMLElement>('[data-salida]');
   const btnEntregar = el.querySelector<HTMLButtonElement>('[data-entregar]');
+  const btnCorregir = el.querySelector<HTMLButtonElement>('[data-corregir]');
   const btnReset = el.querySelector<HTMLButtonElement>('[data-reset]');
-  if (!salida || !btnEntregar || !btnReset) return;
+  const btnVer = el.querySelector<HTMLButtonElement>('[data-ver]');
+  if (!salida || !btnEntregar || !btnCorregir || !btnReset || !btnVer) return;
   pintarSello(el, estaHecho(titulo));
 
-  let entregado = false;
+  let entregas = leerIntentos(titulo);
   const { items, soluciones, borrar } = prepararItems(el, titulo, () => {
     /* mientras responde no se corrige nada */
   });
   const controles = () =>
     Array.from(el.querySelectorAll<HTMLInputElement | HTMLSelectElement>('.completar__hueco, .completar__elegir'));
+
+  const modoRespondiendo = (si: boolean) => {
+    controles().forEach((c) => (c.disabled = !si));
+    btnEntregar.hidden = !si;
+    btnCorregir.hidden = si;
+    btnVer.hidden = si || entregas < ENTREGAS_PARA_VER;
+  };
 
   btnEntregar.addEventListener('click', () => {
     const vacios = items.filter((li) =>
@@ -27,44 +40,56 @@ function initSimulacro(el: HTMLElement): void {
 
     let bien = 0;
     items.forEach((li, i) => {
-      if (corregirItem(li, soluciones[i], true)) bien++;
+      if (corregirItem(li, soluciones[i], 'practica')) bien++;
     });
     const nota = Math.round((bien / items.length) * 100) / 10;
     const aprobado = nota >= 6;
-    entregado = true;
-    controles().forEach((c) => (c.disabled = true));
-    btnEntregar.hidden = true;
-    btnReset.hidden = false;
+    entregas = bien === items.length ? 0 : entregas + 1;
+    guardarIntentos(titulo, entregas);
+    modoRespondiendo(false);
 
     salida.hidden = false;
     salida.className = `ejercicio__salida simulacro__nota ${aprobado ? 'is-ok' : 'is-error'}`;
     salida.innerHTML =
       `<strong class="simulacro__numero">${nota.toFixed(1).replace('.0', '')}/10</strong>` +
       `<span>${bien} de ${items.length} bien. ` +
-      (nota >= 9
-        ? '¡Excelente! 🎉 Estás para el examen.'
-        : aprobado
-          ? '¡Aprobado! 💪 Mirá las que están en rojo: cada una tiene la explicación.'
-          : 'Todavía no 😕. Leé las correcciones en rojo, repasá esos temas y volvé a intentar.') +
+      (nota === 10
+        ? '¡Perfecto! 🎉 Estás para el examen.'
+        : nota >= 9
+          ? '¡Excelente! 🎉 Mirá las que quedaron en rojo y corregilas.'
+          : aprobado
+            ? '¡Aprobado! 💪 Las que están en rojo tienen una pista y el tema para repasar.'
+            : 'Todavía no 😕. Cada error en rojo dice qué revisar y dónde repasarlo. Repasá y volvé a entregar.') +
       '</span>';
     if (aprobado) {
       marcarHecho(titulo);
       pintarSello(el, true);
     }
-    el.querySelector('.is-mal')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.querySelector('.completar__item.is-mal')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  // Corregir: vuelve a habilitar todo sin borrar lo que estaba bien.
+  btnCorregir.addEventListener('click', () => {
+    modoRespondiendo(true);
+    salida.hidden = true;
+    el.querySelector<HTMLElement>('.completar__item.is-mal input, .completar__item.is-mal select')?.focus();
+  });
+
+  btnVer.addEventListener('click', () => {
+    items.forEach((li, i) => corregirItem(li, soluciones[i], 'revelado'));
+    btnVer.hidden = true;
   });
 
   btnReset.addEventListener('click', () => {
-    if (!entregado) return;
+    if (!confirm('¿Borrar todas tus respuestas y empezar de cero?')) return;
     borrar();
     items.forEach(limpiarItem);
-    controles().forEach((c) => (c.disabled = false));
-    entregado = false;
-    btnEntregar.hidden = false;
-    btnReset.hidden = true;
+    modoRespondiendo(true);
     salida.hidden = true;
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+
+  modoRespondiendo(true);
 }
 
 function boot(): void {

@@ -17,7 +17,6 @@ export function conectarClasificar(el: HTMLElement): void {
   const pozo = el.querySelector<HTMLElement>('[data-pozo]');
   const salida = el.querySelector<HTMLElement>('[data-salida]');
   const porques = el.querySelector<HTMLElement>('[data-porques]');
-  const destinos = [...el.querySelectorAll<HTMLElement>('[data-destino]')];
   const tarjetas = () => [...el.querySelectorAll<HTMLElement>('[data-tarjeta]')];
   if (!pozo || !salida) return;
 
@@ -65,30 +64,44 @@ export function conectarClasificar(el: HTMLElement): void {
   });
 
   // --- arrastrar (atajo con mouse) ---
+  // La zona para soltar es la caja ENTERA (título incluido), no solo su parte
+  // de abajo: antes había que apuntarle a un hueco chico y no se notaba dónde.
   let arrastrada: HTMLElement | null = null;
+  const cajas = [...el.querySelectorAll<HTMLElement>('.clasificar__caja')];
+  const destinoDe = (zona: HTMLElement) =>
+    zona === pozo ? pozo : zona.querySelector<HTMLElement>('[data-destino]');
   el.addEventListener('dragstart', (e) => {
     const t = (e.target as HTMLElement).closest<HTMLElement>('[data-tarjeta]');
     if (!t) return;
     arrastrada = t;
     t.classList.add('is-arrastrando');
+    el.classList.add('arrastrando');
     // Firefox no inicia el arrastre si no se setea algo en el dataTransfer.
     e.dataTransfer?.setData('text/plain', t.textContent || '');
   });
   el.addEventListener('dragend', () => {
     arrastrada?.classList.remove('is-arrastrando');
     arrastrada = null;
+    el.classList.remove('arrastrando');
     el.querySelectorAll('.is-encima').forEach((x) => x.classList.remove('is-encima'));
   });
-  [...destinos, pozo].forEach((zona) => {
+  [...cajas, pozo].forEach((zona) => {
     zona.addEventListener('dragover', (e) => {
+      if (!arrastrada) return;
       e.preventDefault(); // sin esto el navegador no permite soltar
+      if (e.dataTransfer) e.dataTransfer.dropEffect = 'move';
       zona.classList.add('is-encima');
     });
-    zona.addEventListener('dragleave', () => zona.classList.remove('is-encima'));
+    zona.addEventListener('dragleave', (e) => {
+      // dragleave también salta al pasar sobre un hijo: solo apagamos si de
+      // verdad salió de la zona.
+      if (!zona.contains(e.relatedTarget as Node)) zona.classList.remove('is-encima');
+    });
     zona.addEventListener('drop', (e) => {
       e.preventDefault();
       zona.classList.remove('is-encima');
-      if (arrastrada) mover(arrastrada, zona);
+      const destino = destinoDe(zona);
+      if (arrastrada && destino) mover(arrastrada, destino);
     });
   });
 
@@ -115,19 +128,28 @@ export function conectarClasificar(el: HTMLElement): void {
       if (ok) bien++;
     });
 
-    // Los "porqué" se muestran SIEMPRE, no solo cuando está mal: acertar sin
-    // saber por qué es la forma más rápida de olvidarlo.
+    // El "porqué" se muestra solo en las que están BIEN (refuerza lo que acertó).
+    // En las que están mal va una pista que no dice adónde va: si dijera "esto
+    // es she → is", la alumna movería la tarjeta sin pensar.
     if (porques) {
-      const conMotivo = tarjetas().filter((t) => t.dataset.porque);
-      if (conMotivo.length) {
-        porques.hidden = false;
-        porques.innerHTML = conMotivo
-          .map((t) => {
-            const ok = t.classList.contains('is-bien');
-            return `<li class="${ok ? 'es-bien' : 'es-mal'}"><strong>${t.textContent}</strong> — ${t.dataset.porque}</li>`;
-          })
-          .join('');
+      const lineas = tarjetas()
+        .map((t) => {
+          const ok = t.classList.contains('is-bien');
+          if (ok && t.dataset.porque)
+            return `<li class="es-bien"><strong>${t.textContent}</strong> — ${t.dataset.porque}</li>`;
+          if (!ok)
+            return `<li class="es-mal"><strong>${t.textContent}</strong> — ${
+              t.dataset.pista || el.dataset.pistaMal || 'No va en esa caja. Volvé a leer qué agrupa cada una.'
+            }</li>`;
+          return '';
+        })
+        .filter(Boolean);
+      if (el.dataset.repasar && lineas.some((l) => l.includes('es-mal'))) {
+        const r = JSON.parse(el.dataset.repasar) as { texto: string; href: string };
+        lineas.push(`<li class="es-repasar">📖 Repasá: <a href="${r.href}">${r.texto}</a></li>`);
       }
+      porques.hidden = lineas.length === 0;
+      porques.innerHTML = lineas.join('');
     }
 
     salida.hidden = false;

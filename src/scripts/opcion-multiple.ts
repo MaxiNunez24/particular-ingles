@@ -67,6 +67,8 @@ function initQuiz(el: HTMLElement): void {
       mostrar('Elegí una opción antes de verificar 🙂', 'is-error');
       return;
     }
+    // Solo se marca lo que ELIGIÓ: si marcáramos también la correcta que le
+    // faltó, la corrección le diría la respuesta.
     const explicaciones: string[] = [];
     let bien = true;
     opciones.forEach((btn) => {
@@ -75,20 +77,23 @@ function initQuiz(el: HTMLElement): void {
       const correcta = correctas.has(idx);
       btn.classList.remove('quiz-ok', 'quiz-mal', 'quiz-falta');
       if (elegida && correcta) btn.classList.add('quiz-ok');
-      else if (elegida && !correcta) { btn.classList.add('quiz-mal'); bien = false; }
-      else if (!elegida && correcta) { btn.classList.add('quiz-falta'); bien = false; }
-      // mostrar explicación de las correctas y de las elegidas-incorrectas
-      if (sol.expl[idx] && (correcta || elegida)) {
-        explicaciones.push(`${correcta ? '✅' : '❌'} ${sol.expl[idx]}`);
-      }
+      else if (elegida && !correcta) btn.classList.add('quiz-mal');
+      if (elegida !== correcta) bien = false;
+      if (sol.expl[idx] && elegida) explicaciones.push(`${correcta ? '✅' : '🔎'} ${sol.expl[idx]}`);
     });
-    const detalle = explicaciones.length ? '\n\n' + explicaciones.join('\n') : '';
     if (bien) {
-      mostrar('✅ ¡Correcto!' + detalle, 'is-ok');
+      mostrar('✅ ¡Correcto!' + (explicaciones.length ? '\n\n' + explicaciones.join('\n') : ''), 'is-ok');
       marcarHecho(titulo);
       pintarSello(el, true);
     } else {
-      mostrar('❌ Todavía no. Mirá lo marcado:' + detalle, 'is-error');
+      const soloFalta = [...seleccion].every((i) => correctas.has(i));
+      const rep = el.dataset.repasar ? (JSON.parse(el.dataset.repasar) as { texto: string; href: string }) : null;
+      mostrar(
+        (soloFalta ? '🔎 Lo que elegiste está bien, pero falta marcar alguna más.' : '❌ Todavía no.') +
+          (explicaciones.length ? '\n\n' + explicaciones.join('\n') : '') +
+          (rep ? `\n\n📖 Repasá: <a href="${rep.href}">${rep.texto}</a>` : ''),
+        'is-error',
+      );
     }
   });
 

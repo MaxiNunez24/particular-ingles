@@ -8,12 +8,12 @@
  *     { f: 'My sister ___ (watch) TV every day.', r: ['watches'],
  *       e: 'Termina en <b>-ch</b>: se agrega <b>-es</b>.' },
  *     { f: 'They {plays|*play} football.', e: 'Con <b>they</b> el verbo no lleva -s.' },
- *   ]}>
+ *   ]} repasar={{ texto: 'La -s, -es o -ies', href: '#cuándo-es--s--es-o--ies' }}>
  *     Completá con el verbo en Present Simple.
  *   </Completar>
  */
 import ItemsCompletar from './ItemsCompletar.astro';
-import { armarItem, codificar, type ItemCompletar } from '../scripts/completar-armar';
+import { armarItem, codificar, type ItemCompletar, type Repasar } from '../scripts/completar-armar';
 import { idEjercicio } from '../scripts/id-ejercicio';
 
 interface Props {
@@ -22,8 +22,10 @@ interface Props {
   fundamental?: boolean;
   dificultad?: string;
   items: ItemCompletar[];
+  /** Qué repasar si algo sale mal: { texto, href } (href a una sección del material). */
+  repasar?: Repasar;
 }
-const { titulo, dificultad = '✏️', items } = Astro.props;
+const { titulo, dificultad = '✏️', items, repasar } = Astro.props;
 const armados = items.map(armarItem);
 const id = idEjercicio(titulo);
 ---
@@ -43,7 +45,7 @@ const id = idEjercicio(titulo);
 
   <div class="ejercicio__consigna"><slot /></div>
 
-  <ItemsCompletar items={armados} />
+  <ItemsCompletar items={armados} repasar={repasar} />
 
   <div class="ejercicio__acciones">
     <button type="button" class="ejercicio__btn ejercicio__btn--verify" data-verify>✓ Verificar</button>

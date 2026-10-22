@@ -7,7 +7,11 @@ import Completar from '../../components/Completar.astro';
 import Clasificar from '../../components/Clasificar.astro';
 import OpcionMultiple from '../../components/OpcionMultiple.astro';
 
-Ya sabés armar los dos. La parte difícil del examen es **elegir cuál**. La pregunta clave es una sola:
+Ya sabés armar los dos. La parte difícil del examen es **elegir cuál**.
+
+## Cómo darte cuenta
+
+La pregunta clave es una sola:
 
 :::tip[La pregunta clave]
 **¿Esto pasa SIEMPRE / normalmente, o está pasando AHORA?**
@@ -48,6 +52,8 @@ Simple** aunque sea "ahora":
 
 <Clasificar
   titulo="Palabras pista"
+  repasar={{ texto: 'Cómo darte cuenta (la fila de palabras pista)', href: '#cómo-darte-cuenta' }}
+  pistaMal="¿Esa expresión habla de algo que se repite, o de este momento?"
   fundamental
   cajas={[
     { id: 's', nombre: '🔁 Present Simple', ayuda: 'siempre / normalmente' },
@@ -71,6 +77,7 @@ Simple** aunque sea "ahora":
 
 <Completar
   titulo="Elegí el tiempo correcto"
+  repasar={{ texto: 'Cómo darte cuenta', href: '#cómo-darte-cuenta' }}
   fundamental
   items={[
     { f: "I {*get up|am getting up} at 7.00 every day.", e: '<i>Every day</i> = costumbre → Present Simple.' },
@@ -78,21 +85,22 @@ Simple** aunque sea "ahora":
     { f: "My mum {*works|is working} in a bank.", e: 'Es su trabajo, siempre → Present Simple.' },
     { f: "Shh! I {study|*am studying}.", e: '<i>Shh!</i> = ahora mismo → Continuous.' },
     { f: "We {*don't usually go|aren't usually going} out on Monday.", e: '<i>Usually</i> = costumbre → Present Simple.' },
-    { f: "I {am wanting|*want} a new phone.", e: '<i>Want</i> no va con -ing.' },
-    { f: "{Are you liking|*Do you like} this song?", e: '<i>Like</i> no va con -ing.' },
+    { rep: { texto: 'Los verbos que no van con -ing', href: '#los-verbos-que-no-van-con--ing' }, f: "I {am wanting|*want} a new phone.", e: '<i>Want</i> no va con -ing.' },
+    { rep: { texto: 'Los verbos que no van con -ing', href: '#los-verbos-que-no-van-con--ing' }, f: "{Are you liking|*Do you like} this song?", e: '<i>Like</i> no va con -ing.' },
     { f: "Where's Pedro? — He {has|*is having} a shower.", e: 'Está pasando ahora → Continuous.' },
   ]}
 />
 
 <Completar
   titulo="Completá con el tiempo correcto"
+  repasar={{ texto: 'Cómo darte cuenta', href: '#cómo-darte-cuenta' }}
   fundamental
   items={[
     { f: "My brother usually ___ (play) football on Saturdays, but today he ___ (study).", r: ['plays', ['is studying', "'s studying"]], e: 'usually → <b>plays</b>; today (hoy, ahora) → <b>is studying</b>.' },
     { f: "Listen! Someone ___ (sing) in the street.", r: [['is singing', "'s singing"]], e: 'Listen! → <b>is singing</b>.' },
     { f: "Martina ___ (not eat) meat. She's vegetarian.", r: [["doesn't eat", 'does not eat']], e: 'Es algo que pasa siempre → <b>doesn\'t eat</b>.' },
     { f: "I can't talk now. I ___ (have) dinner.", r: [["'m having", 'am having']], e: 'Ahora → <b>am having</b> (have pierde la e).' },
-    { f: "___ you ___ (know) the answer?", r: [['Do', 'do'], 'know'], e: '<i>Know</i> no va con -ing → <b>Do you know</b>…?' },
+    { rep: { texto: 'Los verbos que no van con -ing', href: '#los-verbos-que-no-van-con--ing' }, f: "___ you ___ (know) the answer?", r: [['Do', 'do'], 'know'], e: '<i>Know</i> no va con -ing → <b>Do you know</b>…?' },
     { f: "What ___ you ___ (do) right now?", r: ['are', 'doing'], e: 'right now → <b>are</b> you <b>doing</b>?' },
     { f: "What ___ your dad ___ (do)? — He's a doctor.", r: ['does', 'do'], e: 'Pregunta por el trabajo (siempre) → <b>does</b> your dad <b>do</b>?' },
   ]}
@@ -102,6 +110,7 @@ Simple** aunque sea "ahora":
 
 <OpcionMultiple
   titulo="La pregunta trampa"
+  repasar={{ texto: 'Cómo darte cuenta', href: '#cómo-darte-cuenta' }}
   opciones={[
     { texto: '¿Qué está haciendo tu mamá ahora?', explicacion: 'Eso sería <i>What is your mum doing?</i>' },
     { texto: '¿De qué trabaja tu mamá?', correcta: true, explicacion: '<b>What does she do?</b> en Present Simple pregunta por el trabajo, lo que hace siempre.' },
@@ -112,11 +121,12 @@ Simple** aunque sea "ahora":
 
 <Completar
   titulo="Un mensaje de Valen"
+  repasar={{ texto: 'Cómo darte cuenta', href: '#cómo-darte-cuenta' }}
   items={[
     { f: "Hi Juli! How are you? I ___ (write) to you from my grandma's house.", r: [["'m writing", 'am writing']] },
     { f: "We usually ___ (visit) her once a month.", r: ['visit'], e: 'usually + once a month → Present Simple.' },
     { f: "Right now my grandma ___ (make) a cake and my cousins ___ (watch) a film.", r: [['is making', "'s making"], ['are watching', "'re watching"]], e: 'Right now → Continuous. make pierde la e.' },
-    { f: "My grandma ___ (have) a big garden and she ___ (love) flowers.", r: ['has', 'loves'], e: 'Cosas que son así + <i>love</i> → Present Simple.' },
+    { rep: { texto: 'Los verbos que no van con -ing', href: '#los-verbos-que-no-van-con--ing' }, f: "My grandma ___ (have) a big garden and she ___ (love) flowers.", r: ['has', 'loves'], e: 'Cosas que son así + <i>love</i> → Present Simple.' },
     { f: "What ___ you ___ (do) at the moment?", r: ['are', 'doing'], e: 'At the moment → <b>are</b> you <b>doing</b>?' },
   ]}
 >

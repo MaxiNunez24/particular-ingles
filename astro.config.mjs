@@ -24,6 +24,10 @@ export default defineConfig({
       },
       favicon: '/favicon.svg',
       customCss: ['./src/styles/custom.css'],
+      // Sidebars redimensionables (el mismo script que la plataforma del CFP):
+      // arrastrar el borde para ajustar, doble clic para ocultar. Lleva el
+      // `base` adelante: sin él, en producción se busca en la raíz y da 404.
+      head: [{ tag: 'script', attrs: { src: `${base}/sidebars-resizable.js`, defer: true } }],
       sidebar: [
         { label: '🏠 Inicio', link: '/' },
         {

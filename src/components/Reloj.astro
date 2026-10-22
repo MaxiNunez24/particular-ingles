@@ -1,0 +1,112 @@
+---
+/**
+ * Reloj de agujas + digital + la hora en palabras, para aprender la hora de
+ * forma visual. Cada vista se prende y apaga por separado (se recuerda).
+ *
+ * Uso (.mdx):
+ *   <Reloj />                                  → para explorar: se mueve la hora con botones
+ *   <Reloj practica titulo="¿Qué hora es?" />  → ejercicio: elegir cómo se dice la hora del reloj
+ */
+import { idEjercicio } from '../scripts/id-ejercicio';
+
+interface Props {
+  practica?: boolean;
+  titulo?: string;
+  fundamental?: boolean;
+  /** Aciertos para darlo por resuelto (modo práctica). */
+  meta?: number;
+  repasar?: { texto: string; href: string };
+}
+const { practica = false, titulo = 'El reloj', meta = 5, repasar } = Astro.props;
+const id = idEjercicio(titulo);
+
+const marcas = Array.from({ length: 60 }, (_, i) => i);
+const numeros = Array.from({ length: 12 }, (_, i) => i + 1);
+const pos = (ang: number, r: number) => ({
+  x: 100 + r * Math.sin((ang * Math.PI) / 180),
+  y: 100 - r * Math.cos((ang * Math.PI) / 180),
+});
+---
+
+<section
+  class:list={['reloj', practica && 'ejercicio reloj--practica']}
+  id={practica ? id : undefined}
+  data-titulo={practica ? titulo : undefined}
+  data-meta={meta}
+  data-repasar={repasar ? JSON.stringify(repasar) : undefined}
+  data-fundamental={Astro.props.fundamental ? '' : undefined}
+>
+  {practica && (
+    <header class="ejercicio__header">
+      <span class="ejercicio__dif" aria-hidden="true">🕰️</span>
+      <h3 class="ejercicio__titulo">{titulo}</h3>
+      {Astro.props.fundamental && <span class="ejercicio__fundamental">⭐ Fundamental</span>}
+      <span class="ej-hecho" hidden>✓ Resuelto</span>
+    </header>
+  )}
+  {practica && <div class="ejercicio__consigna"><slot /></div>}
+
+  <div class="reloj__vistas" role="group" aria-label="Qué mostrar">
+    <label><input type="checkbox" data-vista="agujas" checked /> 🕰️ Agujas</label>
+    <label><input type="checkbox" data-vista="digital" checked /> 🔢 Digital</label>
+    {!practica && <label><input type="checkbox" data-vista="palabras" checked /> 🔤 En palabras</label>}
+  </div>
+
+  <div class="reloj__caras">
+    <svg class="reloj__agujas" viewBox="0 0 200 200" role="img" aria-label="Reloj de agujas">
+      <circle cx="100" cy="100" r="96" class="reloj__borde" />
+      {marcas.map((i) => {
+        const a = pos(i * 6, 90);
+        const b = pos(i * 6, i % 5 === 0 ? 80 : 86);
+        return <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} class={i % 5 === 0 ? 'reloj__marca reloj__marca--hora' : 'reloj__marca'} />;
+      })}
+      {numeros.map((n) => {
+        const p = pos(n * 30, 68);
+        return <text x={p.x} y={p.y} class="reloj__num" text-anchor="middle" dominant-baseline="central">{n}</text>;
+      })}
+      <line x1="100" y1="100" x2="100" y2="52" class="reloj__hora" data-aguja-hora />
+      <line x1="100" y1="100" x2="100" y2="24" class="reloj__min" data-aguja-min />
+      <circle cx="100" cy="100" r="5" class="reloj__centro" />
+    </svg>
+    <div class="reloj__digital" aria-label="Reloj digital">
+      <span data-digital>07:15</span>
+      <small data-parte></small>
+    </div>
+    <p class="reloj__apagado" hidden>Prendé al menos uno de los relojes 🙂</p>
+  </div>
+
+  {!practica && (
+    <>
+      <div class="reloj__palabras" data-palabras>
+        <p><span class="reloj__etq">Fácil (como en el digital):</span> <span lang="en" data-dicho-digital></span>
+          <button type="button" class="say__btn" data-hablar="digital" aria-label="Escuchar">🔊</button></p>
+        <p><span class="reloj__etq">Clásica (past / to):</span> <span lang="en" data-dicho-clasico></span>
+          <button type="button" class="say__btn" data-hablar="clasico" aria-label="Escuchar">🔊</button></p>
+      </div>
+      <div class="reloj__controles">
+        <button type="button" class="ejercicio__btn" data-mover="-60">− 1 hora</button>
+        <button type="button" class="ejercicio__btn" data-mover="-5">− 5 min</button>
+        <button type="button" class="ejercicio__btn" data-mover="5">+ 5 min</button>
+        <button type="button" class="ejercicio__btn" data-mover="60">+ 1 hora</button>
+        <button type="button" class="ejercicio__btn" data-azar>🎲 Una al azar</button>
+      </div>
+    </>
+  )}
+
+  {practica && (
+    <>
+      <p class="reloj__pregunta">¿Cómo se dice esta hora?</p>
+      <div class="reloj__opciones" data-opciones></div>
+      <div class="ejercicio__acciones">
+        <button type="button" class="ejercicio__btn" data-otra>🎲 Otra hora</button>
+        <span class="reloj__racha" data-racha></span>
+      </div>
+      <div class="ejercicio__salida" data-salida role="status" aria-live="polite" hidden></div>
+    </>
+  )}
+</section>
+
+<script>
+  import '../scripts/reloj';
+  import '../scripts/hablar';
+</script>

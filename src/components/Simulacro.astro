@@ -10,11 +10,13 @@
  *   ]} />
  */
 import ItemsCompletar from './ItemsCompletar.astro';
-import { armarItem, codificar, type ItemCompletar } from '../scripts/completar-armar';
+import { armarItem, codificar, type ItemCompletar, type Repasar } from '../scripts/completar-armar';
 import { idEjercicio } from '../scripts/id-ejercicio';
 
 interface Parte {
   titulo: string;
+  /** Qué tema repasar si algo de esta parte sale mal. */
+  repasar?: Repasar;
   consigna?: string;
   items: ItemCompletar[];
 }
@@ -40,20 +42,23 @@ const desdes = armadas.map((_, i) => 1 + armadas.slice(0, i).reduce((n, a) => n 
   </header>
   <p class="simulacro__aviso">
     Como en el examen: respondé todo y tocá <strong>Entregar</strong> al final. Recién ahí vas a ver la nota y
-    las correcciones. Lo que escribís se guarda solo, así que podés cortar y seguir después.
+    qué revisar en cada error (no te dice la respuesta: te dice qué repasar). Después podés corregir y volver
+    a entregar. Lo que escribís se guarda solo, así que podés cortar y seguir después.
   </p>
 
   {partes.map((p, i) => (
     <div class="simulacro__parte">
       <h4 class="simulacro__parte-tit">{p.titulo}</h4>
       {p.consigna && <p class="simulacro__consigna" set:html={p.consigna} />}
-      <ItemsCompletar items={armadas[i]} desde={desdes[i]} />
+      <ItemsCompletar items={armadas[i]} desde={desdes[i]} repasar={p.repasar} />
     </div>
   ))}
 
   <div class="ejercicio__acciones">
     <button type="button" class="ejercicio__btn ejercicio__btn--verify" data-entregar>📨 Entregar</button>
-    <button type="button" class="ejercicio__btn ejercicio__btn--reset" data-reset hidden>↺ Hacerlo de nuevo</button>
+    <button type="button" class="ejercicio__btn ejercicio__btn--verify" data-corregir hidden>✏️ Corregir y volver a entregar</button>
+    <button type="button" class="ejercicio__btn" data-ver hidden>👀 Ver las respuestas correctas</button>
+    <button type="button" class="ejercicio__btn ejercicio__btn--reset" data-reset>↺ Empezar de cero</button>
   </div>
   <div class="ejercicio__salida simulacro__nota" data-salida role="status" aria-live="polite" hidden></div>
 </section>

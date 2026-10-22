@@ -6,11 +6,17 @@ import Ejemplos from '../../../components/Ejemplos.astro';
 import Completar from '../../../components/Completar.astro';
 import Clasificar from '../../../components/Clasificar.astro';
 import OpcionMultiple from '../../../components/OpcionMultiple.astro';
+import Reloj from '../../../components/Reloj.astro';
 
 Para contar una rutina hace falta decir **a qué hora** y **cuándo** hacés las cosas. Esto aparece en
 todos los ejercicios de la unidad 5.
 
 ## Decir la hora
+
+Jugá con el reloj: movelo con los botones y mirá cómo se dice cada hora. Podés prender o apagar el
+de agujas, el digital y las palabras, para practicar con el que te cueste más.
+
+<Reloj />
 
 La forma más fácil (y que siempre está bien) es decir los números **como en un reloj digital**:
 
@@ -70,8 +76,15 @@ Saturday, Sunday.
 
 ## Ejercicios
 
+<Reloj practica titulo="¿Qué hora es?" fundamental repasar={{ texto: 'Decir la hora (y el recuadro de quarter to)', href: '#decir-la-hora' }}>
+  Mirá el reloj y elegí cómo se dice. Para darlo por resuelto, acertá **5 al primer intento**.
+  Si te resulta fácil, apagá el reloj digital y hacelo solo con las agujas.
+</Reloj>
+
 <Clasificar
   titulo="¿At, in u on?"
+  repasar={{ texto: 'At, in, on: ¿cuándo?', href: '#at-in-on-cuándo' }}
+  pistaMal="¿Es una hora exacta, una parte del día o un día? Y ojo con las dos excepciones de la tabla."
   fundamental
   cajas={[
     { id: 'at', nombre: 'at', ayuda: 'hora exacta, night, the weekend' },
@@ -95,6 +108,7 @@ Saturday, Sunday.
 
 <Completar
   titulo="Completá con at, in u on"
+  repasar={{ texto: 'At, in, on: ¿cuándo?', href: '#at-in-on-cuándo' }}
   items={[
     { f: "I have breakfast ___ 7.30.", r: ['at'], e: 'Hora exacta → <b>at</b>.' },
     { f: "My brother plays football ___ Saturday.", r: ['on'], e: 'Día → <b>on</b>.' },
@@ -107,6 +121,7 @@ Saturday, Sunday.
 
 <OpcionMultiple
   titulo="Quarter to…"
+  repasar={{ texto: 'Decir la hora (y el recuadro de quarter to)', href: '#decir-la-hora' }}
   opciones={[
     { texto: '8:15', explicacion: '8:15 es <i>quarter past eight</i>.' },
     { texto: '7:45', correcta: true, explicacion: '<i>To</i> = "para". Un cuarto para las 8 = 7:45.' },
@@ -118,6 +133,7 @@ Saturday, Sunday.
 
 <OpcionMultiple
   titulo="Half past"
+  repasar={{ texto: 'Decir la hora', href: '#decir-la-hora' }}
   opciones={[
     { texto: '6:30', correcta: true, explicacion: '<i>Half past six</i> = media pasadas las seis.' },
     { texto: '5:30', explicacion: 'Es <b>past</b> six: después de las 6, no antes.' },

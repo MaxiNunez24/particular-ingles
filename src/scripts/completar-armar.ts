@@ -13,13 +13,22 @@
 // contracciones se aceptan solas en las dos formas (doesn't = does not), así que
 // no hace falta listarlas.
 
+/** A qué parte del material mandar a repasar cuando algo sale mal. */
+export interface Repasar {
+  texto: string;
+  href: string;
+}
+
 export interface ItemCompletar {
   /** La frase, con ___ y {a|*b} */
   f: string;
   /** Respuestas de los ___, en orden */
   r?: (string | string[])[];
-  /** Explicación: se muestra cuando la respuesta está mal. Es donde se aprende. */
+  /** Explicación con la respuesta: se muestra SOLO cuando se revelan las
+   *  respuestas (después de varios intentos). Puede nombrar la respuesta. */
   e?: string;
+  /** Qué repasar si esta frase sale mal (si no, el del ejercicio). */
+  rep?: Repasar;
 }
 
 export type Pedazo =
@@ -34,6 +43,7 @@ export interface ItemArmado {
   /** La frase completa y correcta, en texto plano (para leerla en voz alta). */
   correcta: string;
   e?: string;
+  rep?: Repasar;
 }
 
 const sinEtiquetas = (s: string) => s.replace(/<[^>]+>/g, '');
@@ -79,7 +89,7 @@ export function armarItem(item: ItemCompletar): ItemArmado {
   // en las de transformar ("She plays. → She doesn't play.") se lee el final.
   if (correcta.includes('→')) correcta = correcta.slice(correcta.lastIndexOf('→') + 1);
   correcta = sinEtiquetas(correcta).replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
-  return { pedazos, solucion, correcta, e: item.e };
+  return { pedazos, solucion, correcta, e: item.e, rep: item.rep };
 }
 
 export const codificar = (o: unknown) => Buffer.from(JSON.stringify(o), 'utf-8').toString('base64');

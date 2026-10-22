@@ -24,8 +24,10 @@ interface Tarjeta {
   texto: string;
   /** id de la caja donde va */
   caja: string;
-  /** Se muestra al verificar, esté bien o mal. Es donde está la enseñanza. */
+  /** Se muestra al verificar, SOLO si quedó bien. Puede decir la respuesta. */
   porque?: string;
+  /** Se muestra si quedó mal. NO tiene que decir adónde va: una pregunta que la haga pensar. */
+  pista?: string;
 }
 
 const {
@@ -34,6 +36,8 @@ const {
   cajas,
   tarjetas,
   pistas = [],
+  repasar,
+  pistaMal,
 } = Astro.props as {
   titulo: string;
   /** ⭐ Lo principal de la clase: se hace en clase, y si alguien hace solo algunos, que sean estos. */
@@ -42,6 +46,10 @@ const {
   cajas: Caja[];
   tarjetas: Tarjeta[];
   pistas?: string[];
+  /** Qué repasar si algo sale mal: { texto, href }. */
+  repasar?: { texto: string; href: string };
+  /** Pista para las tarjetas mal ubicadas que no tienen la suya. Sin decir adónde van. */
+  pistaMal?: string;
 };
 
 const id = idEjercicio(titulo);
@@ -56,6 +64,8 @@ const mezcladas = tarjetas
 ---
 
 <section class="clasificar ejercicio" id={id} data-titulo={titulo}
+  data-repasar={repasar ? JSON.stringify(repasar) : undefined}
+  data-pista-mal={pistaMal}
   data-fundamental={Astro.props.fundamental ? '' : undefined}>
   <header class="ejercicio__header">
     <span class="ejercicio__dif" aria-hidden="true">{dificultad}</span>
@@ -83,6 +93,7 @@ const mezcladas = tarjetas
         data-tarjeta
         data-caja={t.caja}
         data-porque={t.porque || ''}
+        data-pista={t.pista || ''}
       >{t.texto}</button>
     ))}
   </div>

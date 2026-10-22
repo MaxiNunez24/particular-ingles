@@ -31,9 +31,10 @@ examen.
 
 <OpcionMultiple
   titulo="Error 1"
+  repasar={{ texto: 'Present Simple: la -s', href: '../../present-simple/afirmativo/#cómo-se-forma-la-regla-más-importante' }}
   fundamental
   opciones={[
-    { texto: 'My brother watch TV every night.', explicacion: '<i>My brother</i> = he → <b>watches</b>.' },
+    { texto: 'My brother watch TV every night.', explicacion: '<i>My brother</i> es <i>he</i>. ¿Qué le pasa al verbo con <i>he</i>? (Y fijate cómo termina <i>watch</i>.)' },
     { texto: 'My brother watches TV every night.', correcta: true },
     { texto: 'My brother is watch TV every night.', explicacion: 'No se mezcla <i>is</i> con el verbo en Present Simple.' },
   ]}
@@ -43,10 +44,11 @@ examen.
 
 <OpcionMultiple
   titulo="Error 2"
+  repasar={{ texto: "Negativo: don't / doesn't", href: '../../present-simple/negativo-preguntas/#negativo-dont--doesnt' }}
   fundamental
   opciones={[
-    { texto: "Sofi doesn't goes to the gym.", explicacion: 'Con <i>doesn\'t</i>, el verbo va sin -es: <b>go</b>.' },
-    { texto: "Sofi don't go to the gym.", explicacion: '<i>Sofi</i> = she → <b>doesn\'t</b>.' },
+    { texto: "Sofi doesn't goes to the gym.", explicacion: 'Mirá el verbo que va después de <i>doesn\'t</i>: ¿lleva -s?' },
+    { texto: "Sofi don't go to the gym.", explicacion: '<i>Sofi</i> es <i>she</i>. ¿Qué ayudante va con <i>she</i>?' },
     { texto: "Sofi doesn't go to the gym.", correcta: true },
   ]}
 >
@@ -55,12 +57,13 @@ examen.
 
 <OpcionMultiple
   titulo="Error 3"
+  repasar={{ texto: 'Preguntas con What, Where, When…', href: '../../present-simple/negativo-preguntas/#preguntas-con-what-where-when' }}
   fundamental
   opciones={[
-    { texto: 'What time she gets up?', explicacion: 'Falta el ayudante: <b>What time does she get up?</b>' },
-    { texto: 'What time does she gets up?', explicacion: 'Con <i>does</i>, el verbo va sin -s: <b>get</b>.' },
+    { texto: 'What time she gets up?', explicacion: 'A la pregunta le falta el ayudante.' },
+    { texto: 'What time does she gets up?', explicacion: 'La -s aparece dos veces (en <i>does</i> y en el verbo).' },
     { texto: 'What time does she get up?', correcta: true },
-    { texto: 'What time is she get up?', explicacion: 'Es una rutina (Present Simple): va <i>does</i>, no <i>is</i>.' },
+    { texto: 'What time is she get up?', explicacion: 'Es una rutina (Present Simple). ¿Las preguntas del Present Simple se hacen con <i>is</i>?' },
   ]}
 >
   ¿A qué hora se levanta ella? ¿Cuál está bien?
@@ -68,9 +71,10 @@ examen.
 
 <OpcionMultiple
   titulo="Error 4"
+  repasar={{ texto: '¿Simple o Continuous? Cómo darte cuenta', href: '../../simple-o-continuous/#cómo-darte-cuenta' }}
   fundamental
   opciones={[
-    { texto: 'Listen! The baby cries.', explicacion: '<i>Listen!</i> = ahora → Continuous.' },
+    { texto: 'Listen! The baby cries.', explicacion: '<i>Listen!</i> quiere decir que está pasando ahora. ¿Qué tiempo va?' },
     { texto: 'Listen! The baby is crying.', correcta: true },
     { texto: 'Listen! The baby crying.', explicacion: 'Falta el <b>is</b>.' },
   ]}
@@ -80,6 +84,7 @@ examen.
 
 <Completar
   titulo="Corregí la frase"
+  repasar={{ texto: 'La tabla de errores de arriba', href: '#_top' }}
   fundamental
   items={[
     { f: "She study English. → She ___ English.", r: ['studies'], e: 'he/she/it + consonante + y → <b>studies</b>.' },

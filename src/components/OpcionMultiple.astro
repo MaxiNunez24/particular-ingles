@@ -16,6 +16,7 @@ import { idEjercicio } from '../scripts/id-ejercicio';
 interface Opcion {
   texto: string;
   correcta?: boolean;
+  /** En las incorrectas: por qué no va, SIN decir cuál es la correcta. */
   explicacion?: string;
 }
 interface Props {
@@ -23,6 +24,8 @@ interface Props {
   /** ⭐ Lo principal de la clase: se hace en clase, y si alguien hace solo algunos, que sean estos. */
   fundamental?: boolean;
   opciones: Opcion[];
+  /** Qué repasar si elige mal: { texto, href }. */
+  repasar?: { texto: string; href: string };
 }
 
 const { titulo = 'Pregunta', opciones } = Astro.props;
@@ -39,6 +42,7 @@ const enc = (o: unknown) => Buffer.from(JSON.stringify(o), 'utf-8').toString('ba
 ---
 
 <section class="quiz" id={id} data-titulo={titulo}
+  data-repasar={Astro.props.repasar ? JSON.stringify(Astro.props.repasar) : undefined}
   data-fundamental={Astro.props.fundamental ? '' : undefined} data-solucion={enc({ correctas, expl, multiple })}>
   <header class="ejercicio__header">
     <span class="ejercicio__dif" aria-hidden="true">❓</span>

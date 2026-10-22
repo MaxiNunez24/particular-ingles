@@ -6,6 +6,134 @@
   --ej-radio: 0.7rem;
   --ok: #2e7d32;
   --mal: #c62828;
+  /* Anchos ajustables de los sidebars (se arrastran; ver sidebars-resizable.js). */
+  --pc-left-w: 16rem;
+  --pc-right-w: 18rem;
+  --sl-sidebar-width: var(--pc-left-w);
+}
+
+/* ---------- Sidebars redimensionables ---------- */
+
+/* El índice derecho sigue su ancho ajustable. flex-shrink:0 para que MANTENGA
+   el ancho que se le pide (si no, el flex lo encoge y el arrastre no engancha
+   1:1); el panel de contenido —que ya tiene min-width:0— es el que cede. */
+.right-sidebar-container {
+  width: var(--pc-right-w);
+  flex-shrink: 0;
+}
+/* Starlight REUSA --sl-sidebar-width para el ancho interno del TOC derecho
+   (asume que ambos sidebars miden igual). Eso rompía el TOC al achicar/ocultar
+   el nav izquierdo (width = 0 - 2*pad → texto de a una letra). Lo atamos a
+   NUESTRA variable del lado derecho. */
+.right-sidebar .sl-container {
+  width: calc(var(--pc-right-w) - 2 * var(--sl-sidebar-pad-x));
+  max-width: none;
+}
+/* El contenido CRECE para ocupar el espacio que liberan los sidebars (Starlight
+   lo deja fijo en --sl-content-width y sobraba lugar al achicarlos). El hijo
+   flex real es .main-pane (no .content-panel); ahí va el flex-grow. */
+.main-pane {
+  flex-grow: 1;
+  /* Sin esto el panel es un ítem flex con min-width:auto, o sea que NO puede
+     achicarse por debajo de su ancho min-content (~687px acá). Cuando el índice
+     derecho pide sus 22rem y no entran, el que sobra no es el panel: es la
+     página entera, que se va 30px al costado y aparece scroll horizontal.
+     Con min-width:0 el panel cede, y lo ancho de adentro (código, tablas) ya
+     tiene su propio overflow-x:auto. */
+  min-width: 0;
+}
+.content-panel .sl-container {
+  max-width: var(--pc-content-max, none);
+}
+
+/* Manija de arrastre (una por sidebar). Fija; el script la posiciona sobre el
+   borde interno de cada sidebar. Fina y discreta; se ilumina al pasar el mouse. */
+.pc-resizer {
+  position: fixed;
+  z-index: 50;
+  width: 11px;
+  display: none; /* en mobile no hay sidebars fijos: se muestran por media query */
+  cursor: col-resize;
+  touch-action: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.pc-resizer::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--sl-color-gray-5);
+  transition: background 0.15s ease, width 0.15s ease;
+}
+.pc-resizer:hover::before,
+.pc-resizer:focus-visible::before,
+.pc-resizer.is-drag::before {
+  width: 4px;
+  background: var(--sl-color-accent);
+}
+/* "agarradera" de puntos al pasar el cursor */
+.pc-resizer:hover::after,
+.pc-resizer:focus-visible::after,
+.pc-resizer.is-drag::after {
+  content: '⋮';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--sl-color-accent);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.pc-resizer:focus-visible {
+  outline: none;
+}
+/* Botón ↺ de reset (uno por manija). Oculto; aparece al pasar el cursor por la
+   manija o si ese sidebar fue modificado (.is-custom). */
+.pc-reset {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--sl-color-gray-4);
+  background: var(--sl-color-gray-6);
+  color: var(--sl-color-text);
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.pc-resizer:hover .pc-reset,
+.pc-resizer:focus-within .pc-reset,
+.pc-resizer.is-custom .pc-reset {
+  opacity: 1;
+}
+.pc-reset:hover,
+.pc-reset:focus-visible {
+  color: var(--sl-color-accent);
+  border-color: var(--sl-color-accent);
+}
+/* Solo cuando Starlight muestra los sidebars como columnas fijas. */
+@media (min-width: 50rem) {
+  .pc-resizer--left { display: block; }
+}
+@media (min-width: 72rem) {
+  .pc-resizer--right { display: block; }
+}
+/* Mientras se arrastra: nada de selección y cursor de redimensionar global. */
+body.pc-resizing,
+body.pc-resizing * {
+  cursor: col-resize !important;
+  user-select: none !important;
 }
 
 /* Acento violeta en vez del azul por defecto de Starlight. */
@@ -703,3 +831,109 @@
   .main-frame { padding: 0 !important; }
   .sl-markdown-content { font-size: 11pt; }
 }
+
+/* ---------- Clasificar: alturas parejas y feedback al arrastrar ---------- */
+/* Starlight le pone margin-top a cada hermano dentro del texto: en una fila
+   flex eso estiraba la PRIMERA tarjeta (la única sin margen) hasta igualar a
+   las demás, y bajaba las cajas que no son la primera de su fila. */
+.clasificar .clasificar__pozo > *,
+.clasificar .clasificar__cajas > *,
+.clasificar .clasificar__caja-contenido > *,
+.clasificar .clasificar__caja > * { margin-top: 0; }
+.clasificar__pozo,
+.clasificar__caja-contenido { align-items: flex-start; }
+.clasificar__caja-contenido .clasificar__tarjeta { align-self: stretch; }
+
+/* Mientras se arrastra, TODAS las cajas se ofrecen como destino… */
+.clasificar.arrastrando .clasificar__caja,
+.clasificar.arrastrando .clasificar__pozo {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--sl-color-accent) 55%, transparent);
+}
+/* …y la que está debajo del mouse se prende: ahí cae si soltás. */
+.clasificar .clasificar__caja.is-encima,
+.clasificar .clasificar__pozo.is-encima {
+  border: 2px solid var(--sl-color-accent);
+  background: color-mix(in srgb, var(--sl-color-accent) 14%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-accent) 25%, transparent);
+}
+.clasificar__caja.is-encima .clasificar__caja-contenido::after {
+  content: '⬇ Soltá acá';
+  align-self: stretch;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sl-color-text-accent);
+  text-align: center;
+  padding: 0.35rem;
+  border: 1px dashed var(--sl-color-accent);
+  border-radius: 0.4rem;
+}
+
+/* Pistas debajo de cada frase: un renglón por pista. */
+.completar__expl p { margin: 0.15rem 0 0; }
+.completar__expl p:first-child { margin-top: 0; }
+.completar__expl a, .clasificar__porques a, .ejercicio__salida a { color: var(--sl-color-text-accent); font-weight: 600; }
+.clasificar__porques li.es-repasar { border-left-color: var(--sl-color-accent); }
+
+/* ---------- Reloj (agujas + digital + en palabras) ---------- */
+.reloj {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: var(--ej-radio);
+  padding: 1rem 1.1rem 1.2rem;
+  margin: 1.5rem 0;
+  background: var(--sl-color-black);
+}
+.reloj > * { margin-top: 0; }
+.reloj > * + * { margin-top: 0.8rem; }
+.reloj__vistas { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-size: 0.9rem; }
+.reloj__vistas label { display: inline-flex; align-items: center; gap: 0.35rem; cursor: pointer; }
+.reloj__vistas input { accent-color: var(--sl-color-accent); width: 1rem; height: 1rem; }
+.reloj__caras {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem 2.5rem;
+}
+.reloj__caras > * { margin-top: 0; }
+.reloj__agujas { width: min(13rem, 70vw); height: auto; }
+.reloj__borde { fill: var(--sl-color-gray-6); stroke: var(--sl-color-gray-3); stroke-width: 3; }
+.reloj__marca { stroke: var(--sl-color-gray-4); stroke-width: 1; }
+.reloj__marca--hora { stroke: var(--sl-color-gray-2); stroke-width: 2.5; }
+.reloj__num { fill: var(--sl-color-white); font-size: 15px; font-weight: 700; font-family: inherit; }
+.reloj__hora { stroke: var(--sl-color-white); stroke-width: 7; stroke-linecap: round; transition: transform 0.25s ease; }
+.reloj__min { stroke: var(--sl-color-accent); stroke-width: 4; stroke-linecap: round; transition: transform 0.25s ease; }
+.reloj__centro { fill: var(--sl-color-accent); }
+.reloj__digital {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.6rem;
+  background: #0d1117;
+  border: 2px solid var(--sl-color-gray-4);
+}
+.reloj__digital[hidden] { display: none; }
+.reloj__digital span {
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #7CFC9A;
+  line-height: 1.1;
+}
+.reloj__digital small { color: #9fb3c8; font-size: 0.85rem; }
+.reloj__palabras { padding: 0.6rem 0.8rem; border-radius: 0.5rem; background: var(--sl-color-gray-6); }
+.reloj__palabras[hidden] { display: none; }
+.reloj__palabras p { margin: 0.15rem 0 0; font-size: 1.05rem; }
+.reloj__palabras p:first-child { margin-top: 0; }
+.reloj__etq { font-size: 0.82rem; color: var(--sl-color-gray-3); margin-right: 0.3rem; }
+.reloj__controles { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.reloj__controles > * { margin-top: 0; }
+.reloj__pregunta { font-weight: 600; }
+.reloj__opciones { display: grid; gap: 0.45rem; }
+.reloj__opciones > * { margin-top: 0; }
+.reloj__opciones .quiz__opcion:disabled { cursor: default; }
+.reloj__racha { font-size: 0.88rem; color: var(--sl-color-gray-3); align-self: center; }
+.reloj--practica.ej-resuelto { border-left: 4px solid var(--ok); }

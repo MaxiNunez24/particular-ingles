@@ -27,8 +27,10 @@ interface Props {
   fundamental?: boolean;
   dificultad?: string;
   items: Item[];
+  /** Qué repasar si algo sale mal: { texto, href }. */
+  repasar?: { texto: string; href: string };
 }
-const { titulo, dificultad = '🧩', items } = Astro.props;
+const { titulo, dificultad = '🧩', items, repasar } = Astro.props;
 const id = idEjercicio(titulo);
 
 const armados = items.map((it, n) => {
@@ -56,6 +58,7 @@ const armados = items.map((it, n) => {
 ---
 
 <section class="armar ejercicio" id={id} data-titulo={titulo}
+  data-repasar={repasar ? JSON.stringify(repasar) : undefined}
   data-fundamental={Astro.props.fundamental ? '' : undefined}>
   <header class="ejercicio__header">
     <span class="ejercicio__dif" aria-hidden="true">{dificultad}</span>
@@ -83,6 +86,7 @@ const armados = items.map((it, n) => {
         </div>
         <button type="button" class="say__btn armar__say" data-say={a.frase} hidden
           aria-label="Escuchar la frase" title="Escuchar la frase">🔊</button>
+        <div class="completar__expl" lang="es" hidden></div>
       </li>
     ))}
   </ol>

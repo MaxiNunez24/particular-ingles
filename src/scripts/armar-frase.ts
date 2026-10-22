@@ -2,6 +2,7 @@
 // (disponibles) a arriba (la frase) y vuelven con otro toque.
 
 import { estaHecho, marcarHecho, pintarSello, actualizarResumen } from './progreso';
+import { diagnosticar } from './diagnostico';
 
 function initArmar(el: HTMLElement): void {
   const titulo = el.dataset.titulo || '';
@@ -14,8 +15,11 @@ function initArmar(el: HTMLElement): void {
     li.classList.remove('is-bien', 'is-mal');
     const say = li.querySelector<HTMLElement>('.armar__say');
     if (say) say.hidden = true;
+    const expl = li.querySelector<HTMLElement>('.completar__expl');
+    if (expl) expl.hidden = true;
     salida.hidden = true;
   };
+  const rep = el.dataset.repasar ? (JSON.parse(el.dataset.repasar) as { texto: string; href: string }) : null;
 
   items.forEach((li) => {
     const resp = li.querySelector<HTMLElement>('[data-respuesta]')!;
@@ -47,6 +51,19 @@ function initArmar(el: HTMLElement): void {
       li.classList.toggle('is-mal', !ok);
       const say = li.querySelector<HTMLElement>('.armar__say');
       if (say) say.hidden = !ok;
+      const expl = li.querySelector<HTMLElement>('.completar__expl');
+      if (expl) {
+        const sinUsar = !!li.querySelector('[data-fichas] .armar__ficha');
+        const msgs = ok
+          ? []
+          : sinUsar
+            ? ['Todavía quedan palabras sin usar: la frase lleva todas.']
+            : diagnosticar(armada, [li.dataset.solucion || '']) || [];
+        const partes = [...new Set(msgs)].map((m) => `🔎 ${m}`);
+        if (!ok && rep) partes.push(`📖 Repasá: <a href="${rep.href}">${rep.texto}</a>`);
+        expl.innerHTML = partes.map((p) => `<p>${p}</p>`).join('');
+        expl.hidden = partes.length === 0;
+      }
       if (ok) bien++;
     });
     salida.hidden = false;
@@ -60,7 +77,7 @@ function initArmar(el: HTMLElement): void {
       salida.textContent =
         `Van ${bien} de ${items.length}.` +
         (incompletas ? ' Hay frases a las que les faltan palabras.' : '') +
-        ' En las preguntas, acordate del orden: (palabra de pregunta) + do/does/is/are + sujeto + verbo.';
+        ' Debajo de cada frase en rojo tenés una pista.';
     }
   });
 

@@ -3,19 +3,25 @@
  * La lista de frases con huecos. La usan Completar (práctica, corrige cada
  * ejercicio) y Simulacro (examen, corrige todo junto al final).
  */
-import type { ItemArmado } from '../scripts/completar-armar';
+import type { ItemArmado, Repasar } from '../scripts/completar-armar';
 
 interface Props {
   items: ItemArmado[];
   /** Número del primer ítem (en el simulacro la numeración sigue entre partes). */
   desde?: number;
+  /** Qué repasar si una frase sale mal (cada ítem puede tener el suyo). */
+  repasar?: Repasar;
 }
-const { items, desde = 1 } = Astro.props;
+const { items, desde = 1, repasar } = Astro.props;
+const rep = (it: ItemArmado) => {
+  const r = it.rep || repasar;
+  return r ? JSON.stringify(r) : undefined;
+};
 ---
 
 <ol class="completar__items" start={desde}>
   {items.map((it, i) => (
-    <li class="completar__item" data-item={i} lang="en">
+    <li class="completar__item" data-item={i} data-rep={rep(it)} lang="en">
       <span class="completar__frase">
         {it.pedazos.map((p) =>
           p.tipo === 'texto' ? (
