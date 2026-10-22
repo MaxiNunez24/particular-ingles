@@ -901,8 +901,11 @@ body.pc-resizing * {
 .reloj__marca { stroke: var(--sl-color-gray-4); stroke-width: 1; }
 .reloj__marca--hora { stroke: var(--sl-color-gray-2); stroke-width: 2.5; }
 .reloj__num { fill: var(--sl-color-white); font-size: 15px; font-weight: 700; font-family: inherit; }
-.reloj__hora { stroke: var(--sl-color-white); stroke-width: 7; stroke-linecap: round; transition: transform 0.25s ease; }
-.reloj__min { stroke: var(--sl-color-accent); stroke-width: 4; stroke-linecap: round; transition: transform 0.25s ease; }
+.reloj__hora { stroke: var(--sl-color-white); stroke-width: 7; stroke-linecap: round; }
+.reloj__min { stroke: var(--sl-color-accent); stroke-width: 4; stroke-linecap: round; }
+/* La animación de las agujas, recién después de la primera pintada: si no, al
+   cargar la página se las veía girar desde las 12. */
+.reloj--listo .reloj__hora, .reloj--listo .reloj__min { transition: transform 0.25s ease; }
 .reloj__centro { fill: var(--sl-color-accent); }
 .reloj__digital {
   display: flex;
@@ -937,3 +940,37 @@ body.pc-resizing * {
 .reloj__opciones .quiz__opcion:disabled { cursor: default; }
 .reloj__racha { font-size: 0.88rem; color: var(--sl-color-gray-3); align-self: center; }
 .reloj--practica.ej-resuelto { border-left: 4px solid var(--ok); }
+
+/* ---------- Filas parejas en TODOS los componentes ----------
+   Starlight le pone margin-top a cada hermano dentro del texto (su regla para
+   separar párrafos). En una fila flex o grid eso baja a todos menos al primero:
+   pasaba con las tarjetas, con las cajas y con los tildes del reloj. Esta
+   regla lo anula en los hijos directos de cada fila y grilla de los
+   componentes. Lleva .sl-markdown-content adelante para ganarle en
+   especificidad a la de Starlight. Si se agrega una fila nueva, sumarla acá. */
+.sl-markdown-content .armar__fichas > *,
+.sl-markdown-content .armar__respuesta > *,
+.sl-markdown-content .clasificar__caja-contenido > *,
+.sl-markdown-content .clasificar__cajas > *,
+.sl-markdown-content .clasificar__porques > *,
+.sl-markdown-content .clasificar__pozo > *,
+.sl-markdown-content .ejercicio__acciones > *,
+.sl-markdown-content .ejercicio__btn > *,
+.sl-markdown-content .ejercicio__enviar > *,
+.sl-markdown-content .ejercicio__header > *,
+.sl-markdown-content .ordenar__botones > *,
+.sl-markdown-content .ordenar__paso > *,
+.sl-markdown-content .pcp-resumen__txt > *,
+.sl-markdown-content .quiz__opcion > *,
+.sl-markdown-content .quiz__opciones > *,
+.sl-markdown-content .reloj__caras > *,
+.sl-markdown-content .reloj__controles > *,
+.sl-markdown-content .reloj__digital > *,
+.sl-markdown-content .reloj__opciones > *,
+.sl-markdown-content .reloj__vistas > *,
+.sl-markdown-content .simulacro__nota > * {
+  margin-top: 0;
+}
+
+/* El porqué, cuando la frase ya está bien: en verde, no en rojo. */
+.completar__expl.es-bien { border-left-color: var(--ok); }

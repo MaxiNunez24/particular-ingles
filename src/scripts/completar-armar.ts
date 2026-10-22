@@ -24,8 +24,8 @@ export interface ItemCompletar {
   f: string;
   /** Respuestas de los ___, en orden */
   r?: (string | string[])[];
-  /** Explicación con la respuesta: se muestra SOLO cuando se revelan las
-   *  respuestas (después de varios intentos). Puede nombrar la respuesta. */
+  /** El porqué: se muestra SOLO cuando esa frase ya está bien, para afirmar
+   *  lo que acertó. Puede nombrar la respuesta. */
   e?: string;
   /** Qué repasar si esta frase sale mal (si no, el del ejercicio). */
   rep?: Repasar;

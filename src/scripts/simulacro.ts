@@ -1,12 +1,9 @@
 // Simulacro de examen (components/Simulacro.astro): corrige todo junto al
 // entregar. Como en la práctica, no muestra las respuestas: dice qué tipo de
-// error hay y qué repasar. Se puede corregir y volver a entregar; después de
-// varias entregas aparece el botón para ver las respuestas correctas.
+// error hay y qué repasar. Se puede corregir y volver a entregar.
 
 import { estaHecho, marcarHecho, pintarSello, actualizarResumen } from './progreso';
-import { prepararItems, corregirItem, limpiarItem, leerIntentos, guardarIntentos } from './completar';
-
-const ENTREGAS_PARA_VER = 3;
+import { prepararItems, corregirItem, limpiarItem } from './completar';
 
 function initSimulacro(el: HTMLElement): void {
   const titulo = el.dataset.titulo || '';
@@ -14,11 +11,9 @@ function initSimulacro(el: HTMLElement): void {
   const btnEntregar = el.querySelector<HTMLButtonElement>('[data-entregar]');
   const btnCorregir = el.querySelector<HTMLButtonElement>('[data-corregir]');
   const btnReset = el.querySelector<HTMLButtonElement>('[data-reset]');
-  const btnVer = el.querySelector<HTMLButtonElement>('[data-ver]');
-  if (!salida || !btnEntregar || !btnCorregir || !btnReset || !btnVer) return;
+  if (!salida || !btnEntregar || !btnCorregir || !btnReset) return;
   pintarSello(el, estaHecho(titulo));
 
-  let entregas = leerIntentos(titulo);
   const { items, soluciones, borrar } = prepararItems(el, titulo, () => {
     /* mientras responde no se corrige nada */
   });
@@ -29,7 +24,6 @@ function initSimulacro(el: HTMLElement): void {
     controles().forEach((c) => (c.disabled = !si));
     btnEntregar.hidden = !si;
     btnCorregir.hidden = si;
-    btnVer.hidden = si || entregas < ENTREGAS_PARA_VER;
   };
 
   btnEntregar.addEventListener('click', () => {
@@ -40,12 +34,10 @@ function initSimulacro(el: HTMLElement): void {
 
     let bien = 0;
     items.forEach((li, i) => {
-      if (corregirItem(li, soluciones[i], 'practica')) bien++;
+      if (corregirItem(li, soluciones[i])) bien++;
     });
     const nota = Math.round((bien / items.length) * 100) / 10;
     const aprobado = nota >= 6;
-    entregas = bien === items.length ? 0 : entregas + 1;
-    guardarIntentos(titulo, entregas);
     modoRespondiendo(false);
 
     salida.hidden = false;
@@ -73,11 +65,6 @@ function initSimulacro(el: HTMLElement): void {
     modoRespondiendo(true);
     salida.hidden = true;
     el.querySelector<HTMLElement>('.completar__item.is-mal input, .completar__item.is-mal select')?.focus();
-  });
-
-  btnVer.addEventListener('click', () => {
-    items.forEach((li, i) => corregirItem(li, soluciones[i], 'revelado'));
-    btnVer.hidden = true;
   });
 
   btnReset.addEventListener('click', () => {

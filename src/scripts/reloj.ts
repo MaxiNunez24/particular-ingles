@@ -101,6 +101,7 @@ function initReloj(el: HTMLElement): void {
     });
   });
   aplicarVistas();
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('reloj--listo')));
 
   if (!practica) {
     el.querySelectorAll<HTMLButtonElement>('[data-mover]').forEach((b) =>

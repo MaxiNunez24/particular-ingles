@@ -3,9 +3,9 @@
 // se corrige: la práctica, cada vez que se toca Verificar; el simulacro, una
 // sola vez al entregar.
 //
-// La respuesta correcta NO se muestra de entrada. Cuando algo está mal se dice
-// qué tipo de error es (scripts/diagnostico.ts) y qué parte del tema repasar.
-// Recién después de varios intentos aparece el botón para ver las respuestas.
+// La respuesta correcta NO se muestra nunca. Cuando algo está mal se dice qué
+// tipo de error es (scripts/diagnostico.ts) y qué parte del tema repasar; con
+// eso y el botón Verificar alcanza para resolver todo.
 
 import {
   estaHecho,
@@ -26,9 +26,6 @@ interface Repasar {
   href: string;
 }
 
-/** Intentos fallidos antes de ofrecer las respuestas. */
-export const INTENTOS_PARA_VER = 4;
-
 function b64(s: string): unknown {
   const bytes = Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
   return JSON.parse(new TextDecoder().decode(bytes));
@@ -36,13 +33,6 @@ function b64(s: string): unknown {
 
 const controles = (li: Element) =>
   Array.from(li.querySelectorAll<HTMLInputElement | HTMLSelectElement>('.completar__hueco, .completar__elegir'));
-
-const esc = (s: string) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c] as string);
-
-function respuestaCorrecta(c: HTMLInputElement | HTMLSelectElement, sol: string[] | number): string {
-  if (typeof sol === 'number') return (c as HTMLSelectElement).options[sol + 1]?.text || '';
-  return sol[0];
-}
 
 /** Qué está mal en un control, o null si está bien. */
 function diagnosticoDe(c: HTMLInputElement | HTMLSelectElement, s: string[] | number): string[] | null {
@@ -61,13 +51,10 @@ function diagnosticoDe(c: HTMLInputElement | HTMLSelectElement, s: string[] | nu
   return diagnosticar(c.value, s);
 }
 
-export type Modo = 'practica' | 'revelado';
-
 /** Corrige un ítem (una frase). Marca cada control y devuelve si está todo bien.
- *  En modo 'revelado' muestra además la respuesta y la explicación. */
-export function corregirItem(li: HTMLElement, sol: Solucion, modo: Modo = 'practica'): boolean {
+ *  Si está mal: pistas y qué repasar. Si está bien: el porqué, para afirmarlo. */
+export function corregirItem(li: HTMLElement, sol: Solucion): boolean {
   let bien = true;
-  const faltan: string[] = [];
   const msgs: string[] = [];
   controles(li).forEach((c, k) => {
     const d = diagnosticoDe(c, sol[k]);
@@ -75,14 +62,13 @@ export function corregirItem(li: HTMLElement, sol: Solucion, modo: Modo = 'pract
     c.classList.toggle('is-mal', !!d);
     if (d) {
       bien = false;
-      faltan.push(respuestaCorrecta(c, sol[k]));
       msgs.push(...d);
     }
   });
   li.classList.toggle('is-bien', bien);
   li.classList.toggle('is-mal', !bien);
   const say = li.querySelector<HTMLElement>('.completar__say');
-  if (say) say.hidden = !bien && modo !== 'revelado';
+  if (say) say.hidden = !bien;
 
   const expl = li.querySelector<HTMLElement>('.completar__expl');
   if (expl) {
@@ -91,11 +77,14 @@ export function corregirItem(li: HTMLElement, sol: Solucion, modo: Modo = 'pract
       [...new Set(msgs)].forEach((m) => partes.push(`🔎 ${m}`));
       const rep = li.dataset.rep ? (JSON.parse(li.dataset.rep) as Repasar) : null;
       if (rep) partes.push(`📖 Repasá: <a href="${rep.href}">${rep.texto}</a>`);
-      if (modo === 'revelado') {
-        partes.push(`✔️ Era: <b lang="en">${faltan.map(esc).join(' … ')}</b>`);
-        if (li.dataset.expl) partes.push(`💡 ${li.dataset.expl}`);
-      }
+      li.dataset.fallo = '1';
+    } else if (li.dataset.expl && li.dataset.fallo) {
+      // La corrigió después de haberse equivocado: ahora sí, el porqué (nombra
+      // la respuesta que ella misma escribió). En las que salieron bien de
+      // entrada no se muestra, para no llenar la pantalla de texto.
+      partes.push(`💡 ${li.dataset.expl}`);
     }
+    expl.classList.toggle('es-bien', bien);
     expl.innerHTML = partes.map((p) => `<p>${p}</p>`).join('');
     expl.hidden = partes.length === 0;
   }
@@ -109,27 +98,6 @@ export function limpiarItem(li: HTMLElement): void {
   if (say) say.hidden = true;
   const expl = li.querySelector<HTMLElement>('.completar__expl');
   if (expl) expl.hidden = true;
-}
-
-// Los intentos se guardan con el mismo prefijo que el resto del progreso, así
-// recargar la página no vuelve a esconder el botón de las respuestas.
-function claveIntentos(titulo: string) {
-  return `pcp:intentos:${location.pathname}::${titulo}`;
-}
-export function leerIntentos(titulo: string): number {
-  try {
-    return Number(localStorage.getItem(claveIntentos(titulo))) || 0;
-  } catch {
-    return 0;
-  }
-}
-export function guardarIntentos(titulo: string, n: number): void {
-  try {
-    if (n) localStorage.setItem(claveIntentos(titulo), String(n));
-    else localStorage.removeItem(claveIntentos(titulo));
-  } catch {
-    /* sin persistencia */
-  }
 }
 
 /** Prepara los ítems de un bloque: les pasa su explicación, y guarda/restaura
@@ -174,7 +142,10 @@ export function prepararItems(el: HTMLElement, clave: string, alCambiar: (li: HT
     soluciones: b64(el.dataset.solucion || '') as Solucion[],
     borrar: () => {
       todos().forEach((c) => (c.value = ''));
-      items.forEach(limpiarItem);
+      items.forEach((li) => {
+        limpiarItem(li);
+        delete li.dataset.fallo;
+      });
       borrarCodigo(clave);
     },
     guardar,
@@ -184,17 +155,8 @@ export function prepararItems(el: HTMLElement, clave: string, alCambiar: (li: HT
 function initCompletar(el: HTMLElement): void {
   const titulo = el.dataset.titulo || '';
   const salida = el.querySelector<HTMLElement>('[data-salida]');
-  const btnVer = el.querySelector<HTMLButtonElement>('[data-ver]');
   if (!salida) return;
   pintarSello(el, estaHecho(titulo));
-
-  let intentos = leerIntentos(titulo);
-  // Si miró las respuestas, acertar después no cuenta como resuelto.
-  let vio = false;
-  const mostrarBotonVer = () => {
-    if (btnVer) btnVer.hidden = intentos < INTENTOS_PARA_VER;
-  };
-  mostrarBotonVer();
 
   const { items, soluciones, borrar } = prepararItems(el, titulo, (li) => {
     limpiarItem(li);
@@ -211,46 +173,24 @@ function initCompletar(el: HTMLElement): void {
     }
     let bien = 0;
     items.forEach((li, i) => {
-      if (corregirItem(li, soluciones[i], vio ? 'revelado' : 'practica')) bien++;
+      if (corregirItem(li, soluciones[i])) bien++;
     });
     salida.hidden = false;
-    if (bien === items.length && vio) {
-      salida.className = 'ejercicio__salida';
-      salida.textContent = '👀 Están bien, pero las miraste. Tocá "Borrar todo" y hacelo sin mirar para que cuente.';
-    } else if (bien === items.length) {
+    if (bien === items.length) {
       salida.className = 'ejercicio__salida is-ok';
       salida.textContent = `✅ ¡Todas bien! (${bien}/${items.length}) 🎉 Tocá 🔊 para escuchar cada frase.`;
       marcarHecho(titulo);
       pintarSello(el, true);
-      intentos = 0;
-      guardarIntentos(titulo, 0);
     } else {
-      intentos++;
-      guardarIntentos(titulo, intentos);
       salida.className = 'ejercicio__salida is-error';
-      const faltan = INTENTOS_PARA_VER - intentos;
       salida.textContent =
-        `Van ${bien} de ${items.length}. Debajo de cada frase en rojo tenés una pista de qué revisar.` +
-        (faltan > 0
-          ? ''
-          : '\n\nSi ya lo intentaste y no sale, podés ver las respuestas. Pero primero probá repasar el tema 😉');
-      mostrarBotonVer();
+        `Van ${bien} de ${items.length}. Debajo de cada frase en rojo tenés una pista de qué revisar ` +
+        'y un link a la parte del tema que te ayuda. Corregí y volvé a verificar.';
     }
-  });
-
-  btnVer?.addEventListener('click', () => {
-    vio = true;
-    items.forEach((li, i) => corregirItem(li, soluciones[i], 'revelado'));
-    salida.hidden = false;
-    salida.className = 'ejercicio__salida';
-    salida.textContent =
-      '👀 Debajo de cada frase que estaba mal está la respuesta y el porqué. Esto no cuenta como resuelto: ' +
-      'tocá "Borrar todo" y hacelo de nuevo sin mirar.';
   });
 
   el.querySelector('[data-reset]')?.addEventListener('click', () => {
     borrar();
-    vio = false;
     salida.hidden = true;
   });
 }

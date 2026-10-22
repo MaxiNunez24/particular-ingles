@@ -1,8 +1,8 @@
 ---
 /**
  * Simulacro de examen: varias partes, se responde todo y se entrega una vez.
- * Recién al entregar se ve la nota, qué estuvo mal, la respuesta correcta y
- * el porqué. Se puede volver a hacer las veces que haga falta.
+ * Al entregar se ve la nota y, en cada error, una pista y qué repasar (nunca
+ * la respuesta). Se puede corregir y volver a entregar.
  *
  * Uso (.mdx):
  *   <Simulacro titulo="Simulacro 1" partes={[
@@ -57,7 +57,6 @@ const desdes = armadas.map((_, i) => 1 + armadas.slice(0, i).reduce((n, a) => n 
   <div class="ejercicio__acciones">
     <button type="button" class="ejercicio__btn ejercicio__btn--verify" data-entregar>📨 Entregar</button>
     <button type="button" class="ejercicio__btn ejercicio__btn--verify" data-corregir hidden>✏️ Corregir y volver a entregar</button>
-    <button type="button" class="ejercicio__btn" data-ver hidden>👀 Ver las respuestas correctas</button>
     <button type="button" class="ejercicio__btn ejercicio__btn--reset" data-reset>↺ Empezar de cero</button>
   </div>
   <div class="ejercicio__salida simulacro__nota" data-salida role="status" aria-live="polite" hidden></div>

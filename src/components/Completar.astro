@@ -6,7 +6,7 @@
  * Uso (.mdx):
  *   <Completar titulo="La -s de he/she/it" items={[
  *     { f: 'My sister ___ (watch) TV every day.', r: ['watches'],
- *       e: 'Termina en <b>-ch</b>: se agrega <b>-es</b>.' },
+ *       e: 'Termina en <b>-ch</b>: se agrega <b>-es</b>.' },   ← se muestra cuando ya la resolvió
  *     { f: 'They {plays|*play} football.', e: 'Con <b>they</b> el verbo no lleva -s.' },
  *   ]} repasar={{ texto: 'La -s, -es o -ies', href: '#cuándo-es--s--es-o--ies' }}>
  *     Completá con el verbo en Present Simple.
@@ -49,7 +49,6 @@ const id = idEjercicio(titulo);
 
   <div class="ejercicio__acciones">
     <button type="button" class="ejercicio__btn ejercicio__btn--verify" data-verify>✓ Verificar</button>
-    <button type="button" class="ejercicio__btn" data-ver hidden>👀 Ver las respuestas</button>
     <button type="button" class="ejercicio__btn ejercicio__btn--reset" data-reset>↺ Borrar todo</button>
   </div>
 
