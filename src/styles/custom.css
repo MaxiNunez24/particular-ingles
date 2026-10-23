@@ -737,7 +737,15 @@ body.pc-resizing * {
   vertical-align: baseline;
 }
 .completar__elegir { cursor: pointer; padding-right: 0.2rem; }
-.completar__elegir option { color: initial; background: initial; }
+/* La lista desplegable la dibuja el sistema: sin esto, en modo oscuro salía
+   blanca con letra clara (no se leía nada). color-scheme le dice al navegador
+   que la dibuje oscura, y el fondo/color de cada opción lo refuerza. */
+.completar__elegir { color-scheme: light; }
+:root[data-theme='dark'] .completar__elegir { color-scheme: dark; }
+.completar__elegir option {
+  color: var(--sl-color-white);
+  background: var(--sl-color-gray-6);
+}
 .completar__hueco:focus,
 .completar__elegir:focus {
   outline: 2px solid var(--sl-color-accent);
