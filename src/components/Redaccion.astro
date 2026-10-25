@@ -1,0 +1,101 @@
+---
+/**
+ * Redacción guiada: la alumna escribe SU texto, parte por parte, con las
+ * consignas en castellano y la ayuda de conectores a la vista.
+ *
+ * No hay una respuesta única, así que no se compara contra nada: cada parte se
+ * revisa con
+ *   · lo que esa parte tiene que tener (`debe`: expresiones regulares, cada una
+ *     con el mensaje si falta), y
+ *   · los errores típicos de cualquier texto (scripts/revisar-texto.ts).
+ * Al final se cuentan los conectores y, si está todo, se arma el texto completo
+ * para leerlo de corrido, escucharlo o copiarlo.
+ *
+ * Uso (.mdx):
+ *   <Redaccion titulo="Mi rutina" partes={[
+ *     { es: '¿A qué hora te levantás?', ayuda: 'get up · at 7.00',
+ *       debe: [{ re: '\\bget up\\b', msg: 'Contá a qué hora te levantás.' }] },
+ *   ]} minConectores={3} />
+ */
+import Conectores from './Conectores.astro';
+import { idEjercicio } from '../scripts/id-ejercicio';
+
+interface Regla {
+  /** Expresión regular (como texto, sin barras). Se prueba sin mayúsculas. */
+  re: string;
+  /** Qué decir si no aparece. Una pista, no la respuesta. */
+  msg: string;
+}
+interface Parte {
+  /** La consigna, en castellano. */
+  es: string;
+  /** Palabras que pueden servir para esta parte (se muestran plegadas). */
+  ayuda?: string;
+  debe?: Regla[];
+}
+interface Props {
+  titulo: string;
+  fundamental?: boolean;
+  partes: Parte[];
+  /** Cuántos conectores distintos tiene que usar en todo el texto. */
+  minConectores?: number;
+  repasar?: { texto: string; href: string };
+}
+const { titulo, partes, minConectores = 3, repasar } = Astro.props;
+const id = idEjercicio(titulo);
+const enc = (o: unknown) => Buffer.from(JSON.stringify(o), 'utf-8').toString('base64');
+---
+
+<section class="redaccion ejercicio" id={id} data-titulo={titulo}
+  data-fundamental={Astro.props.fundamental ? '' : undefined}
+  data-reglas={enc(partes.map((p) => p.debe || []))}
+  data-min-conectores={minConectores}
+  data-repasar={repasar ? JSON.stringify(repasar) : undefined}>
+  <header class="ejercicio__header">
+    <span class="ejercicio__dif" aria-hidden="true">✍️</span>
+    <h3 class="ejercicio__titulo">{titulo}</h3>
+    {Astro.props.fundamental && <span class="ejercicio__fundamental">⭐ Fundamental</span>}
+    <span class="ej-hecho" hidden>✓ Resuelto</span>
+  </header>
+
+  <div class="ejercicio__consigna"><slot /></div>
+
+  <Conectores plegada titulo="🧰 Ayuda: conectores y frases útiles (tocá para abrir)" />
+
+  <ol class="redaccion__partes">
+    {partes.map((p) => (
+      <li class="redaccion__parte">
+        <p class="redaccion__es">{p.es}</p>
+        {p.ayuda && (
+          <details class="redaccion__ayuda">
+            <summary>💡 Palabras que te pueden servir</summary>
+            <p lang="en">{p.ayuda}</p>
+          </details>
+        )}
+        <textarea class="redaccion__texto" rows="2" lang="en" spellcheck="false"
+          placeholder="Escribí en inglés…" aria-label={p.es}></textarea>
+        <div class="completar__expl" hidden></div>
+      </li>
+    ))}
+  </ol>
+
+  <div class="ejercicio__acciones">
+    <button type="button" class="ejercicio__btn ejercicio__btn--verify" data-verify>✓ Revisar mi texto</button>
+    <button type="button" class="ejercicio__btn ejercicio__btn--reset" data-reset>↺ Borrar todo</button>
+  </div>
+  <div class="ejercicio__salida" data-salida role="status" aria-live="polite" hidden></div>
+
+  <div class="redaccion__final" data-final hidden>
+    <p class="redaccion__final-tit">📄 Tu texto completo</p>
+    <p class="redaccion__final-texto" lang="en" data-texto></p>
+    <div class="ejercicio__acciones">
+      <button type="button" class="ejercicio__btn" data-escuchar>🔊 Escucharlo</button>
+      <button type="button" class="ejercicio__btn" data-copiar>📋 Copiar</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/redaccion';
+  import '../scripts/hablar';
+</script>

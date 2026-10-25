@@ -1,0 +1,166 @@
+---
+title: 3. Días, meses y estaciones
+description: Monday, Tuesday… January, February… con un calendario que arranca el día de hoy.
+---
+import Ejemplos from '../../../components/Ejemplos.astro';
+import Calendario from '../../../components/Calendario.astro';
+import Completar from '../../../components/Completar.astro';
+import Clasificar from '../../../components/Clasificar.astro';
+
+Para contar una rutina hace falta decir **qué día** pasa cada cosa (*on Monday I have English*), y en
+la unidad 6 aparecen los **meses** y las **estaciones**.
+
+:::note[Los ejercicios cambian todos los días]
+El calendario de los ejercicios **empieza hoy**: si hoy es miércoles, la fila arranca en
+*Wednesday*, no en *Monday*. Así no alcanza con recitar la lista de memoria: hay que saber qué viene
+después de cada uno. Mañana va a empezar en otro día. Volvé seguido 😉
+:::
+
+## Los días de la semana
+
+| Inglés | Castellano | Abreviado |
+|---|---|---|
+| **Monday** | lunes | Mon |
+| **Tuesday** | martes | Tue |
+| **Wednesday** | miércoles | Wed |
+| **Thursday** | jueves | Thu |
+| **Friday** | viernes | Fri |
+| **Saturday** | sábado | Sat |
+| **Sunday** | domingo | Sun |
+
+<Ejemplos items={[
+  ['Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.', 'Escuchá cómo suenan, sobre todo Wednesday: se dice "uénsdei".'],
+  ['I have English <b>on</b> Tuesday.', 'Tengo inglés el martes.'],
+  ['We play football <b>on</b> Saturdays.', 'Jugamos al fútbol los sábados (todos).'],
+  ['<b>on weekdays</b> / <b>at the weekend</b>', 'los días de semana / el fin de semana'],
+]} />
+
+:::tip[El truco para no confundir Tuesday y Thursday]
+Son los dos que más se confunden. Acordate de uno solo:
+**Th**ursday es **jueves**: **Th** de **Th**or, el dios del trueno ⚡. El otro, **Tu**esday, es martes.
+:::
+
+:::caution[Siempre con mayúscula]
+En inglés los días y los meses se escriben **con mayúscula**, aunque estén en el medio de la frase:
+*on **M**onday*, *in **J**uly*. En castellano no, por eso es un error muy común.
+:::
+
+## Los meses
+
+| Inglés | Castellano | Inglés | Castellano |
+|---|---|---|---|
+| **January** | enero | **July** | julio |
+| **February** | febrero | **August** | agosto |
+| **March** | marzo | **September** | septiembre |
+| **April** | abril | **October** | octubre |
+| **May** | mayo | **November** | noviembre |
+| **June** | junio | **December** | diciembre |
+
+<Ejemplos items={[
+  ['January, February, March, April, May, June.'],
+  ['July, August, September, October, November, December.'],
+  ['My birthday is <b>in</b> May.', 'Mi cumpleaños es en mayo.'],
+]} />
+
+:::tip[Los que se confunden: June / July y March / May]
+- **June** (junio) tiene **n**, como ju**n**io. **July** (julio) tiene **l**, como ju**l**io.
+- **March** (marzo) tiene **r** como ma**r**zo. **May** (mayo) es corto como **mayo**.
+:::
+
+## Las estaciones (¡al revés que en el libro!)
+
+| Inglés | Castellano | En Argentina | En el Reino Unido (el libro) |
+|---|---|---|---|
+| **summer** | verano | December, January, February | June, July, August |
+| **autumn** | otoño | March, April, May | September, October, November |
+| **winter** | invierno | June, July, August | December, January, February |
+| **spring** | primavera | September, October, November | March, April, May |
+
+Las estaciones van **sin** mayúscula: *in summer*, *in winter*.
+
+## On o in
+
+| | Ejemplos |
+|---|---|
+| **on** + día | on Monday, on Friday, on weekdays |
+| **in** + mes / estación | in March, in July, in winter, in summer |
+
+---
+
+## Ejercicios: los días
+
+<Calendario tipo="dias" modo="arrastrar" titulo="Los días: arrastralos" fundamental
+  repasar={{ texto: 'Los días de la semana', href: '#los-días-de-la-semana' }}>
+  Poné cada día en inglés en su casillero del calendario.
+</Calendario>
+
+<Calendario tipo="dias" modo="escribir" titulo="Los días: escribilos" fundamental
+  repasar={{ texto: 'Los días de la semana (y la mayúscula)', href: '#los-días-de-la-semana' }}>
+  Ahora sin tarjetas: escribí cada día en inglés. Ojo con la mayúscula.
+</Calendario>
+
+<Calendario tipo="dias" modo="arrastrar" etiquetas="relativo" titulo="Los días: en orden desde hoy"
+  repasar={{ texto: 'Los días de la semana', href: '#los-días-de-la-semana' }}>
+  Más difícil: los casilleros ya no dicen el día en castellano, solo **hoy**, **mañana**, **pasado
+  mañana**… Tenés que saber qué día viene después.
+</Calendario>
+
+<Calendario tipo="dias" modo="hoy" titulo="Today, tomorrow, yesterday"
+  repasar={{ texto: 'Los días de la semana', href: '#los-días-de-la-semana' }}>
+  Completá en inglés. *Tomorrow* = mañana, *yesterday* = ayer.
+</Calendario>
+
+## Ejercicios: los meses y las estaciones
+
+<Calendario tipo="meses" modo="arrastrar" titulo="Los meses: arrastralos" fundamental
+  repasar={{ texto: 'Los meses', href: '#los-meses' }}>
+  Poné cada mes en inglés en su casillero. El calendario empieza en este mes.
+</Calendario>
+
+<Calendario tipo="meses" modo="escribir" titulo="Los meses: escribilos" fundamental
+  repasar={{ texto: 'Los meses (y la mayúscula)', href: '#los-meses' }}>
+  Escribí cada mes en inglés. Con mayúscula.
+</Calendario>
+
+<Calendario tipo="meses" modo="hoy" titulo="This month, next month…"
+  repasar={{ texto: 'Los meses', href: '#los-meses' }}>
+  Completá con el mes en inglés.
+</Calendario>
+
+<Clasificar
+  titulo="Las estaciones en Argentina"
+  repasar={{ texto: 'Las estaciones', href: '#las-estaciones-al-revés-que-en-el-libro' }}
+  pistaMal="Pensá qué tiempo hace acá en ese mes: ¿hace calor, frío, o es intermedio?"
+  cajas={[
+    { id: 'summer', nombre: '☀️ summer' },
+    { id: 'autumn', nombre: '🍂 autumn' },
+    { id: 'winter', nombre: '❄️ winter' },
+    { id: 'spring', nombre: '🌸 spring' },
+  ]}
+  tarjetas={[
+    { texto: 'January', caja: 'summer', porque: 'Enero: vacaciones de verano.' },
+    { texto: 'December', caja: 'summer', porque: 'Diciembre: empieza el verano.' },
+    { texto: 'April', caja: 'autumn', porque: 'Abril: otoño.' },
+    { texto: 'March', caja: 'autumn', porque: 'Marzo: empieza el otoño (y las clases).' },
+    { texto: 'July', caja: 'winter', porque: 'Julio: vacaciones de invierno.' },
+    { texto: 'June', caja: 'winter', porque: 'Junio: empieza el invierno.' },
+    { texto: 'October', caja: 'spring', porque: 'Octubre: primavera.' },
+    { texto: 'September', caja: 'spring', porque: 'Septiembre: empieza la primavera.' },
+  ]}
+>
+  ¿En qué estación está cada mes **acá, en Argentina**?
+</Clasificar>
+
+<Completar
+  titulo="On o in"
+  repasar={{ texto: 'On o in', href: '#on-o-in' }}
+  items={[
+    { f: "I have Maths {*on|in} Monday.", e: 'Días → <b>on</b>.' },
+    { f: "My birthday is {on|*in} August.", e: 'Meses → <b>in</b>.' },
+    { f: "We go to the beach {on|*in} summer.", e: 'Estaciones → <b>in</b>.' },
+    { f: "There is no school {*on|in} Sunday.", e: 'Días → <b>on</b>.' },
+    { f: "It's very cold {on|*in} July.", e: 'Meses → <b>in</b>.' },
+  ]}
+>
+  Elegí la preposición correcta.
+</Completar>

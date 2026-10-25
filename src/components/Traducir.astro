@@ -1,0 +1,99 @@
+---
+/**
+ * Traducir del castellano al inglés, frase por frase.
+ *
+ * Para quien todavía no puede escribir "sin tener las palabras en frente": cada
+ * frase tiene un 🧰 banco de palabras (las de la respuesta + algunas trampa,
+ * mezcladas) que se toca para ir armando. Con `banco={false}` el banco arranca
+ * escondido: el siguiente paso es escribir sin ayuda.
+ *
+ * Uso (.mdx):
+ *   <Traducir titulo="Mi mañana" items={[
+ *     { es: 'Me levanto a las 7.', en: ['I get up at 7.00.', 'I wake up at 7.00.'], trampa: ['gets', 'in'] },
+ *   ]} />
+ *
+ * `en` son todas las traducciones que valen (la primera arma el banco). Los
+ * números se aceptan en cifras o en palabras (7 = 7.00 = seven) y mum/mom/mother
+ * da lo mismo, así que no hace falta listar esas variantes.
+ */
+import { idEjercicio } from '../scripts/id-ejercicio';
+
+interface Item {
+  es: string;
+  en: string[];
+  /** Palabras que NO van, para que el banco no se resuelva solo (gets, in, the…). */
+  trampa?: string[];
+}
+interface Props {
+  titulo: string;
+  fundamental?: boolean;
+  items: Item[];
+  /** El banco de palabras arranca visible (true) o escondido (false). */
+  banco?: boolean;
+  repasar?: { texto: string; href: string };
+}
+const { titulo, items, banco = true, repasar } = Astro.props;
+const id = idEjercicio(titulo);
+const enc = (o: unknown) => Buffer.from(JSON.stringify(o), 'utf-8').toString('base64');
+
+// Mezcla determinista (la misma página en cada build), sembrada con la frase.
+function mezclar<T>(xs: T[], semillaTexto: string): T[] {
+  let s = [...semillaTexto].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 11);
+  const azar = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32);
+  const out = [...xs];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(azar() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+const fichas = items.map((it) => {
+  const palabras = it.en[0].replace(/[.?!]$/, '').split(/\s+/);
+  return mezclar([...palabras, ...(it.trampa || [])], it.es);
+});
+---
+
+<section class="traducir ejercicio" id={id} data-titulo={titulo}
+  data-fundamental={Astro.props.fundamental ? '' : undefined}
+  data-solucion={enc(items.map((it) => it.en))}
+  data-repasar={repasar ? JSON.stringify(repasar) : undefined}>
+  <header class="ejercicio__header">
+    <span class="ejercicio__dif" aria-hidden="true">🔁</span>
+    <h3 class="ejercicio__titulo">{titulo}</h3>
+    {Astro.props.fundamental && <span class="ejercicio__fundamental">⭐ Fundamental</span>}
+    <span class="ej-hecho" hidden>✓ Resuelto</span>
+  </header>
+
+  <div class="ejercicio__consigna"><slot /></div>
+
+  <label class="traducir__toggle">
+    <input type="checkbox" data-banco checked={banco} /> 🧰 Mostrar el banco de palabras
+  </label>
+
+  <ol class="traducir__items">
+    {items.map((it, i) => (
+      <li class="traducir__item" data-item={i}>
+        <p class="traducir__es">{it.es}</p>
+        <input type="text" class="traducir__en" lang="en" autocomplete="off" autocapitalize="sentences"
+          spellcheck="false" aria-label="Tu traducción" placeholder="Escribí la frase en inglés…" />
+        <div class="traducir__banco" data-fichas lang="en">
+          {fichas[i].map((f) => <button type="button" class="armar__ficha">{f}</button>)}
+          <button type="button" class="traducir__borrar" data-borrar-palabra title="Borrar la última palabra">⌫</button>
+        </div>
+        <button type="button" class="say__btn traducir__say" data-say={it.en[0]} hidden aria-label="Escuchar">🔊</button>
+        <div class="completar__expl" hidden></div>
+      </li>
+    ))}
+  </ol>
+
+  <div class="ejercicio__acciones">
+    <button type="button" class="ejercicio__btn ejercicio__btn--verify" data-verify>✓ Verificar</button>
+    <button type="button" class="ejercicio__btn ejercicio__btn--reset" data-reset>↺ Borrar todo</button>
+  </div>
+  <p class="ejercicio__salida" data-salida role="status" aria-live="polite" hidden></p>
+</section>
+
+<script>
+  import '../scripts/traducir';
+  import '../scripts/hablar';
+</script>

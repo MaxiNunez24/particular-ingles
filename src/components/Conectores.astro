@@ -1,0 +1,44 @@
+---
+/**
+ * La ayuda de conectores: en inglés, qué significa y un ejemplo con 🔊.
+ *
+ *   <Conectores />                → abierta, para la página de referencia
+ *   <Conectores plegada />        → plegada (la ayuda dentro de cada redacción)
+ */
+import { CONECTORES } from '../data/conectores';
+
+interface Props {
+  plegada?: boolean;
+  titulo?: string;
+}
+const { plegada = false, titulo = '🧰 Conectores y frases útiles' } = Astro.props;
+---
+
+<details class="conectores" open={!plegada}>
+  <summary>{titulo}</summary>
+  <div class="conectores__grupos">
+    {CONECTORES.map((g) => (
+      <div class="conectores__grupo">
+        <p class="conectores__grupo-tit">{g.grupo}</p>
+        <table>
+          <tbody>
+            {g.items.map((c) => (
+              <tr>
+                <td lang="en"><b>{c.en}</b></td>
+                <td>{c.es}</td>
+                <td class="conectores__ej" lang="en" data-say-scope>
+                  {c.ejemplo}
+                  <button type="button" class="say__btn" data-say="" aria-label="Escuchar">🔊</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ))}
+  </div>
+</details>
+
+<script>
+  import '../scripts/hablar';
+</script>

@@ -1,0 +1,79 @@
+---
+title: 10. Conectores y frases útiles
+description: First, then, after that, but, because… las palabras que unen un texto, con su significado.
+---
+import Conectores from '../../../components/Conectores.astro';
+import Completar from '../../../components/Completar.astro';
+import OrdenarPasos from '../../../components/OrdenarPasos.astro';
+import ArmarFrase from '../../../components/ArmarFrase.astro';
+
+Un texto no es una lista de frases sueltas. Lo que hace que se lea bien son los **conectores**:
+las palabras que dicen **en qué orden** pasan las cosas y **cómo se relacionan** (*pero*,
+*porque*, *así que*…).
+
+Esta es la ayuda que vas a tener a mano en todas las redacciones. Tocá 🔊 para escuchar cada
+ejemplo.
+
+<Conectores />
+
+:::tip[Cómo usarlos en un texto sobre una rutina]
+1. Arrancá con **First,** y seguí con **Then,** / **After that,**: así el texto va en orden.
+2. Usá **and** para juntar dos cosas que hacés seguidas.
+3. Usá **but** para mostrar una diferencia (*I get up early, but my brother gets up late*).
+4. Usá **because** para dar una razón.
+5. Terminá con **Finally,**.
+
+Después de *First, Then, After that, Finally* va una **coma**.
+:::
+
+---
+
+## Ejercicios
+
+<Completar
+  titulo="¿Qué conector va?"
+  fundamental
+  repasar={{ texto: 'La tabla de conectores', href: '#_top' }}
+  items={[
+    { f: "{*First|Finally|Because}, I get up and have a shower.", e: '<b>First</b> = primero: así arranca la rutina.' },
+    { f: "I have breakfast. {*Then|But|Because}, I leave home.", e: '<b>Then</b> = después: sigue el orden.' },
+    { f: "I walk to school {but|*because|so} it's near my house.", e: '<b>because</b> = porque: da la razón.' },
+    { f: "I like English, {*but|so|because} I don't like History.", e: '<b>but</b> = pero: una diferencia.' },
+    { f: "My mum works late, {because|*so|but} we have dinner at 10.", e: '<b>so</b> = así que: la consecuencia.' },
+    { f: "{*When|But|So} I get home, I make a snack.", e: '<b>When</b> = cuando.' },
+    { f: "My dad cooks dinner and he {*also|because|but} washes the dishes.", e: '<b>also</b> = también (va antes del verbo).' },
+    { f: "{Then|*Finally|First}, I go to bed at 11.", e: '<b>Finally</b> = por último: cierra el día.' },
+  ]}
+>
+  Elegí el conector que tiene sentido. Leé la frase entera antes de elegir.
+</Completar>
+
+<OrdenarPasos
+  titulo="Ordená el texto de Martina"
+  fundamental
+  pasos={[
+    'First, I get up at 7.00 and I have a shower.',
+    'Then, I have breakfast with my mum.',
+    'After that, I leave home and I walk to school.',
+    'After school, I have lunch and I do my homework.',
+    'In the evening, I watch videos, but I don\'t watch TV.',
+    'Finally, I go to bed at 11.00 because I\'m tired.',
+  ]}
+  inicial={[3, 6, 1, 5, 2, 4]}
+  pistas={['Los conectores te dicen el orden: First va primero, Finally al final.', 'Then y After that van en el medio: fijate qué tiene sentido hacer antes.']}
+>
+  Las frases están mezcladas. Usá los **conectores** para saber cuál va primero.
+</OrdenarPasos>
+
+<ArmarFrase
+  titulo="Armá las frases con conectores"
+  repasar={{ texto: 'La tabla de conectores', href: '#_top' }}
+  items={[
+    { frase: 'After school, I do my homework.', es: 'Después de la escuela, hago la tarea.' },
+    { frase: 'I get up early because I go to school.', es: 'Me levanto temprano porque voy a la escuela.' },
+    { frase: 'My dad works at home, but my mum works in a shop.', es: 'Mi papá trabaja en casa, pero mi mamá trabaja en un negocio.', mayuscula: false },
+    { frase: 'When I get home, I make a snack.', es: 'Cuando llego a casa, me preparo algo para comer.' },
+  ]}
+>
+  Tocá las palabras en orden. Las comas ya están pegadas a la palabra que las lleva.
+</ArmarFrase>

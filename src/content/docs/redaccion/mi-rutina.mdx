@@ -1,0 +1,173 @@
+---
+title: 12. Redacción - mi rutina y la de mi familia
+description: Escribir tu rutina y la de tu mamá o papá, parte por parte, con ayuda de conectores.
+---
+import Redaccion from '../../../components/Redaccion.astro';
+
+Este es el ensayo: **tu rutina** y **la rutina de tu mamá o tu papá**. Lo escribís vos, con tus
+palabras, **parte por parte**. Cada parte tiene la consigna en castellano y, si la necesitás, una
+💡 lista de palabras que te pueden servir. Arriba de cada ejercicio está la 🧰 ayuda de conectores.
+
+Cuando tocás **Revisar mi texto**, la página busca los errores típicos (la -s, *at / in / on*, lo
+que quedó en castellano…), se fija que cada parte tenga lo que pide y cuenta tus conectores. **No
+te da el texto hecho**: te dice qué revisar.
+
+:::tip[Lo que más se mira en un ensayo de rutina]
+- ✅ Que el texto vaya **en orden** y con **conectores** (First, Then, After that, Finally…).
+- ✅ Con **I** el verbo va **sin -s**; con **my mum / my dad / she / he**, **con -s** (*she gets up*,
+  *he has*).
+- ✅ La hora con **at** (*at 7.00*); las partes del día con **in** (*in the morning*), salvo *at night*.
+- ✅ **I** siempre con mayúscula, y cada oración termina con punto.
+:::
+
+<details>
+<summary>📄 Un texto de ejemplo, para inspirarte (no es para copiar: es la rutina de Tomi)</summary>
+
+*Hi! My name is Tomi and I'm 13 years old. On weekdays, I get up at 7.00. First, I have a shower and I
+get dressed. Then, I have breakfast with my sister. After that, I walk to school because it's near my
+house. School starts at 7.45 and finishes at 12.30. After school, I have lunch and I do my homework.
+In the evening, I play videogames, but I don't play on school nights. Finally, I go to bed at 11.00.*
+
+*My dad's name is Carlos. He is a taxi driver. He gets up very early, at 5.30, and he has a coffee.
+Then, he leaves home at 6.00 and he drives his taxi all day. He gets home at 7.00 in the evening. After
+dinner, he watches the news. At the weekend, he doesn't work, so we go to the park together.*
+
+*My dad gets up early, but I get up late. We both love football!*
+</details>
+
+## 1. Mi rutina
+
+<Redaccion
+  titulo="Mi rutina"
+  fundamental
+  minConectores={3}
+  repasar={{ texto: 'Rutinas y Present Simple', href: '../../present-simple/rutinas/' }}
+  partes={[
+    {
+      es: 'Presentate: ¿cómo te llamás y cuántos años tenés?',
+      ayuda: "My name is … · I'm … years old.",
+      debe: [
+        { re: "\\b(my name is|i'm|i am)\\b", msg: 'Empezá presentándote: tu nombre.' },
+        { re: '\\b(years old|\\d+)\\b', msg: 'Contá cuántos años tenés.' },
+      ],
+    },
+    {
+      es: '¿A qué hora te levantás y qué hacés primero?',
+      ayuda: 'First, … · get up · wake up · have a shower · get dressed · at 7.00',
+      debe: [
+        { re: '\\b(get|wake) up\\b', msg: 'Contá a qué hora te <b>levantás</b> (la expresión está en la lista de rutinas).' },
+        { re: '\\bat\\s+(about\\s+)?(\\d|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|half|quarter)', msg: 'Falta la <b>hora</b>.' },
+      ],
+    },
+    {
+      es: '¿Qué desayunás y cómo vas a la escuela?',
+      ayuda: 'have breakfast · toast · milk · cereal · go to school by bus / by car · walk to school',
+      debe: [
+        { re: '\\bbreakfast\\b', msg: 'Contá qué <b>desayunás</b>.' },
+        { re: '\\bschool\\b', msg: 'Contá cómo vas a la <b>escuela</b>.' },
+      ],
+    },
+    {
+      es: '¿A qué hora empieza y termina la escuela? ¿Qué materias tenés?',
+      ayuda: 'School starts at … · it finishes at … · I study Maths, English…',
+      debe: [
+        { re: '\\b(start|starts|begin|begins)\\b', msg: 'Contá a qué hora <b>empieza</b> la escuela.' },
+        { re: '\\b(finish|finishes|end|ends)\\b', msg: 'Contá a qué hora <b>termina</b>.' },
+      ],
+    },
+    {
+      es: '¿Qué hacés a la tarde, después de la escuela?',
+      ayuda: 'After school, … · have lunch · do my homework · watch videos · meet my friends',
+      debe: [{ re: '\\b(after school|after lunch|in the afternoon)\\b', msg: 'Usá <i>After school</i> o <i>In the afternoon</i> para decir cuándo.' }],
+    },
+    {
+      es: '¿Qué hacés a la noche? ¿A qué hora te vas a dormir?',
+      ayuda: 'In the evening, … · have dinner · Finally, … · go to bed',
+      debe: [
+        { re: '\\b(go to bed|sleep)\\b', msg: 'Contá a qué hora te <b>vas a dormir</b>.' },
+        { re: '\\bat\\s+(about\\s+)?(\\d|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|half|quarter)', msg: 'Falta la <b>hora</b>.' },
+      ],
+    },
+  ]}
+>
+  Contá tu día de semana, de la mañana a la noche. Usá al menos **3 conectores distintos**.
+</Redaccion>
+
+## 2. La rutina de mi mamá o mi papá
+
+Ahora escribís sobre otra persona: el sujeto es **my mum / my dad / she / he**, así que **todos los
+verbos llevan -s** (*gets up, has, goes, watches*).
+
+<Redaccion
+  titulo="La rutina de mi mamá o mi papá"
+  fundamental
+  minConectores={3}
+  repasar={{ texto: 'Present Simple: la -s de he / she', href: '../../present-simple/afirmativo/' }}
+  partes={[
+    {
+      es: '¿De quién vas a escribir? Contá cómo se llama y de qué trabaja.',
+      ayuda: "My mum's name is … · My dad is a teacher. · She works in a shop. · He works at home.",
+      debe: [
+        { re: '\\bmy (mum|mom|mother|dad|father)\\b', msg: 'Empezá diciendo de quién hablás (<i>my mum</i> o <i>my dad</i>).' },
+        { re: '\\b(works|is a|is an)\\b', msg: 'Contá de qué trabaja.' },
+      ],
+    },
+    {
+      es: '¿A qué hora se levanta y qué hace primero?',
+      ayuda: 'First, … · gets up · has a shower · has a coffee · at 6.00',
+      debe: [
+        { re: '\\b(gets|wakes) up\\b', msg: 'Contá a qué hora se <b>levanta</b> (¿qué le pasa al verbo con she / he?).' },
+        { re: '\\bat\\s+(about\\s+)?(\\d|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|half|quarter)', msg: 'Falta la <b>hora</b>.' },
+      ],
+    },
+    {
+      es: '¿A qué hora sale de casa y cómo va al trabajo?',
+      ayuda: 'leaves home · goes to work by car / by bus · walks to work · drives',
+      debe: [{ re: '\\bwork\\b', msg: 'Contá cómo va al <b>trabajo</b>.' }],
+    },
+    {
+      es: '¿Qué hace a la tarde, cuando vuelve?',
+      ayuda: 'After work, … · gets home · cooks · goes shopping · helps me with my homework',
+      debe: [{ re: '\\b(after work|after lunch|in the afternoon|gets home|in the evening)\\b', msg: 'Usá <i>After work</i> o <i>In the afternoon</i> para decir cuándo.' }],
+    },
+    {
+      es: '¿Qué hace a la noche y los fines de semana?',
+      ayuda: 'In the evening, … · has dinner · watches TV · At the weekend, … · doesn\'t work',
+      debe: [{ re: '\\bweekend\\b', msg: 'Contá qué hace el <b>fin de semana</b>.' }],
+    },
+  ]}
+>
+  Contá el día de tu mamá o de tu papá (o de quien vos quieras de tu familia). Usá al menos **3
+  conectores distintos**.
+</Redaccion>
+
+## 3. Para cerrar: comparar
+
+<Redaccion
+  titulo="Mi rutina y la de mi mamá o papá"
+  minConectores={2}
+  repasar={{ texto: 'Conectores: but, because, also', href: '../conectores/' }}
+  partes={[
+    {
+      es: '¿En qué se parecen sus rutinas?',
+      ayuda: 'We both … · My mum gets up early and I get up early too. · I also …',
+      debe: [{ re: '\\b(both|too|also)\\b', msg: 'Usá <i>both</i>, <i>too</i> o <i>also</i> para decir en qué se parecen.' }],
+    },
+    {
+      es: '¿En qué son distintas? Usá but.',
+      ayuda: 'I get up at 7.00, but my dad gets up at 6.00.',
+      debe: [
+        { re: '\\bbut\\b', msg: 'Usá <b>but</b> para mostrar la diferencia.' },
+        { re: '\\bi\\b', msg: 'Contá lo que hacés <b>vos</b> (<i>I …</i>).' },
+        { re: '\\b(my (mum|mom|mother|dad|father)|she|he)\\b', msg: 'Contá lo que hace tu mamá o tu papá.' },
+      ],
+    },
+    {
+      es: 'Explicá una de las diferencias con because.',
+      ayuda: 'My dad gets up early because he works far from home.',
+      debe: [{ re: '\\bbecause\\b', msg: 'Usá <b>because</b> para dar la razón.' }],
+    },
+  ]}
+>
+  El cierre del ensayo: comparar las dos rutinas.
+</Redaccion>

@@ -1,0 +1,65 @@
+---
+/**
+ * Días de la semana y meses, en un calendario que ARRANCA HOY: si hoy es
+ * miércoles, la fila empieza en miércoles (y si es octubre, los meses en
+ * octubre). Así no se aprende la lista de memoria desde Monday: hay que saber
+ * qué viene después de cada uno.
+ *
+ *   <Calendario tipo="dias" modo="arrastrar" titulo="…" />   → arrastrar las tarjetas en inglés
+ *   <Calendario tipo="dias" modo="escribir" titulo="…" />    → escribirlos
+ *   <Calendario tipo="meses" modo="hoy" titulo="…" />        → today / tomorrow / next month…
+ *
+ * `etiquetas`: 'es' (cada casillero dice el día en castellano) o 'relativo'
+ * (solo "hoy", "mañana", "en 2 días"…: hay que saber el orden).
+ *
+ * Todo se arma en el navegador con la fecha de ese día (el HTML no sabe qué día
+ * es cuando la alumna lo abre).
+ */
+import { idEjercicio } from '../scripts/id-ejercicio';
+
+interface Props {
+  titulo: string;
+  tipo: 'dias' | 'meses';
+  modo: 'arrastrar' | 'escribir' | 'hoy';
+  etiquetas?: 'es' | 'relativo';
+  fundamental?: boolean;
+  repasar?: { texto: string; href: string };
+}
+const { titulo, tipo, modo, etiquetas = 'es', repasar } = Astro.props;
+const id = idEjercicio(titulo);
+---
+
+<section class="calendario ejercicio" id={id} data-titulo={titulo}
+  data-tipo={tipo} data-modo={modo} data-etiquetas={etiquetas}
+  data-fundamental={Astro.props.fundamental ? '' : undefined}
+  data-repasar={repasar ? JSON.stringify(repasar) : undefined}>
+  <header class="ejercicio__header">
+    <span class="ejercicio__dif" aria-hidden="true">{tipo === 'dias' ? '📅' : '🗓️'}</span>
+    <h3 class="ejercicio__titulo">{titulo}</h3>
+    {Astro.props.fundamental && <span class="ejercicio__fundamental">⭐ Fundamental</span>}
+    <span class="ej-hecho" hidden>✓ Resuelto</span>
+  </header>
+
+  <div class="ejercicio__consigna"><slot /></div>
+  <p class="calendario__hoy" data-hoy></p>
+
+  {modo === 'arrastrar' && (
+    <p class="clasificar__ayuda">
+      Tocá una tarjeta y después el casillero. También podés arrastrarla
+      <span class="clasificar__ayuda-mouse">con el mouse</span><span class="clasificar__ayuda-dedo">(mantenela apretada un instante y movela con el dedo)</span>.
+    </p>
+  )}
+  {modo === 'arrastrar' && <div class="calendario__pozo" data-pozo lang="en" aria-label="Tarjetas sin ubicar"></div>}
+  <div class:list={['calendario__grilla', `calendario__grilla--${tipo}`, modo === 'hoy' && 'calendario__grilla--hoy']} data-grilla></div>
+
+  <div class="ejercicio__acciones">
+    <button type="button" class="ejercicio__btn ejercicio__btn--verify" data-verify>✓ Verificar</button>
+    <button type="button" class="ejercicio__btn ejercicio__btn--reset" data-reset>↺ Volver a empezar</button>
+  </div>
+  <div class="ejercicio__salida" data-salida role="status" aria-live="polite" hidden></div>
+</section>
+
+<script>
+  import '../scripts/calendario';
+  import '../scripts/hablar';
+</script>

@@ -1005,3 +1005,184 @@ body.pc-resizing * {
   .clasificar__ayuda-mouse { display: none; }
   .clasificar__ayuda-dedo { display: inline; }
 }
+
+/* ===========================================================================
+   DÍAS Y MESES (Calendario)
+=========================================================================== */
+.calendario__hoy {
+  font-size: 0.92rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: 0.4rem;
+  background: var(--sl-color-gray-6);
+}
+.calendario__pozo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.45rem;
+  min-height: 3rem;
+  padding: 0.6rem;
+  border: 2px dashed var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+}
+.calendario__grilla { display: grid; gap: 0.45rem; margin-top: 0.8rem; }
+.calendario__grilla--dias { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.calendario__grilla--meses { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.calendario__grilla--hoy { grid-template-columns: 1fr; gap: 0.2rem; }
+@media (max-width: 62rem) {
+  .calendario__grilla--dias { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .calendario__grilla--meses { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 34rem) {
+  .calendario__grilla--dias,
+  .calendario__grilla--meses { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* Cada casillero, como la hoja de un almanaque: arriba la etiqueta, abajo el lugar. */
+.cal__slot {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: var(--sl-color-gray-7, var(--sl-color-black));
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.cal__etq {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-align: center;
+  padding: 0.3rem 0.25rem;
+  background: var(--sl-color-gray-5);
+  color: var(--sl-color-white);
+}
+.cal__slot--hoy .cal__etq { background: var(--sl-color-accent); color: #fff; }
+.cal__cuerpo {
+  min-height: 3rem;
+  padding: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cal__cuerpo .cal__tarjeta { width: 100%; text-align: center; }
+.cal__input {
+  width: 100%;
+  font: inherit;
+  text-align: center;
+  color: var(--sl-color-white);
+  background: color-mix(in srgb, var(--sl-color-accent) 10%, transparent);
+  border: 1px solid var(--sl-color-gray-4);
+  border-bottom: 2px solid var(--sl-color-accent);
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.2rem;
+}
+.cal__pregunta .cal__input { width: auto; text-align: left; }
+.cal__pista { font-size: 0.78rem; line-height: 1.35; padding: 0.3rem 0.4rem; border-top: 1px solid var(--sl-color-gray-5); }
+.cal__pista[hidden] { display: none; }
+.cal__slot.is-bien { border-color: var(--ok); box-shadow: inset 0 -3px 0 var(--ok); }
+.cal__slot.is-mal { border-color: var(--mal); box-shadow: inset 0 -3px 0 var(--mal); }
+.calendario.tiene-elegida .cal__slot,
+.calendario.arrastrando .cal__slot,
+.calendario.arrastrando .calendario__pozo { border-style: dashed; border-color: var(--sl-color-accent); cursor: pointer; }
+.calendario .cal__slot.is-encima,
+.calendario .calendario__pozo.is-encima {
+  border: 2px solid var(--sl-color-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-accent) 25%, transparent);
+  background: color-mix(in srgb, var(--sl-color-accent) 14%, transparent);
+}
+.cal__pregunta { padding: 0.35rem 0; border-bottom: 1px solid var(--sl-color-gray-6); }
+.cal__pregunta p { margin: 0; }
+.cal__pregunta .cal__es { font-size: 0.82rem; color: var(--sl-color-gray-3); }
+.cal__pregunta [lang='en'] { font-size: 1.05rem; line-height: 2.1; }
+.cal__pregunta.is-bien .cal__input { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 18%, transparent); }
+.cal__pregunta.is-mal .cal__input { border-color: var(--mal); background: color-mix(in srgb, var(--mal) 18%, transparent); }
+
+/* ===========================================================================
+   REDACCIÓN: conectores, traducir, redacción guiada
+=========================================================================== */
+.conectores {
+  margin: 1rem 0;
+  border: 1px solid var(--sl-color-gray-5);
+  border-left: 4px solid var(--sl-color-accent);
+  border-radius: 0.5rem;
+  background: var(--sl-color-gray-6);
+  padding: 0.5rem 0.8rem;
+}
+.conectores summary { cursor: pointer; font-weight: 700; }
+.conectores__grupo-tit { margin: 0.7rem 0 0.2rem; font-weight: 700; font-size: 0.92rem; }
+.conectores table { width: 100%; margin: 0; font-size: 0.9rem; display: table; }
+.conectores td { padding: 0.3rem 0.45rem; vertical-align: top; }
+.conectores__ej { color: var(--sl-color-gray-2); font-style: italic; }
+@media (max-width: 40rem) {
+  .conectores tr { display: grid; grid-template-columns: 1fr 1fr; }
+  .conectores__ej { grid-column: 1 / -1; padding-top: 0 !important; }
+}
+
+.traducir__toggle,
+.reloj__vistas label { display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.92rem; }
+.traducir__toggle input { accent-color: var(--sl-color-accent); width: 1rem; height: 1rem; }
+.traducir .traducir__items,
+.redaccion .redaccion__partes { padding-left: 1.6rem; margin: 0.6rem 0 0; }
+.traducir__item,
+.redaccion__parte { margin-top: 1rem; }
+.traducir__item > *,
+.redaccion__parte > * { margin-top: 0.35rem; }
+.traducir__item > :first-child,
+.redaccion__parte > :first-child { margin-top: 0; }
+.traducir__es,
+.redaccion__es { font-weight: 600; }
+.traducir__en,
+.redaccion__texto {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--sl-color-white);
+  background: color-mix(in srgb, var(--sl-color-accent) 8%, transparent);
+  border: 1px solid var(--sl-color-gray-4);
+  border-bottom: 2px solid var(--sl-color-accent);
+  border-radius: 0.35rem;
+  padding: 0.4rem 0.55rem;
+}
+.redaccion__texto { resize: vertical; min-height: 3.2rem; line-height: 1.5; overflow: hidden; }
+.traducir__en:focus,
+.redaccion__texto:focus { outline: 2px solid var(--sl-color-accent); outline-offset: 1px; }
+.traducir__item.is-bien .traducir__en,
+.redaccion__parte.is-bien .redaccion__texto { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent); }
+.traducir__item.is-mal .traducir__en,
+.redaccion__parte.is-mal .redaccion__texto { border-color: var(--mal); }
+.traducir__banco { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.traducir__banco .armar__ficha { font-size: 0.92rem; padding: 0.2rem 0.55rem; }
+.traducir.sin-banco .traducir__banco { display: none; }
+.traducir__borrar {
+  font: inherit;
+  padding: 0.2rem 0.6rem;
+  border: 1px dashed var(--sl-color-gray-4);
+  border-radius: 0.45rem;
+  background: transparent;
+  color: var(--sl-color-gray-2);
+  cursor: pointer;
+}
+.redaccion__ayuda { font-size: 0.88rem; }
+.redaccion__ayuda summary { cursor: pointer; color: var(--sl-color-text-accent); }
+.redaccion__ayuda p { margin: 0.2rem 0 0; font-style: italic; }
+.redaccion__final {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--ok);
+  background: color-mix(in srgb, var(--ok) 8%, transparent);
+}
+.redaccion__final[hidden] { display: none; }
+.redaccion__final-tit { font-weight: 700; margin: 0; }
+.redaccion__final-texto { font-size: 1.05rem; line-height: 1.7; margin: 0.4rem 0 0; }
+
+/* Las filas nuevas también, contra el margin-top de Starlight (ver más arriba). */
+.sl-markdown-content .calendario__pozo > *,
+.sl-markdown-content .calendario__grilla > *,
+.sl-markdown-content .cal__slot > *,
+.sl-markdown-content .cal__cuerpo > *,
+.sl-markdown-content .traducir__banco > *,
+.sl-markdown-content .conectores__grupos > *:first-child {
+  margin-top: 0;
+}

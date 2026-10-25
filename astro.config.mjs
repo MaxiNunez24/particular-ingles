@@ -75,29 +75,38 @@ export default defineConfig({
           items: [
             { label: '1. Pronombres y verbo to be', link: '/bases/to-be/' },
             { label: '2. La hora y cuándo pasa algo', link: '/bases/la-hora/' },
+            { label: '3. Días, meses y estaciones', link: '/bases/dias-meses/' },
           ],
         },
         {
           label: '🔁 Present Simple',
           items: [
-            { label: '3. Rutinas (vocabulario)', link: '/present-simple/rutinas/' },
-            { label: '4. Afirmativo: la -s', link: '/present-simple/afirmativo/' },
-            { label: '5. Negativo y preguntas', link: '/present-simple/negativo-preguntas/' },
-            { label: '6. ¿Con qué frecuencia?', link: '/present-simple/frecuencia/' },
+            { label: '4. Rutinas (vocabulario)', link: '/present-simple/rutinas/' },
+            { label: '5. Afirmativo: la -s', link: '/present-simple/afirmativo/' },
+            { label: '6. Negativo y preguntas', link: '/present-simple/negativo-preguntas/' },
+            { label: '7. ¿Con qué frecuencia?', link: '/present-simple/frecuencia/' },
           ],
         },
         {
           label: '🎬 Present Continuous',
           items: [
-            { label: '7. Lo que pasa ahora', link: '/present-continuous/' },
-            { label: '8. ¿Simple o Continuous?', link: '/simple-o-continuous/' },
+            { label: '8. Lo que pasa ahora', link: '/present-continuous/' },
+            { label: '9. ¿Simple o Continuous?', link: '/simple-o-continuous/' },
+          ],
+        },
+        {
+          label: '✍️ Redacción',
+          items: [
+            { label: '10. Conectores y frases útiles', link: '/redaccion/conectores/' },
+            { label: '11. Traducir frases', link: '/redaccion/traducir/' },
+            { label: '12. Mi rutina y la de mi familia', link: '/redaccion/mi-rutina/' },
           ],
         },
         {
           label: '🎯 Para el examen',
           items: [
-            { label: '9. Errores típicos', link: '/examen/errores-tipicos/' },
-            { label: '10. Simulacro', link: '/examen/simulacro/' },
+            { label: '13. Errores típicos', link: '/examen/errores-tipicos/' },
+            { label: '14. Simulacro', link: '/examen/simulacro/' },
             { label: '📄 Machete (resumen)', link: '/examen/machete/' },
           ],
         },

@@ -1,0 +1,77 @@
+---
+title: 11. Traducir frases
+description: Pasar del castellano al inglés, primero con un banco de palabras y después sin ayuda.
+---
+import Traducir from '../../../components/Traducir.astro';
+import Conectores from '../../../components/Conectores.astro';
+
+Para escribir un texto propio hay que poder pasar las ideas del castellano al inglés **sin tener
+las palabras enfrente**. Eso se entrena de a poco:
+
+1. **Con banco de palabras** 🧰: abajo de cada frase están las palabras (y algunas trampa). Tocalas
+   en orden o escribí directamente.
+2. **Sin banco**: destildá *Mostrar el banco de palabras* y escribila vos. Cuando te salga así, ya
+   estás para la redacción.
+
+:::tip[No traduzcas palabra por palabra]
+*Me levanto* no es "me I get up": es **I get up**. *Desayuno* es **I have breakfast**. Pensá la idea
+y buscá la frase en inglés que ya conocés de la rutina.
+:::
+
+<Conectores plegada titulo="🧰 Ayuda: conectores y frases útiles (tocá para abrir)" />
+
+## Mi día (yo)
+
+<Traducir
+  titulo="Mi día"
+  fundamental
+  repasar={{ texto: 'Rutinas (vocabulario)', href: '../../present-simple/rutinas/' }}
+  items={[
+    { es: 'Me levanto a las 7.', en: ['I get up at 7.00.', 'I wake up at 7.00.'], trampa: ['gets', 'in'] },
+    { es: 'Me baño y me visto.', en: ['I have a shower and I get dressed.', 'I have a shower and get dressed.', 'I take a shower and I get dressed.', 'I take a shower and get dressed.'], trampa: ['has', 'am'] },
+    { es: 'Desayuno a las 7 y media.', en: ['I have breakfast at 7.30.', 'I have breakfast at half past seven.', 'I have breakfast at seven thirty.'], trampa: ['take', 'in'] },
+    { es: 'Salgo de casa a las 8 menos cuarto.', en: ['I leave home at 7.45.', 'I leave home at quarter to eight.', 'I leave home at a quarter to eight.', 'I leave home at seven forty-five.'], trampa: ['from', 'the'] },
+    { es: 'Después de la escuela, hago la tarea.', en: ['After school, I do my homework.', 'After school, I do homework.'], trampa: ['make', 'the'] },
+    { es: 'Me voy a dormir a las 11.', en: ['I go to bed at 11.00.'], trampa: ['the', 'goes'] },
+  ]}
+>
+  Pasá cada frase al inglés.
+</Traducir>
+
+## El día de mi mamá (ella)
+
+Ojo: ahora el sujeto es **she** (o *my mum*), así que el verbo lleva **-s**.
+
+<Traducir
+  titulo="El día de mi mamá"
+  fundamental
+  repasar={{ texto: 'Present Simple: la -s', href: '../../present-simple/afirmativo/' }}
+  items={[
+    { es: 'Mi mamá se levanta a las 6.', en: ['My mum gets up at 6.00.', 'My mum wakes up at 6.00.'], trampa: ['get', 'is'] },
+    { es: 'Ella toma un café y sale de casa a las 7.', en: ['She has a coffee and leaves home at 7.00.', 'She has a coffee and she leaves home at 7.00.', 'She drinks a coffee and leaves home at 7.00.', 'She drinks a coffee and she leaves home at 7.00.'], trampa: ['have', 'leave'] },
+    { es: 'Trabaja en un hospital.', en: ['She works in a hospital.', 'She works at a hospital.'], trampa: ['work', 'is'] },
+    { es: 'Llega a casa a las 6 de la tarde.', en: ['She gets home at 6.00 in the evening.', 'She gets home at 6.00 in the afternoon.', 'She gets home at 6 pm.', 'She gets home at 6.00.'], trampa: ['to', 'get'] },
+    { es: 'A la noche, cocina la cena.', en: ['In the evening, she cooks dinner.', 'At night, she cooks dinner.', 'She cooks dinner in the evening.', 'She cooks dinner at night.', 'In the evening, she makes dinner.', 'She makes dinner in the evening.'], trampa: ['cook', 'the'] },
+    { es: 'No mira la tele porque está cansada.', en: ["She doesn't watch TV because she is tired.", "She doesn't watch the TV because she is tired."], trampa: ['watches', 'but'] },
+  ]}
+>
+  Pasá cada frase al inglés. Acordate de la -s.
+</Traducir>
+
+## Sin ayuda
+
+<Traducir
+  titulo="Sin banco de palabras"
+  banco={false}
+  repasar={{ texto: 'Present Simple: negativo y preguntas', href: '../../present-simple/negativo-preguntas/' }}
+  items={[
+    { es: 'Mi papá trabaja en una oficina.', en: ['My dad works in an office.', 'My dad works at an office.'] },
+    { es: 'Mis padres no trabajan los sábados.', en: ["My parents don't work on Saturdays.", "My parents don't work on Saturday."] },
+    { es: 'Generalmente ceno con mi familia.', en: ['I usually have dinner with my family.', 'Usually, I have dinner with my family.', 'I usually eat dinner with my family.'] },
+    { es: 'Mi hermano nunca hace la tarea.', en: ['My brother never does his homework.', 'My brother never does homework.'] },
+    { es: '¿A qué hora se levanta tu mamá?', en: ['What time does your mum get up?', 'What time does your mum wake up?'] },
+    { es: 'Me levanto temprano, pero mi hermana se levanta tarde.', en: ['I get up early, but my sister gets up late.', 'I wake up early, but my sister wakes up late.'] },
+  ]}
+>
+  Ahora sin el banco (si te trabás, podés tildarlo, pero probá primero sin).
+</Traducir>
