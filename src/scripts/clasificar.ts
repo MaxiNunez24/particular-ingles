@@ -4,13 +4,15 @@
  * Dos formas de mover una tarjeta, y las dos hacen exactamente lo mismo:
  *   · tocar la tarjeta y después la caja  → funciona con dedo, con mouse y con
  *     teclado; es el camino principal
- *   · arrastrar y soltar                  → atajo para quien está con mouse
+ *   · arrastrar y soltar                  → con el mouse (drag & drop de HTML)
+ *                                           o con el dedo (arrastre-tactil.ts)
  *
  * Se corrige recién al tocar Verificar, no mientras se mueve: la idea es que el
  * alumno piense y decida, no que adivine por prueba y error hasta que se ponga
  * verde.
  */
 import { estaHecho, marcarHecho, pintarSello } from './progreso';
+import { arrastreTactil } from './arrastre-tactil';
 
 export function conectarClasificar(el: HTMLElement): void {
   const titulo = el.dataset.titulo || '';
@@ -103,6 +105,37 @@ export function conectarClasificar(el: HTMLElement): void {
       const destino = destinoDe(zona);
       if (arrastrada && destino) mover(arrastrada, destino);
     });
+  });
+
+  // --- arrastrar con el dedo (tablet) ---
+  const zonaEn = (x: number, y: number) => {
+    const z = (document.elementFromPoint(x, y) as HTMLElement | null)?.closest<HTMLElement>(
+      '.clasificar__caja, [data-pozo]',
+    );
+    return z && el.contains(z) ? z : null;
+  };
+  const apagarZonas = () => {
+    el.classList.remove('arrastrando');
+    [...cajas, pozo].forEach((z) => z.classList.remove('is-encima'));
+  };
+  arrastreTactil(el, {
+    piezas: '[data-tarjeta]',
+    fantasma: true,
+    alEmpezar: () => {
+      elegir(null);
+      el.classList.add('arrastrando');
+    },
+    alMover: (_t, x, y) => {
+      const z = zonaEn(x, y);
+      [...cajas, pozo].forEach((c) => c.classList.toggle('is-encima', c === z));
+    },
+    alSoltar: (t, x, y) => {
+      const z = zonaEn(x, y);
+      apagarZonas();
+      const destino = z && destinoDe(z);
+      if (destino) mover(t, destino);
+    },
+    alCancelar: apagarZonas,
   });
 
   // --- verificar ---

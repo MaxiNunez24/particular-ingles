@@ -13,6 +13,7 @@ import {
   borrarCodigo,
   actualizarResumen,
 } from './progreso';
+import { arrastreTactil } from './arrastre-tactil';
 
 function items(lista: HTMLElement): HTMLElement[] {
   return Array.from(lista.querySelectorAll<HTMLElement>('.ordenar__paso'));
@@ -115,6 +116,27 @@ function initOrdenar(el: HTMLElement): void {
     const r = sobre.getBoundingClientRect();
     const despues = e.clientY > r.top + r.height / 2;
     lista.insertBefore(arrastrando, despues ? sobre.nextSibling : sobre);
+  });
+
+  // ---------- Arrastrar con el dedo (tablet) ----------
+  // Acá no hay fantasma: el paso mismo se va corriendo en la lista mientras el
+  // dedo baja o sube, igual que con el mouse.
+  arrastreTactil(lista, {
+    piezas: '.ordenar__paso',
+    alEmpezar: (li) => li.classList.add('is-drag'),
+    alMover: (li, _x, y) => {
+      const x = lista.getBoundingClientRect().left + 20;
+      const sobre = (document.elementFromPoint(x, y) as HTMLElement | null)?.closest<HTMLElement>('.ordenar__paso');
+      if (!sobre || sobre === li || !lista.contains(sobre)) return;
+      const r = sobre.getBoundingClientRect();
+      lista.insertBefore(li, y > r.top + r.height / 2 ? sobre.nextSibling : sobre);
+    },
+    alSoltar: (li) => {
+      li.classList.remove('is-drag');
+      limpiarMarcas();
+      guardarOrden();
+    },
+    alCancelar: (li) => li.classList.remove('is-drag'),
   });
 
   // ---------- Verificar ----------

@@ -982,3 +982,26 @@ body.pc-resizing * {
 
 /* El porqué, cuando la frase ya está bien: en verde, no en rojo. */
 .completar__expl.es-bien { border-left-color: var(--ok); }
+
+/* ---------- Arrastrar con el dedo ---------- */
+/* Sin esto, el toque largo en la tablet selecciona el texto o abre el menú
+   del sistema (copiar, compartir) en vez de levantar la pieza. */
+.clasificar__tarjeta,
+.ordenar__paso {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+/* La copia que sigue al dedo: un poco girada y con sombra, "levantada". */
+.arrastre-fantasma {
+  opacity: 0.92;
+  transform: rotate(-2deg) scale(1.04);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  border-color: var(--sl-color-accent) !important;
+}
+/* La ayuda dice "con el mouse" o "con el dedo" según el aparato. */
+.clasificar__ayuda-dedo { display: none; }
+@media (hover: none) {
+  .clasificar__ayuda-mouse { display: none; }
+  .clasificar__ayuda-dedo { display: inline; }
+}
