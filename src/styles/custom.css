@@ -1186,3 +1186,124 @@ body.pc-resizing * {
 .sl-markdown-content .conectores__grupos > *:first-child {
   margin-top: 0;
 }
+
+/* ===========================================================================
+   PROGRESO EN LA PORTADA
+=========================================================================== */
+.progreso__total {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: var(--ej-radio);
+  background: var(--sl-color-gray-6);
+}
+.progreso__total > * { margin-top: 0.45rem; }
+.progreso__total > :first-child { margin-top: 0; }
+.progreso__titulo { font-size: 1.1rem; }
+.progreso__fund { font-size: 0.92rem; }
+.progreso__seguir {
+  display: inline-block;
+  padding: 0.45rem 0.8rem;
+  border-radius: 0.45rem;
+  background: var(--sl-color-accent);
+  color: #fff !important;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.progreso__seguir:hover { filter: brightness(1.12); }
+.progreso__grupo { font-weight: 700; margin: 1.2rem 0 0.35rem; }
+.progreso__temas { display: grid; gap: 0.35rem; }
+.progreso__tema {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-black);
+  padding: 0.1rem 0.75rem;
+}
+.progreso__tema--completo { border-left: 4px solid var(--ok); }
+.progreso__tema--empezado { border-left: 4px solid var(--sl-color-accent); }
+.progreso__tema summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(4rem, 9rem) auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.45rem 0;
+  cursor: pointer;
+  list-style: none;
+}
+.progreso__tema summary::-webkit-details-marker { display: none; }
+.progreso__nombre { font-weight: 600; }
+.progreso__barra { display: block; margin: 0 !important; }
+.progreso__cuenta { font-variant-numeric: tabular-nums; font-size: 0.88rem; color: var(--sl-color-gray-2); }
+.progreso__ejercicios { list-style: none; padding: 0 0 0.3rem; margin: 0.2rem 0 0; font-size: 0.92rem; }
+.progreso__ejercicios li { display: flex; align-items: center; gap: 0.4rem; margin-top: 0.2rem; }
+.progreso__ejercicios a { text-decoration: none; color: var(--sl-color-gray-2); }
+.progreso__ejercicios li.es-hecho a { color: #66bb6a; }
+.progreso__ejercicios a:hover { text-decoration: underline; }
+.progreso__ir { display: inline-block; font-size: 0.88rem; margin: 0.2rem 0 0.6rem; }
+.progreso__nota { font-size: 0.85rem; color: var(--sl-color-gray-3); }
+@media (max-width: 34rem) {
+  .progreso__tema summary { grid-template-columns: minmax(0, 1fr) auto; }
+  .progreso__barra { grid-column: 1 / -1; grid-row: 2; }
+}
+.sl-markdown-content .progreso__temas > *,
+.sl-markdown-content .progreso__grupos > *,
+.sl-markdown-content .progreso__tema > *,
+.sl-markdown-content .progreso__tema summary > * { margin-top: 0; }
+
+/* ===========================================================================
+   CONSULTAR CON EL PROFE (WhatsApp)
+=========================================================================== */
+.consultar__btn {
+  margin-left: auto;
+  background: transparent !important;
+  border-color: #25d366 !important;
+  color: var(--sl-color-white) !important;
+  font-weight: 500 !important;
+}
+.consultar__btn:hover { background: color-mix(in srgb, #25d366 15%, transparent) !important; }
+@media (max-width: 30rem) {
+  .consultar__btn { margin-left: 0; }
+}
+.consultar {
+  width: min(32rem, calc(100vw - 2rem));
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--sl-color-gray-4);
+  border-radius: 0.8rem;
+  background: var(--sl-color-gray-6);
+  color: var(--sl-color-white);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+.consultar::backdrop { background: rgba(0, 0, 0, 0.55); }
+.consultar h2 { margin: 0; font-size: 1.15rem; }
+.consultar p { margin: 0.5rem 0 0; font-size: 0.92rem; }
+.consultar__ej { color: var(--sl-color-gray-2); }
+.consultar textarea {
+  width: 100%;
+  margin-top: 0.7rem;
+  min-height: 7rem;
+  font: inherit;
+  font-size: 1rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.45rem;
+  border: 1px solid var(--sl-color-gray-4);
+  background: var(--sl-color-black);
+  color: var(--sl-color-white);
+  resize: vertical;
+}
+.consultar textarea:focus { outline: 2px solid var(--sl-color-accent); }
+.consultar label { display: flex; gap: 0.45rem; align-items: center; margin-top: 0.6rem; font-size: 0.9rem; cursor: pointer; }
+.consultar__aviso { color: var(--mal); font-weight: 600; }
+.consultar__aviso[hidden] { display: none; }
+.consultar__botones { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: flex-end; margin-top: 0.9rem; }
+.consultar__enviar { background: #25d366 !important; border-color: #25d366 !important; color: #06301a !important; }
+/* .not-content saca al progreso de los estilos de texto de Starlight (que le
+   ponían su propia flecha y márgenes a los <details>): los de acá mandan. */
+.progreso p { margin: 0; }
+.progreso__total > * + * { margin-top: 0.45rem; }
+.progreso__grupo { margin: 1.2rem 0 0.35rem; }
+.progreso__nota { margin-top: 1rem !important; }
+.progreso__tema summary::marker { content: ''; }
+.progreso__tema[open] .progreso__nombre::after { content: ' ▴'; color: var(--sl-color-gray-3); }
+.progreso__tema:not([open]) .progreso__nombre::after { content: ' ▾'; color: var(--sl-color-gray-3); }
+.progreso .ejercicio__fundamental { padding: 0 0.35rem; }
+/* El reset de Starlight le saca el margin:auto que centra los <dialog>. */
+dialog.consultar[open] { position: fixed; inset: 0; margin: auto; height: fit-content; max-height: calc(100vh - 2rem); overflow: auto; }

@@ -1,0 +1,28 @@
+---
+/**
+ * El progreso de cada clase, para la portada.
+ *
+ * Los temas salen de src/data/temas.mjs (los mismos del menú). Qué ejercicios
+ * tiene cada clase NO está escrito en ningún lado: se pregunta a la página
+ * misma (se la pide y se cuentan sus ejercicios), así nunca queda una lista
+ * vieja cuando se agrega o se saca uno. Lo resuelto se lee del navegador, con
+ * las mismas claves que guarda scripts/progreso.ts.
+ */
+import { GRUPOS } from '../data/temas.mjs';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section class="progreso not-content" data-base={base} data-grupos={JSON.stringify(GRUPOS)}>
+  <div class="progreso__total" data-total>
+    <p>Cargando tu progreso…</p>
+  </div>
+  <div class="progreso__grupos" data-lista></div>
+  <p class="progreso__nota">
+    💾 El progreso se guarda en <b>este</b> navegador: si cambiás de celu o de compu, arranca de cero.
+  </p>
+</section>
+
+<script>
+  import '../scripts/progreso-portada';
+</script>

@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import { writeFileSync } from 'node:fs';
+import { sidebar } from './src/data/temas.mjs';
 
 // Se publica en GitHub Pages como sitio de proyecto:
 //   https://maxinunez24.github.io/particular-ingles/
@@ -67,50 +68,11 @@ export default defineConfig({
       head: [
         { tag: 'script', content: chequeoVersion },
         { tag: 'script', attrs: { src: `${base}/sidebars-resizable.js?v=${VERSION}`, defer: true } },
+        // 💬 "Consultar con el profe" en cada ejercicio (abre WhatsApp).
+        { tag: 'script', attrs: { src: `${base}/consultar.js?v=${VERSION}`, defer: true } },
       ],
-      sidebar: [
-        { label: '🏠 Inicio', link: '/' },
-        {
-          label: '🧱 Las bases',
-          items: [
-            { label: '1. Pronombres y verbo to be', link: '/bases/to-be/' },
-            { label: '2. La hora y cuándo pasa algo', link: '/bases/la-hora/' },
-            { label: '3. Días, meses y estaciones', link: '/bases/dias-meses/' },
-          ],
-        },
-        {
-          label: '🔁 Present Simple',
-          items: [
-            { label: '4. Rutinas (vocabulario)', link: '/present-simple/rutinas/' },
-            { label: '5. Afirmativo: la -s', link: '/present-simple/afirmativo/' },
-            { label: '6. Negativo y preguntas', link: '/present-simple/negativo-preguntas/' },
-            { label: '7. ¿Con qué frecuencia?', link: '/present-simple/frecuencia/' },
-          ],
-        },
-        {
-          label: '🎬 Present Continuous',
-          items: [
-            { label: '8. Lo que pasa ahora', link: '/present-continuous/' },
-            { label: '9. ¿Simple o Continuous?', link: '/simple-o-continuous/' },
-          ],
-        },
-        {
-          label: '✍️ Redacción',
-          items: [
-            { label: '10. Conectores y frases útiles', link: '/redaccion/conectores/' },
-            { label: '11. Traducir frases', link: '/redaccion/traducir/' },
-            { label: '12. Mi rutina y la de mi familia', link: '/redaccion/mi-rutina/' },
-          ],
-        },
-        {
-          label: '🎯 Para el examen',
-          items: [
-            { label: '13. Errores típicos', link: '/examen/errores-tipicos/' },
-            { label: '14. Simulacro', link: '/examen/simulacro/' },
-            { label: '📄 Machete (resumen)', link: '/examen/machete/' },
-          ],
-        },
-      ],
+      // El menú sale de src/data/temas.mjs (la misma lista que usa el progreso de la portada).
+      sidebar,
     }),
   ],
 });
