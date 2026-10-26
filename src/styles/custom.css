@@ -1307,3 +1307,7 @@ body.pc-resizing * {
 .progreso .ejercicio__fundamental { padding: 0 0.35rem; }
 /* El reset de Starlight le saca el margin:auto que centra los <dialog>. */
 dialog.consultar[open] { position: fixed; inset: 0; margin: auto; height: fit-content; max-height: calc(100vh - 2rem); overflow: auto; }
+/* La barra de la portada está hecha con <span> (va dentro del <summary>): sin
+   display:block el relleno es "en línea" e ignora el ancho → no se pintaba. */
+.progreso .pcp-barra,
+.progreso .pcp-barra__fill { display: block; }
